@@ -1,9 +1,9 @@
 # Site settings
-title:       qpautrat
+title:       Objectivement objectif.
 author:      Quentin Pautrat
-description: ""
+description: "Pot-pourri d'idées, de pensées, de connaissances, de critiques. Développeur et passionné j'essaye de partager de façon objective diverses expériences. Développement, internet, cinéma, jeux, etc..."
 baseurl:     ""
-url:         "http://qpautrat.github.io.com"
+url:         "http://qpautrat.github.io"
 
 # Google analytics
 google_analytics:
