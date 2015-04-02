@@ -15,7 +15,15 @@ A l'heure ou j'écris un petit nouveau à fait son apparition, enfin petit ca re
 * **Android**
 * Windows Phone (prévu pour la v1.0, en avril 2015 selon la [roadmap](https://www.nativescript.org/roadmap))
 
-## Objectif
+## Comment ca fonctionne
+
+NativeScript permet d'abstraire l'API native de la plateforme grâce aux technologies web. Ainsi le templating de votre application se fait grâce à des templates **XML**, le styling est réalisé en **CSS3** et l'accès aux fonctionnalités de la plateforme via du javascript natif ES5. Celà permet aux développeurs de se dispenser de l'apprentissage de nouveaux langages.
+Vous pourrez avoir un aperçu plus technique [ici](http://javascript.developpez.com/actu/82307/Telerik-annonce-NativeScript-son-framework-Open-source-de-developpement-d-applications-mobiles-natives/).
+
+## Objectifs
+
+
+
 
 Debugging: pas dispo (juste e nconsole.) Mais prevu dans la v1
 
