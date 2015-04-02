@@ -1,8 +1,12 @@
 ---
 layout: post
 title: Persistence en cascade avec Doctrine 2
-summary: Persister ses entités en cascade avec Doctrine 2
+summary: Maitriser et profiter de la puissance de la persistence en cascade avec Doctrine 2.
 ---
+
+Persister ses données manuellement avec Doctrine peut paraître très simple au premier coup d'oeil. 
+Mais dans une application complexe celà peut vite devenir lourd à gérer.
+Dans ce billet je vais introduire la notion de persistence en cascade, comment l'utiliser, et quels sont les petits pièges à eviter.
 
 ### OneToMany
 
