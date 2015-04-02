@@ -382,4 +382,8 @@ class AuthorBook
 
 Remarquez aussi le `cascade={"persist"}` sur `$book`. Et oui, en persistant _Author_, Doctrine va vouloir persister _AuthorBook_ qui lui doit persister à son tour _Book_.
 
-Et voilà !
+**Attention** : Dans ce dernier cas de figure nous avons une persistence à deux niveaux. La complexité à gérer une persistence à plusieurs niveaux se fait déjà sentir. Imaginez si vous avez trois, ou même quatre niveaux. C'est un cas de figure qui arrive régulièrement dans des applications complexes.
+
+### Conclusion
+
+La persistence implicite est très puissante et surtout très pratique. Elle évite une redondance de code et libère le développeur d'une contrainte supplémentaire. Cependant cette persistence doit rester maitriser. On a vite fait de se perdre lorsque la cascade d'entités à persister augmente.
