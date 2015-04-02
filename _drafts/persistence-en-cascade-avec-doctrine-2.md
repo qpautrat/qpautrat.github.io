@@ -391,3 +391,5 @@ Remarquez aussi le `cascade={"persist"}` sur `$book`. Et oui, en persistant _Aut
 ### Conclusion
 
 La persistence implicite est très puissante et surtout très pratique. Elle évite une redondance de code et libère le développeur d'une contrainte supplémentaire. Cependant cette persistence doit rester maitriser. On a vite fait de se perdre lorsque la cascade d'entités à persister augmente.
+
+_Vous pouvez aussi allez lire la [documentation](http://doctrine-orm.readthedocs.org/en/latest/reference/working-with-associations.html#transitive-persistence-cascade-operations)._
