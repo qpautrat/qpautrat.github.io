@@ -36,16 +36,6 @@ class Author
         $this->books = new \Doctrine\Common\Collections\ArrayCollection;
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
     public function addBook(Book $book)
     {
         $this->books[] = $book;
@@ -75,16 +65,6 @@ class Book
      * @ORM\JoinColumn(nullable=false)
      */
     protected $author;
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     public function setAuthor(Author $author)
     {
@@ -167,14 +147,7 @@ Ce qui nous donne le schéma suivant:
  */
 class Author
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    // ...
 
     /**
      * @ORM\ManyToMany(targetEntity="Book", cascade={"persist"})
@@ -184,16 +157,6 @@ class Author
     public function __construct()
     {
         $this->books = new \Doctrine\Common\Collections\ArrayCollection;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function addBook(Book $book)
@@ -210,24 +173,7 @@ class Author
  */
 class Book
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+    // ...
 }
 ```
 
@@ -431,16 +377,6 @@ class AuthorBook
     protected $startedAt;
 
     // ...
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }
 ```
 
