@@ -388,9 +388,10 @@ Malheureusement Doctrine n'a pas l'air content:
 Nous y voilà, c'est exactement ce problème que j'ai rencontré et qui m'a donné <del>du fil à retordre</del> envie d'écrire ce billet.
 Pourtant nous avons bien la bonne configuration grâce à `cascade={"persist"}`. Alors quel est le problème ?
 
-C'est assez simple au final. La réponse vient du fait que la clé primaire de mon entité de liaison est composé de mes deux clés étrangères _Author_ et _Book_. Doctrine, via la configuration en cascade essaie donc de persister l'entité _AuthorBook_.
-Pour celà il doit donc générer une nouvelle clé primaire. Malheureusement <i>author_id</i> n'existe pas puisque _Author_ n'a pas encore été flushé, son _id_ est donc inconnu pour Doctrine.
-Comme pour la relation _OneToMany_ nous pouvons _flusher_ manuellement _Author_ et _Book_ avant mais c'est solution n'est pas adéquat dans beaucoup de situations.
+C'est assez simple au final. La réponse vient du fait que la clé primaire de mon entité de liaison est composée de mes deux clés étrangères _Author_ et _Book_. Doctrine, via la configuration en cascade, essaie donc de persister l'entité _AuthorBook_.
+Pour celà il doit donc générer une nouvelle clé primaire. Malheureusement <i>author\_id</i> n'existe pas puisque _Author_ n'a pas encore été flushé, son _id_ est donc inconnu pour Doctrine.
+
+Comme pour la relation _OneToMany_ nous pouvons _flusher_ manuellement _Author_ et _Book_ avant mais cette solution n'est pas adéquate dans beaucoup de situations.
 
 Rappelez-vous, un peu plus haut j'ai dis que notre table de relation allait devenir une entité à part entière. Il suffit simplement de lui affecter un _id_ !
 
