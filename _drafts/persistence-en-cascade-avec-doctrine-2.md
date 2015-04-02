@@ -192,7 +192,7 @@ $manager->persist($author2);
 $manager->flush();
 ```
 
-Normalement il n'y a aucun problème. Une nouvelle table `author_book` a fait son apparition. Elle contient deux lignes et nous montre que nous avons bien deux auteurs pour le même livre.
+Une nouvelle table `author_book` a fait son apparition. Elle contient deux lignes et nous montre que nous avons bien deux auteurs pour le même livre.
 
 ### OneToMany - ManyToOne
 
