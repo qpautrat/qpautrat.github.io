@@ -4,7 +4,7 @@ title: Persistence en cascade avec Doctrine 2
 summary: Maitriser et profiter de la puissance de la persistence en cascade avec Doctrine 2.
 ---
 
-Persister ses données manuellement avec Doctrine peut paraître très simple au premier coup d'oeil. 
+Persister ses données manuellement avec Doctrine peut paraître très simple au premier coup d'oeil.
 Mais dans une application complexe celà peut vite devenir lourd à gérer.
 Dans ce billet je vais introduire la notion de persistence en cascade, comment l'utiliser, et quels sont les petits pièges à eviter.
 
@@ -113,7 +113,7 @@ $manager->persist($book);
 
 Cette fois-ci tout se passe correctement. C'est très bien, mais se serait préférable de pouvoir éviter d'écrire cette ligne supplémentaire. On va donc configurer notre relation pour dire à Doctrine de persister automatiquement _Book_.
 
-#### 2. Configurer la relation
+#### 2. Utiliser la persistence en cascade
 
 Dans le message d'erreur, Doctrine nous propose de configurer la relation grâce à `cascade={"persist"}`.
 Même si la solution de la configuration peut paraître "sexy" elle n'en reste pas moins un peu "tricky" (faute de trouver mieux en français). En effet il faut bien faire attention à quel objet est persister en premier.
