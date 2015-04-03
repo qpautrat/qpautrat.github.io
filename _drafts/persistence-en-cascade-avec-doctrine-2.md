@@ -116,7 +116,7 @@ Cette fois-ci tout se passe correctement. C'est très bien, mais se serait préf
 #### 2. Utiliser la persistence en cascade
 
 Dans le message d'erreur, Doctrine nous propose de configurer la relation grâce à `cascade={"persist"}`.
-Même si la solution de la configuration peut paraître "sexy" elle n'en reste pas moins un peu "tricky" (faute de trouver mieux en français). En effet il faut bien faire attention à quel objet est persister en premier.
+Même si la solution de la configuration peut paraître "sexy" elle n'en reste pas moins un peu "tricky" (faute de trouver mieux en français). En effet il faut bien faire attention à quel objet est persisté en premier.
 Dans notre cas il s'agit de Author.
 
 ```php
