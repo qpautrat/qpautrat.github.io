@@ -336,11 +336,11 @@ Nous y voilà, c'est exactement ce problème que j'ai rencontré et qui m'a donn
 Pourtant nous avons bien la bonne configuration grâce à `cascade={"persist"}`. Alors quel est le problème ?
 
 C'est assez simple au final. La réponse vient du fait que la clé primaire de mon entité de liaison est composée de mes deux clés étrangères _Author_ et _Book_. Doctrine, via la configuration en cascade, essaie donc de persister l'entité _AuthorBook_.
-Pour celà il doit donc générer une nouvelle clé primaire. Malheureusement <i>author\_id</i> n'existe pas puisque _Author_ n'a pas encore été flushé, son _id_ est donc inconnu pour Doctrine.
+Pour celà il doit générer une nouvelle clé primaire. Malheureusement <i>author\_id</i> n'existe pas puisque _Author_ n'a pas encore été flushé, son _id_ est donc inconnu pour Doctrine.
 
 Comme pour la relation _OneToMany_ nous pouvons _flusher_ manuellement _Author_ et _Book_ avant mais cette solution n'est pas adéquate dans beaucoup de situations.
 
-Rappelez-vous, un peu plus haut j'ai dis que notre table de relation allait devenir une entité à part entière. Il suffit simplement de lui affecter un _id_ !
+Rappelez-vous, un peu plus haut, j'ai dis que notre table de relation allait devenir une entité à part entière. Il suffit simplement de lui affecter un _id_ !
 
 _AuthorBook_ devient donc:
 
@@ -383,7 +383,7 @@ class AuthorBook
 
 Remarquez aussi le `cascade={"persist"}` sur `$book`. Et oui, en persistant _Author_, Doctrine va vouloir persister _AuthorBook_ qui lui doit persister à son tour _Book_.
 
-**Attention** : Dans ce dernier cas de figure nous avons une persistence à deux niveaux. La complexité à gérer une persistence à plusieurs niveaux se fait déjà sentir. Imaginez si vous avez trois, ou même quatre niveaux. C'est un cas de figure qui arrive régulièrement dans des applications complexes.
+**Attention** : Dans ce dernier cas de figure nous avons une persistence à deux niveaux. Imaginez si vous avez trois, ou même quatre niveaux. C'est quelque chose qui arrive régulièrement. Gérer une persistence à plusieurs niveaux peut être assez complexe.
 
 ### Conclusion
 
