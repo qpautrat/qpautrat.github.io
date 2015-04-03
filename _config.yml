@@ -6,7 +6,7 @@ baseurl:     ""
 url:         "http://qpautrat.github.io"
 
 # Google analytics
-google_analytics:
+google_analytics: UA-49889834-2
 
 # Optional features
 animated:           false
