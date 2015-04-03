@@ -12,7 +12,7 @@ Dans ce billet je vais introduire la notion de persistence en cascade, comment l
 
 Imaginons les deux entités suivantes:
 
-```php
+{% highlight php startinline %}
 /**
  * Author
  *
@@ -75,20 +75,20 @@ class Book
         $this->author = $author;
     }
 }
-```
+{% endhighlight %}
 
 Pour le moment un auteur peut écrire un ou plusieurs livres. Un livre a un seul auteur.
 Nous avons donc une relation _OneToMany_ entre _Author_ et _Book_.
 
 Essayons de créer un auteur et de lui associer un livre.
 
-```php
+{% highlight php startinline %}
 $author = new Author;
 $book = new Book;
 $author->addBook($book);
 $manager->persist($author);
 $manager->flush();
-```
+{% endhighlight %}
 
 Vous devriez avoir une erreur de ce type là:
 
@@ -107,9 +107,9 @@ Pour régler ce problème, Doctrine nous propose deux solutions.
 
 Ajoutons la ligne suivante avant de persister _Author_:
 
-```php
+{% highlight php startinline %}
 $manager->persist($book);
-```
+{% endhighlight %}
 
 Cette fois-ci tout se passe correctement. C'est très bien, mais se serait préférable de pouvoir éviter d'écrire cette ligne supplémentaire. On va donc configurer notre relation pour dire à Doctrine de persister automatiquement _Book_.
 
@@ -119,18 +119,18 @@ Dans le message d'erreur, Doctrine nous propose de configurer la relation grâce
 Même si la solution de la configuration peut paraître "sexy" elle n'en reste pas moins un peu "tricky" (faute de trouver mieux en français). En effet il faut bien faire attention à quel objet est persisté en premier.
 Dans notre cas il s'agit de Author.
 
-```php
+{% highlight php startinline %}
 $manager->persist($author);
-```
+{% endhighlight %}
 
 Il faut donc rajouter la configuration dans la classe _Author_:
 
-```php
+{% highlight php startinline %}
 /**
  * @ORM\OneToMany(targetEntity="Book", mappedBy="author", cascade={"persist"})
  */
 protected $books;
-```
+{% endhighlight %}
 
 ### ManyToMany
 
@@ -139,7 +139,7 @@ On va supposer qu'un livre peut avoir plusieurs auteurs.
 
 Ce qui nous donne le schéma suivant:
 
-```php
+{% highlight php startinline %}
 /**
  * Author
  *
@@ -176,13 +176,13 @@ class Book
 {
     // ...
 }
-```
+{% endhighlight %}
 
 Nous sommes dans une configuration **unidirectionnelle** pour simplifier le schéma mais nous pourrions très bien la rendre **bidirectionnelle** en ajoutant la relation dans _Book_.
 
 Ajoutons un deuxième auteur et testons:
 
-```php
+{% highlight php startinline %}
 $author = new Author;
 $author2 = new Author;
 $book = new Book;
@@ -191,7 +191,7 @@ $author2->addBook($book);
 $manager->persist($author);
 $manager->persist($author2);
 $manager->flush();
-```
+{% endhighlight %}
 
 Une nouvelle table `author_book` a fait son apparition. Elle contient deux lignes et nous montre que nous avons bien deux auteurs pour le même livre.
 
@@ -201,7 +201,7 @@ Faisons évoluer une nouvelle fois notre relation. En plus de savoir quels sont 
 Pour cela nous devons forcément modifier notre table de relation pour y ajouter un nouveau champ.
 A cause de celà notre table de relation va devenir une entité à part entière, c'est la seule façon de faire.
 
-```php
+{% highlight php startinline %}
 /**
  * Author
  *
@@ -300,11 +300,11 @@ class Book
         $this->bookAuthors[] = $bookAuthor;
     }
 }
-```
+{% endhighlight %}
 
 Tentons de populer notre base de données.
 
-```php
+{% highlight php startinline %}
 $author = new Author;
 $author2 = new Author;
 
@@ -323,7 +323,7 @@ $book->addBookAuthor($authorBook2);
 $manager->persist($author);
 $manager->persist($author2);
 $manager->flush();
-```
+{% endhighlight %}
 
 Malheureusement Doctrine n'a pas l'air content:
 
@@ -344,7 +344,7 @@ Rappelez-vous, un peu plus haut, j'ai dis que notre table de relation allait dev
 
 _AuthorBook_ devient donc:
 
-```php
+{% highlight php startinline %}
 /**
  * AuthorBook
  *
@@ -379,7 +379,7 @@ class AuthorBook
 
     // ...
 }
-```
+{% endhighlight %}
 
 Remarquez aussi le `cascade={"persist"}` sur `$book`. Et oui, en persistant _Author_, Doctrine va vouloir persister _AuthorBook_ qui lui doit persister à son tour _Book_.
 
