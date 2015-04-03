@@ -132,9 +132,6 @@ Il faut donc rajouter la configuration dans la classe _Author_:
 protected $books;
 ```
 
-Vous ne devriez plus rencontrer d'erreur.
-
-
 ### ManyToMany
 
 Allons un peu plus loin et faisons évoluer notre relation _One To Many_.
