@@ -2,6 +2,13 @@
 layout: post
 title: Premiers pas avec NativeScript
 summary: Débuter avec le framework en développant une application mobile d'aggrégation de flux HackerNews.
+tags:
+  - mobile
+  - native
+  - nativescript
+  - telerik
+  - javascript
+  - css
 ---
 
 Le 12 Juin 2014, l'éditeur d'outils de développement [Telerik](http://www.telerik.com/) [annonce](http://blogs.telerik.com/blogs/14-06-12/announcing-nativescript---cross-platform-framework-for-building-native-mobile-applications) la sortie de leur nouvelle solution de conception d'applications mobiles natives et multiplateformes.
