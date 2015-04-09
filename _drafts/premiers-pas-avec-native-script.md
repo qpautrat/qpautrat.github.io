@@ -4,7 +4,6 @@ title: Premiers pas avec NativeScript
 summary: Débuter avec le framework en développant une application mobile d'aggrégation de flux HackerNews.
 tags:
   - mobile
-  - native
   - nativescript
   - telerik
   - javascript
