@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Persistence en cascade avec Doctrine 2
-summary: Maitriser et profiter de la puissance de la persistence en cascade avec Doctrine 2.
+title: Persistance en cascade avec Doctrine 2
+summary: Maitriser et profiter de la puissance de la persistance en cascade avec Doctrine 2.
 ---
 
 Persister ses données manuellement avec Doctrine peut paraître très simple au premier coup d'oeil.
 Mais dans une application complexe celà peut vite devenir lourd à gérer.
-Dans ce billet je vais introduire la notion de persistence en cascade, comment l'utiliser, et quels sont les petits pièges à eviter.
+Dans ce billet je vais introduire la notion de persistance en cascade, comment l'utiliser, et quels sont les petits pièges à eviter.
 
 ### OneToMany
 
@@ -113,7 +113,7 @@ $manager->persist($book);
 
 Cette fois-ci tout se passe correctement. C'est très bien, mais se serait préférable de pouvoir éviter d'écrire cette ligne supplémentaire. On va donc configurer notre relation pour dire à Doctrine de persister automatiquement _Book_.
 
-#### 2. Utiliser la persistence en cascade
+#### 2. Utiliser la persistance en cascade
 
 Dans le message d'erreur, Doctrine nous propose de configurer la relation grâce à `cascade={"persist"}`.
 Même si la solution de la configuration peut paraître "sexy" elle n'en reste pas moins un peu "tricky" (faute de trouver mieux en français). En effet il faut bien faire attention à quel objet est persisté en premier.
@@ -383,10 +383,10 @@ class AuthorBook
 
 Remarquez aussi le `cascade={"persist"}` sur `$book`. Et oui, en persistant _Author_, Doctrine va vouloir persister _AuthorBook_ qui lui doit persister à son tour _Book_.
 
-**Attention** : Dans ce dernier cas de figure nous avons une persistence à deux niveaux. Imaginez si vous avez trois, ou même quatre niveaux. C'est quelque chose qui arrive régulièrement. Gérer une persistence à plusieurs niveaux peut être assez complexe.
+**Attention** : Dans ce dernier cas de figure nous avons une persistance à deux niveaux. Imaginez si vous avez trois, ou même quatre niveaux. C'est quelque chose qui arrive régulièrement. Gérer une persistance à plusieurs niveaux peut être assez complexe.
 
 ### Conclusion
 
-La persistence implicite est très puissante et surtout très pratique. Elle évite une redondance de code et libère le développeur d'une contrainte supplémentaire. Cependant cette persistence doit rester maitriser. On a vite fait de se perdre lorsque la cascade d'entités à persister augmente.
+La persistance implicite est très puissante et surtout très pratique. Elle évite une redondance de code et libère le développeur d'une contrainte supplémentaire. Cependant cette persistance doit rester maitriser. On a vite fait de se perdre lorsque la cascade d'entités à persister augmente.
 
 _Vous pouvez aussi allez lire la [documentation](http://doctrine-orm.readthedocs.org/en/latest/reference/working-with-associations.html#transitive-persistence-cascade-operations)._
