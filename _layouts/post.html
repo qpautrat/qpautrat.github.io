@@ -14,6 +14,9 @@ layout: default
     <span class="post-meta">Updated: {{ page.update_date | date: "%b %-d, %Y" }}</span><br>
   {% endif %}
   <span class="post-meta small">{{ minutes }} minute read</span>
+  {% if page.tags != empty %}
+    <span class="post-meta small">#{{ page.tags | join: ' #' }}</span><br>
+  {% endif %}
 </div>
 
 <article class="post-content">
