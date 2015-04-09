@@ -2,6 +2,11 @@
 layout: post
 title: Persistance en cascade avec Doctrine 2
 summary: Maitriser et profiter de la puissance de la persistance en cascade avec Doctrine 2.
+tags:
+ - php
+ - doctrine
+ - orm
+ - persistance
 ---
 
 Persister ses données manuellement avec Doctrine peut paraître très simple au premier coup d'oeil.
