@@ -390,8 +390,8 @@ module.exports = viewModel;
 La dernière ligne nous permet d'exposer notre view model en tant que module.
 
 ```javascript
-// topstories.js
 {% raw %}
+// topstories.js
 var model = require("./topstories-viewmodel");
 
 exports.pageLoaded = function(args) {
@@ -481,12 +481,12 @@ module.exports = viewModel;
 [0.1.4](https://github.com/qpautrat/native-hacker-news/tree/0.1.4)
 
 
-### 9.HTTP
+### 10.HTTP
 
 Remplaçons maintenant notre liste statique de *topstories* par la <u>**vraie**</u> liste grâce à l'**API**.
 Pour celà nous allons utiliser le composant [http](http://docs.nativescript.org/ApiReference/http/HOW-TO.html) du framework.
 
-#### Spécifications
+### Specifications
 
 * Liste d'id des 500 topstories https://hacker-news.firebaseio.com/v0/topstories.json
 * Chaque resource est un *item*
