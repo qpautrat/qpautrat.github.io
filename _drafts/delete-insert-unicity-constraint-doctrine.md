@@ -18,7 +18,7 @@ SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique
 DETAIL:  Key (activity_id, "position")=(41ffd17c-4a15-4074-8db0-f7f8604d3458, 0) already exists. (Doctrine\DBAL\Exception\UniqueConstraintViolationException)
 ```
 
-Ou bien parce que vous avez déjà fait face à cette situation si il existe une solution adéquate.
+Ou bien parce que vous avez déjà fait face à cette situation et que vous cherchez si si il existe une solution adéquate.
 
 ### 1. Contexte
 
