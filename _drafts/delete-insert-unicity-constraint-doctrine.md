@@ -3,6 +3,7 @@ layout: post
 title: DELETE INSERT sur une contrainte d'unicité avec Doctrine
 summary:
     Connaître l'origine du problème et quelles sont les solutions pour faire face à ce genre de cas.
+twitter_text: DELETE INSERT sur une contrainte d'unicité avec Doctrine. Faire confiance à son domaine.
 tags:
  - php
  - doctrine
