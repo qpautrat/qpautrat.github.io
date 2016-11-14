@@ -10,6 +10,7 @@ google_analytics: UA-49889834-2
 
 gems:
   - jekyll-sitemap
+  - jemoji
 
 # Optional features
 animated:           false
@@ -52,3 +53,5 @@ permalink:    pretty
 paginate:     5
 sass:
   compressed: true
+
+encoding: utf-8
