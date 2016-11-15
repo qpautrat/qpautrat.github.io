@@ -9,7 +9,8 @@ tags:
  - php
  - doctrine
  - orm
- - persistance
+ - domain driven design
+ - ddd
 ---
 
 Si vous êtes arrivé ici, c'est peut-être parce que vous avez ce message :
