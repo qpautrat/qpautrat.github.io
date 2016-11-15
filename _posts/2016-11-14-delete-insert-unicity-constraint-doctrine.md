@@ -51,7 +51,7 @@ Picture:
 {% endhighlight %}
 
 Afin de pouvoir établir un ordre entre ces images nous ajoutons une `position` à `Picture`.
-Puisque nous sommes malin on ajoute une contrainte d'unicité entre cette `position` et `article_id`
+Puisque nous sommes malins on ajoute une contrainte d'unicité entre cette `position` et `article_id`
 
 {% highlight yaml startinline %}
 # Picture.yml
