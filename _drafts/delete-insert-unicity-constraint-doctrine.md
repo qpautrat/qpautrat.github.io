@@ -73,6 +73,8 @@ La condition sinequanone est de procéder à un `DELETE` et un `INSERT` dans la 
 Prenons l'exemple suivant :
 
 {% highlight php startinline %}
+<?php
+
 $picture = $repository->find($id)
 $em->remove($picture); // $picture->position = 0
 $picture = new Picture(0); // On initialise la position à 0
@@ -89,6 +91,8 @@ Tout se passe dans l'`UnitOfWork` ([Doctrine\ORM\UnitOfWork](https://github.com/
 Si on regarde d'un peu plus près la méthode `commit()` on peut constater que les `INSERT` sont fait **avant** les `DELETE` :
 
 {% highlight php startinline %}
+<?php
+
 // Begin transaction
 try {
     if ($this->entityInsertions) {
@@ -117,6 +121,8 @@ try {
 Une première possibilité serait bien sûr de séparer les deux actions en deux transactions différentes.
 
 {% highlight php startinline %}
+<?php
+
 $picture = $repository->find($id)
 $em->remove($picture); // $picture->position = 0
 $em->flush();
@@ -150,6 +156,8 @@ Article:
 {% endhighlight %}
 
 {% highlight php startinline %}
+<?php
+
 $article->removePicture($picture); // $this->pictures->removeElement($picture)
 $article->addPicture(new Picture(0)); // On s'assure que la position est unique dans addPicture
 $em->flush();
