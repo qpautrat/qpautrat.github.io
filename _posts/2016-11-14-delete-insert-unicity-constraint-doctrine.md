@@ -29,7 +29,6 @@ Imaginez un `Article` de blog avec une relation `OneToMany` vers `Picture` tout 
 
 Article:
     type: entity
-    table: article
     [...]
     oneToMany:
         pictures:
@@ -42,7 +41,6 @@ Article:
 
 Picture:
     type: entity
-    table: picture
     [...]
     manyToOne:
         article:
@@ -141,14 +139,13 @@ $em->flush();
 Pourquoi ? Il est préférable de **faire confiance à son domaine** plutôt qu'à son schéma de base de données, n'en déplaise à votre esprit de DBA.
 
 Grâce aux options de persistance en cascade et de suppression d'entité orpheline de **Doctrine** nous pouvons complètement abstraire l'utilisation de l'`EntityManager`.
-De plus, une bonne habitude est d'encapsuler l'accès à vos collections dans des méthodes métier de votre aggrégat :
+De plus, une bonne habitude est d'encapsuler l'accès à vos collections dans des méthodes métier de votre agrégat :
 
 {% highlight yaml startinline %}
 # Article.yml
 
 Article:
     type: entity
-    table: article
     [...]
     oneToMany:
         pictures:
