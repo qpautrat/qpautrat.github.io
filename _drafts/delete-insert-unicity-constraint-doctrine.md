@@ -75,10 +75,12 @@ Prenons l'exemple suivant :
 {% highlight php startinline %}
 <?php
 
-$picture = $repository->find($id)
 $em->remove($picture); // $picture->position = 0
-$picture = new Picture(0); // On initialise la position à 0
+$article->getPictures()->removeElement($picture);
+$picture = new Picture();
+$picture->setPosition(0);
 $picture->setArticle($article);
+$article->getPictures()->add($picture);
 $em->persist($picture);
 $em->flush();
 {% endhighlight %}
@@ -123,12 +125,14 @@ Une première possibilité serait bien sûr d'exécuter les deux actions dans de
 {% highlight php startinline %}
 <?php
 
-$picture = $repository->find($id)
 $em->remove($picture); // $picture->position = 0
+$article->getPictures()->removeElement($picture);
 $em->flush();
 // ...
-$picture = new Picture(0); // On initialise la position à 0
+$picture = new Picture();
+$picture->setPosition(0);
 $picture->setArticle($article);
+$article->getPictures()->add($picture);
 $em->persist($picture);
 $em->flush();
 {% endhighlight %}
@@ -158,9 +162,33 @@ Article:
 {% highlight php startinline %}
 <?php
 
-$article->removePicture($picture); // $this->pictures->removeElement($picture)
-$article->addPicture(new Picture(0)); // On s'assure que la position est unique dans addPicture
+$article->removePicture($picture);
+$article->addPicture(new Picture(), 0);
 $em->flush();
+{% endhighlight %}
+
+{% highlight php startinline %}
+<?php
+
+// Article.php
+
+public function removePicture(Picture $picture)
+{
+    $this->pictures->removeElement($picture);
+}
+
+public function addPicture(Picture $picture, $position)
+{
+    foreach($this->pictures as $_picture)
+    {
+        if ($_picture->getPosition() === $position) {
+            throw new PositionAlreadyUsed();
+        }
+    }
+
+    $picture->setPosition($position);
+    $this->pictures->add($picture);
+}
 {% endhighlight %}
 
 Qu'en pensez-vous ? Quelle solution avez-vous choisie ? Une autre idée ?
