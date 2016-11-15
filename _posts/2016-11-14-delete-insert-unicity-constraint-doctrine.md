@@ -118,7 +118,7 @@ try {
 
 ### 4. Solutions
 
-Une première possibilité serait bien sûr de séparer les deux actions en deux transactions différentes.
+Une première possibilité serait bien sûr d'exécuter les deux actions dans deux transactions différentes.
 
 {% highlight php startinline %}
 <?php
