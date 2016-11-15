@@ -16,8 +16,8 @@ tags:
 Si vous êtes arrivé ici, c'est peut-être parce que vous avez ce message :
 
 {% highlight bash startinline %}
-SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "activity_position_idx"
-DETAIL:  Key (activity_id, "position")=(41ffd17c-4a15-4074-8db0-f7f8604d3458, 0) already exists. (Doctrine\DBAL\Exception\UniqueConstraintViolationException)
+SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "unique_picture_position_idx"
+DETAIL:  Key (article_id, "position")=(41ffd17c-4a15-4074-8db0-f7f8604d3458, 0) already exists. (Doctrine\DBAL\Exception\UniqueConstraintViolationException)
 {% endhighlight %}
 
 Ou bien parce que vous avez déjà fait face à cette situation et que vous cherchez si si il existe une solution adéquate.
