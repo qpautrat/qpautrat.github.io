@@ -137,9 +137,9 @@ $em->persist($picture);
 $em->flush();
 {% endhighlight %}
 
-:bug: L'inconvénient avec cette méthode c'est si, pour une raison quelconque, l'ajout de l'image ne se passe pas bien, nous l'avons supprimé sans avoir pu la remplacer.
+:bug: L'inconvénient avec cette méthode c'est si, pour une raison quelconque, l'ajout de l'image ne se passe pas bien, nous l'avons supprimé sans avoir pu la remplacer. On a donc un problème d'**incohérence des données**.
 
-:art: Il existe une autre possibilité, celle que je préconise, c'est de **supprimer la contrainte d'unicité**.
+:art: Il existe une autre possibilité, c'est de **supprimer la contrainte d'unicité**.
 Pourquoi ? Il est préférable de **faire confiance à son domaine** plutôt qu'à son schéma de base de données, n'en déplaise à votre esprit de DBA.
 
 Grâce aux options de persistance en cascade et de suppression d'entité orpheline de **Doctrine** nous pouvons complètement abstraire l'utilisation de l'`EntityManager`.
