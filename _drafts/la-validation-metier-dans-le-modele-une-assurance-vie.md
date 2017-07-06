@@ -23,11 +23,11 @@ Considérons l'exemple suivant d'une machine à café. Il est possible de config
 Une contrainte métier nous dit que ce nombre ne peut-être qu'un entier supérieur ou égal à 0.
 
 {% highlight php startinline %}
-// CofeeMachine.php
+// CoffeeMachine.php
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CofeeMachine
+class CoffeeMachine
 {
     /**
      * @Assert\Type("integer")
@@ -42,22 +42,22 @@ class CofeeMachine
 }
 
 // Controller.php
-public function addSugarAction(Request $request, CofeeMachine $cofeeMachine)
+public function addSugarAction(Request $request, CoffeeMachine $coffeeMachine)
 {
-    $cofeeMachine->addSugar($request->request->get('numberOfSugarLump'));
+    $coffeeMachine->addSugar($request->request->get('numberOfSugarLump'));
 
     $validator = $this->get('validator');
-    $errors = $validator->validate($cofeeMachine);
+    $errors = $validator->validate($coffeeMachine);
 
     if (count($errors) > 0) {
-        return $this->render('cofeeMachine/error.html.twig', array(
+        return $this->render('coffeeMachine/error.html.twig', array(
             'errors' => $errors,
         ));
     }
 
     $this->get('doctrine.orm.entity_manager')->flush();
 
-    return $this->render('cofeeMachine/success.html.twig');
+    return $this->render('coffeeMachine/success.html.twig');
 }
 {% endhighlight %}
 
@@ -65,7 +65,7 @@ public function addSugarAction(Request $request, CofeeMachine $cofeeMachine)
 
 ### Oui mais...
 
-Le problème est l'**état** dans lequel se trouve notre modèle `CofeeMachine`. Si le nombre de morceaux, que l'on récupère depuis l'objet `Request` est négatif notre machine est dans un état qu'on appelle **invalide**, même pour un court laps de temps.
+Le problème est l'**état** dans lequel se trouve notre modèle `CoffeeMachine`. Si le nombre de morceaux, que l'on récupère depuis l'objet `Request` est négatif notre machine est dans un état qu'on appelle **invalide**, même pour un court laps de temps.
 
 > Oui c'est normal et c'est pour ça qu'on a notre couche de validation, pour s'assurer qu'on ne persiste pas en base de mauvaises données.
 
@@ -75,7 +75,7 @@ Que se passe t'il si vous ajoutez des morceaux **après** votre couche de valida
 
 > Ça n'arrivera jamais, je sais ce que je fais.
 
-Certe, mais si je vous dis que votre équipe technique va être multipliée par 5 durant les prochains mois, que votre *code base* va grossir exponentiellement et donc sa complexité par extension. Si je vous dis que vous allez devoir faire de l'asynchrone, multiplier les sources de données, etc... Même un système de review de code efficace ne sera pas suffisant pour s'assurer de la cohérence de vos données. Et pour peu que vous vous absentez un temps, c'est *la fin des haricots*.
+Certes, mais si je vous dis que votre équipe technique va être multipliée par 5 durant les prochains mois, que votre *code base* va grossir exponentiellement et donc sa complexité par extension. Si je vous dis que vous allez devoir faire de l'asynchrone, multiplier les sources de données, etc... Même un système de review de code efficace ne sera pas suffisant pour s'assurer de la cohérence de vos données. Et pour peu que vous vous absentiez un temps, c'est *la fin des haricots*.
 
 
 ### Remettons la contrainte métier où elle appartient, dans le métier !
@@ -88,12 +88,12 @@ Selon moi ([et bien d'autres](http://codebetter.com/gregyoung/2009/05/22/always-
 Quand on y pense, c'est une contrainte business. Elle a toute sa place dans notre **domaine métier** non ?! Pourquoi l'exclure et la déléguer à notre couche infrastructure ?
 
 {% highlight php startinline %}
-// CofeeMachine.php
+// CoffeeMachine.php
 
 // Librarie de validation par Benjamin Eberlei.
 use Assert\Assertion;
 
-class CofeeMachine
+class CoffeeMachine
 {
     /**
      * @Assert\Type("integer")
@@ -129,14 +129,14 @@ Plus besoin de charger un système de test avec tout un tas de détails d'archit
  */
 public function it_should_add_a_natural_integer_or_zero_number_of_sugar_lump()
 {
-    $cofeeMachine = new CofeeMachine();
-    $cofeeMachine->addSugar(-1);
+    $coffeeMachine = new CoffeeMachine();
+    $coffeeMachine->addSugar(-1);
     $this->expectException(\InvalidArgumentException::class);
 }
 {% endhighlight %}
 
 ### Conclusion
 
-Mettre de la validation dans le modèle présente de vrais avantages. Cependant ce n'est peut-être pas cécessaire d'en faire aveuglément partout.
+Mettre de la validation dans le modèle présente de vrais avantages. Cependant ce n'est peut-être pas nécessaire d'en faire aveuglément partout.
 Si vous travaillez sur un projet très fortement orienté CRUD, sans beaucoup de logique métier, déléguer la validation à un composant tierce fera l'affaire.
 Soyez simplement averti que la complexité d'un projet augmente rapidement et qu'il n'appartient qu'à vous de détecter le moment où les choses se corsent.
