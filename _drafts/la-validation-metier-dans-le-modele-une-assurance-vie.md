@@ -8,6 +8,7 @@ tags:
  - symfony
  - validation
  - ddd
+image: /assets/keep-calm-and-trust-your-model.jpg
 ---
 
 Aujourd'hui j'aimerais parler de validation.
