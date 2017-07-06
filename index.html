@@ -18,6 +18,11 @@ layout: default
                 {{ post.excerpt }}
               {% endif %}
             </p>
+            <p class="post-meta">
+              {% for tag in post.tags %}
+                #{{ tag }}
+              {% endfor %}
+            </p>
           </a>
         </div>
       {% endunless %}
