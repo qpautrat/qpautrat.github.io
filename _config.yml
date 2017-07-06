@@ -36,7 +36,7 @@ flattr_button:
 show_sharing_icons: true
 share_text: 'Objectivement, tu <u>dois</u> partager'
 # Change to 'true' to enable individual icons
-share_facebook: false
+share_facebook: true
 share_twitter: true
 share_googleplus: false
 share_linkedin: false
