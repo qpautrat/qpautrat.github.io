@@ -39,7 +39,7 @@ share_text: 'Objectivement, tu <u>dois</u> partager'
 share_facebook: true
 share_twitter: true
 share_googleplus: false
-share_linkedin: false
+share_linkedin: true
 share_digg: false
 share_tumblr: false
 share_reddit: false
