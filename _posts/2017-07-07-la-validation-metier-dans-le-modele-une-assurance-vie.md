@@ -12,7 +12,7 @@ image: /assets/keep-calm-and-trust-your-model.jpg
 ---
 
 Aujourd'hui j'aimerais parler de validation.
-Si j'ai envie d'aborder le sujet c'est parce que bien souvent les développeurs ne connaissent qu'une seule façon de faire sans trop se demander si on peut faire autrement.
+Si j'ai envie d'aborder le sujet c'est parce que bien souvent les développeurs ne connaissent qu'une seule façon de faire sans trop se demander si on peut procéder autrement.
 
 ### La documentation, un effet perfide
 
@@ -24,6 +24,7 @@ Cette documentation vous explique **comment fonctionne** la librairie, pas de qu
 
 Prenons l'exemple d'une machine à café. Il est possible de configurer le nombre de morceaux de sucre désiré.
 Une contrainte métier nous dit que ce nombre ne peut-être qu'un entier supérieur ou égal à 0.
+
 *Symfony* est livré par défaut avec le [composant *validator*](https://github.com/symfony/validator).
 Il est facile à utiliser, met à disposition un bon nombre de règles par défaut et sa documentation est plutôt bien foutue.
 
