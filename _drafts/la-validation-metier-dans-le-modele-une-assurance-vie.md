@@ -13,15 +13,20 @@ image: /assets/keep-calm-and-trust-your-model.jpg
 
 Aujourd'hui j'aimerais parler de validation.
 Si j'ai envie d'aborder le sujet c'est parce que bien souvent les développeurs ne connaissent qu'une seule façon de faire sans trop se demander si on peut faire autrement.
-C'est, selon moi, un peu la faute des frameworks et de leur documentation.
 
-### Prenons l'exemple de Symfony
+### La documentation, un effet perfide
 
-Le très fameux framework web français est livré par défaut avec le composant [*validator*](https://github.com/symfony/validator).
-Il est facile à utiliser et met à disposition un bon nombre de règles par défaut.
+*Symfony*, par exemple,  mais ce n'est pas le seul, est un framework web très bien documenté.
+La plupart du temps il suffit de copier-coller un bout de code de ce qui nous intéresse et... *voilà* !
+Cette documentation vous explique **comment fonctionne** la librairie, pas de quelle façon elle **s'intègre** le mieux à votre **conception logicielle**.
 
-Considérons l'exemple suivant d'une machine à café. Il est possible de configurer le nombre de morceaux de sucre désiré.
+### Ce que je vois trop souvent
+
+Prenons l'exemple d'une machine à café. Il est possible de configurer le nombre de morceaux de sucre désiré.
 Une contrainte métier nous dit que ce nombre ne peut-être qu'un entier supérieur ou égal à 0.
+*Symfony* est livré par défaut avec le [composant *validator*](https://github.com/symfony/validator).
+Il est facile à utiliser, met à disposition un bon nombre de règles par défaut et sa documentation est plutôt bien foutue.
+
 
 {% highlight php startinline %}
 // CoffeeMachine.php
@@ -68,25 +73,26 @@ public function addSugarAction(Request $request, CoffeeMachine $coffeeMachine)
 
 Le problème est l'**état** dans lequel se trouve notre modèle `CoffeeMachine`. Si le nombre de morceaux, que l'on récupère depuis l'objet `Request`, est négatif notre machine est dans un état qu'on appelle **invalide**, même pour un court laps de temps.
 
-> Oui c'est normal et c'est pour ça qu'on a notre couche de validation, pour s'assurer qu'on ne persiste pas en base de mauvaises données.
+> Oui c'est normal et c'est pour ça qu'on a notre couche de validation, pour s'assurer qu'on ne persiste pas de mauvaises données.
 
 me direz-vous.
 
-Que se passe t'il si vous ajoutez des morceaux **après** votre couche de validation ? Vous voyez où je veux en venir.
+Que se passe t'il si vous ajoutez des morceaux **après** votre couche de validation ?
 
 > Ça n'arrivera jamais, je sais ce que je fais.
 
-Certes, mais si je vous dis que votre équipe technique va être multipliée par 5 durant les prochains mois, que votre *code base* va grossir exponentiellement et donc sa complexité par extension. Si je vous dis que vous allez devoir faire de l'asynchrone, multiplier les sources de données, etc... Même un système de review de code efficace ne sera pas suffisant pour s'assurer de la cohérence de vos données. Et pour peu que vous vous absentiez un temps, c'est *la fin des haricots*.
+Certes, mais si je vous dis que votre équipe technique va être multipliée par 5 durant les prochains mois, que votre *code base* va grossir exponentiellement et donc sa complexité par extension. Si je vous dis que vous allez devoir faire de l'asynchrone, multiplier les sources de données, etc... Même un système de *code review* efficace ne sera pas suffisant pour s'assurer de la cohérence de vos données. Et pour peu que vous vous absentiez un temps, c'est *la fin des haricots*.
 
 
-### Remettons la contrainte métier où elle appartient, dans le métier !
+### Le métier dans le métier !
 
 {: .center}
 ![Keep calm and trust your model](/assets/keep-calm-and-trust-your-model.jpg)
 
-Selon moi ([et bien d'autres](http://codebetter.com/gregyoung/2009/05/22/always-valid/)) vos modèles devrait **toujours** être dans un état valide. Vous vous assurez qu'à n'importe quel moment de votre application vous êtes capable d'agir sur une donnée cohérente et vous évitez de créer des effets de bord ingérables dans le futur.
+Selon moi, ([et bien d'autres](http://codebetter.com/gregyoung/2009/05/22/always-valid/)) vos modèles devraient **toujours** être dans un état valide.
+C'est une chose de moins à se soucier.
 
-Quand on y pense, c'est une contrainte business. Elle a toute sa place dans notre **domaine métier** non ?! Pourquoi l'exclure et la déléguer à notre couche infrastructure ?
+Quand on y pense, c'est une contrainte business. Elle a toute sa place dans notre **domaine** non ?! Pourquoi l'exclure et la déléguer à notre [couche application](http://dddsample.sourceforge.net/architecture.html) ?
 
 {% highlight php startinline %}
 // CoffeeMachine.php
@@ -114,15 +120,15 @@ class CoffeeMachine
 
 > Ok mais il y a maintenant deux étapes de validations qui font exactement la même chose, c'est redondant !
 
-Oui et non. Si votre contexte vous force d'informer le client des erreurs qu'il aurait pu faire alors vous pouvez considérer votre validation
+Oui et non. Si votre contexte vous force à informer le client des erreurs qu'il aurait pu faire alors vous pouvez considérer votre validation
 comme une couche de présentation, rien de plus. C'est juste une couche qui vous permet de formater simplement vos erreurs dans votre `Response`.
 
-Dans certains contextes, cette couche de présentation sera inutile et vous pourrez même la supprimer purement et simplement (mais ça j'en parlerais dans un autre billet).
+Dans certains contextes, cette couche de présentation sera inutile et vous pourrez même la supprimer purement et simplement (mais ça j'en parlerai dans un autre billet).
 
 ### Testabilité
 
 Le plus beau dans tout ça c'est que pouvez maintenant tester unitairement votre validation d'un point de vue métier.
-Plus besoin de charger un système de test avec tout un tas de détails d'architecture (client HTTP, base de données, ...).
+Plus besoin de charger un système de test avec tout un tas de détails d'infrastructure (client HTTP, base de données, ...).
 
 {% highlight php startinline %}
 /**
