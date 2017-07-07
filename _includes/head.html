@@ -18,13 +18,21 @@
       <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     {% endif %}
 
+    {% if page.summary %}
+        {% assign summary = page.summary | append: '%0A' %}
+        {% for tag in page.tags %}
+            {% assign summary = summary | append: ' %23' | append: tag %}
+        {% endfor %}
+    {% else %}
+        {% assign summary = site.description %}
+    {% endif %}
 
     <!-- Open Graph -->
     <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
     <meta property="og:locale" content="fr_FR">
     <meta property="og:type" content="article">
     <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-    <meta property="og:description" content="{% if page.summary %}{{ page.summary }}{% else %}{{ site.description }}{% endif %}">
+    <meta property="og:description" content="{{ summary }}">
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
     <meta property="og:site_name" content="{{ site.title }}">
     {% if page.image %}
@@ -34,7 +42,7 @@
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@{{ site.twitter_username }}" />
     <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
-    <meta name="twitter:description" content="{% if page.summary %}{{ page.summary }}{% else %}{{ site.description }}{% endif %}" />
+    <meta name="twitter:description" content="{{ summary }}" />
     {% if page.image %}
       <meta name="twitter:image" content="{{ site.url }}{{ page.image }}" />
     {% endif %}
