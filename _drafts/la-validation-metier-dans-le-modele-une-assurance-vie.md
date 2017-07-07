@@ -1,7 +1,7 @@
 ---
 layout: post
 title: La validation métier dans le modèle, une assurance vie
-summary: Une autre façon d'imaginer la validité de son modèle.
+summary: Apprendre à valider autrement ses données.
 tags:
  - php
  - domain model
@@ -18,7 +18,7 @@ C'est, selon moi, un peu la faute des frameworks et de leur documentation.
 ### Prenons l'exemple de Symfony
 
 Le très fameux framework web français est livré par défaut avec le composant [*validator*](https://github.com/symfony/validator).
-Il est facile à utiliser et met à disposition un bon nombre de règles par défaut. Je pense que je ne vous apprend rien.
+Il est facile à utiliser et met à disposition un bon nombre de règles par défaut.
 
 Considérons l'exemple suivant d'une machine à café. Il est possible de configurer le nombre de morceaux de sucre désiré.
 Une contrainte métier nous dit que ce nombre ne peut-être qu'un entier supérieur ou égal à 0.
@@ -66,7 +66,7 @@ public function addSugarAction(Request $request, CoffeeMachine $coffeeMachine)
 
 ### Oui mais...
 
-Le problème est l'**état** dans lequel se trouve notre modèle `CoffeeMachine`. Si le nombre de morceaux, que l'on récupère depuis l'objet `Request` est négatif notre machine est dans un état qu'on appelle **invalide**, même pour un court laps de temps.
+Le problème est l'**état** dans lequel se trouve notre modèle `CoffeeMachine`. Si le nombre de morceaux, que l'on récupère depuis l'objet `Request`, est négatif notre machine est dans un état qu'on appelle **invalide**, même pour un court laps de temps.
 
 > Oui c'est normal et c'est pour ça qu'on a notre couche de validation, pour s'assurer qu'on ne persiste pas en base de mauvaises données.
 
