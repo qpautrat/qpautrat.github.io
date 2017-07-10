@@ -30,6 +30,8 @@ Il est facile à utiliser, met à disposition un bon nombre de règles par défa
 
 
 {% highlight php startinline %}
+<?php
+
 // CoffeeMachine.php
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -96,6 +98,8 @@ C'est une chose de moins à se soucier.
 Quand on y pense, c'est une contrainte business. Elle a toute sa place dans notre **domaine** non ?! Pourquoi l'exclure et la déléguer à notre [couche application](http://dddsample.sourceforge.net/architecture.html) ?
 
 {% highlight php startinline %}
+<?php
+
 // CoffeeMachine.php
 
 // Librarie de validation par Benjamin Eberlei.
@@ -132,6 +136,8 @@ Le plus beau dans tout ça c'est que pouvez maintenant tester unitairement votre
 Plus besoin de charger un système de test avec tout un tas de détails d'infrastructure (client HTTP, base de données, ...).
 
 {% highlight php startinline %}
+<?php
+
 /**
  * @test
  */
