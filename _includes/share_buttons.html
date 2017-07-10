@@ -8,9 +8,9 @@
 
     {% if site.share_twitter %}
       {% if page.twitter_text %}
-        {% assign twitter_text = page.twitter_text %}
+        {% assign twitter_text = page.twitter_text | append: ' via @pautrat%0A' %}
       {% else %}
-        {% assign twitter_text = page.title | append: '%0A' %}
+        {% assign twitter_text = page.title | append: ' via @pautrat%0A' %}
         {% for tag in page.tags %}
           {% assign twitter_text = twitter_text | append: ' %23' | append: tag %}
         {% endfor %}
