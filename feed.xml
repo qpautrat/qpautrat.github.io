@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Objectivement objectif.</title>
+    <description>Software craftsman</description>
+    <link>http://qpautrat.github.io/pages/qpautrat/</link>
+    <atom:link href="http://qpautrat.github.io/pages/qpautrat/feed.xml" rel="self" type="application/rss+xml" />
+    
+      
+        <item>
+          <title>Installer Ubuntu sur son MacBookPro</title>
+          <description>&lt;p&gt;Après plus de 5 ans j’ai enfin craqué ! Je n’en pouvais plus de ces performances désastreuses de &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Docker4Mac&lt;/code&gt;. Faire fonctionner un monolithe d’environ 10 ans sur &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Docker4Mac&lt;/code&gt; est une vraie plaie.&lt;/p&gt;
+
+&lt;p&gt;Alors oui, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Docker&lt;/code&gt; n’est pas le seul à blamer. Un couplage fort avec une multitude de systèmes n’aide pas non plus (mais c’est un autre sujet). Néanmoins, j’ai aussi constaté la lenteur de ma machine sur des projets bien plus petit. De plus j’ai utilisé très intensivement ma machine et je la sentais en bout de course. Il était temps de lui donner un second souffle.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Merci à &lt;a href=&quot;https://twitter.com/rcasagraude&quot;&gt;@kipit&lt;/a&gt; pour son aide précieuse !&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;matériel&quot;&gt;Matériel&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;MacBookPro Mi 2015&lt;/li&gt;
+  &lt;li&gt;CPU Intel(R) Core(TM) i5-5287U CPU @ 2.90GHz&lt;/li&gt;
+  &lt;li&gt;RAM 2 X DDR3 Synchrone 1867 MHz&lt;/li&gt;
+  &lt;li&gt;Webcam Broadcom 720p FaceTime HD Camera&lt;/li&gt;
+  &lt;li&gt;WiFi Broadcom BCM43602 802.11ac Wireless LAN&lt;/li&gt;
+  &lt;li&gt;SATA APPLE SSD SM0256&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;1-sauvegarder-ses-données&quot;&gt;1/ Sauvegarder ses données&lt;/h2&gt;
+
+&lt;p&gt;Je pars sur une installation d’un nouveau système d’exploitation. Je compte écraser tout ce qui se trouve déjà sur mon disque donc je prends le soin de garder tout ce qui me parait important.&lt;/p&gt;
+
+&lt;p&gt;Les documents personnels et professionnels, mais aussi des fichiers de configuration. Par exemple mon fichier &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.zshrc&lt;/code&gt; ou encore &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gitconfig.&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2-avoir-un-osx-sous-la-main&quot;&gt;2/ Avoir un OSX sous la main&lt;/h2&gt;
+
+&lt;p&gt;L’installation d’&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ubuntu&lt;/code&gt; peut échouer ou peut tout simplement ne pas me satisfaire. Je dois pouvoir réinstaller le système d’exploitation d’Apple à tout moment. Le support documente bien cette procédure &lt;a href=&quot;https://support.apple.com/en-us/HT201372&quot;&gt;ici&lt;/a&gt; .&lt;/p&gt;
+
+&lt;h2 id=&quot;3-télécharger-limage-dubuntu&quot;&gt;3/ Télécharger l’image d’Ubuntu&lt;/h2&gt;
+
+&lt;p&gt;La dernière version LTS est disponible sur le site d’&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ubuntu&lt;/code&gt;. Il est possible d’avoir des soucis de vitesse de téléchargement. Il existe des &lt;a href=&quot;https://launchpad.net/ubuntu/+cdmirrors&quot;&gt;serveurs mirroir&lt;/a&gt; si besoin.&lt;/p&gt;
+
+&lt;h2 id=&quot;4-transformer-une-clé-usb-en-image-bootable&quot;&gt;4/ Transformer une clé USB en image Bootable&lt;/h2&gt;
+
+&lt;p&gt;J’ai utilisé &lt;a href=&quot;https://www.balena.io/etcher/&quot;&gt;Balena Etcher&lt;/a&gt; qui est un petit utilitaire extrèmement simple d’utilisation. Il suffit de sélectionner le fichier qui sert d’image puis le disque qui va servir de support.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;NB: J’ai rencontré un petit problème lors de cette étape. L’outil m’indiquait que le disque sur lequel je voulais écrire était occupé. J’ai dû utiliser la commande suivante pour régler le soucis:&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;diskutil umount /path/to/your/disk
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;5-démarrer-linstallation-dubuntu&quot;&gt;5/ Démarrer l’installation d’Ubuntu&lt;/h2&gt;
+
+&lt;p&gt;Je redémarre le Mac tout en maintenant la touche &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Option (ou alt).&lt;/code&gt; Le menu de &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boot&lt;/code&gt; apparait et je peux sélectionner ma clé USB contenant &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ubuntu&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;L’installation est très simple. L’assistant nous guide à travers les étapes essentielles.&lt;/p&gt;
+
+&lt;p&gt;Le clavier Mac est reconnu sans problème et disponible dans la liste des claviers disponibles.&lt;/p&gt;
+
+&lt;p&gt;Le WiFi fonctionne très bien aussi. Je n’ai eu aucun soucis à me connecter à un réseau sans fil avec un excellent débit (~100Mbits/s).&lt;/p&gt;
+
+&lt;p&gt;Il est aussi possible de chiffrer son disque.&lt;/p&gt;
+
+&lt;h2 id=&quot;6-docker--docker-compose&quot;&gt;6/ Docker &amp;amp; docker-compose&lt;/h2&gt;
+
+&lt;p&gt;Pour installer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker&lt;/code&gt; je n’ai pas eu de soucis particulier. Tout est très bien expliqué &lt;a href=&quot;https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository&quot;&gt;ici&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;⚠️ Prenez soin de bien lire le paragraphe en fin d’installation sur la gestion des droits et groupes. Un &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;group&lt;/code&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker&lt;/code&gt; est ajouté mais il n’y a personne dedans. Ce qui veut dire que seul l’utilisateur &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;root&lt;/code&gt; peut exécuter des commandes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker&lt;/code&gt;. Si vous voulez utiliser &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker&lt;/code&gt; sans &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo&lt;/code&gt;, la documentation est &lt;a href=&quot;https://docs.docker.com/engine/install/linux-postinstall/&quot;&gt;ici&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Pour installer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose&lt;/code&gt; j’ai utilisé &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;docker-compose
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;7-python&quot;&gt;7/ Python&lt;/h2&gt;
+
+&lt;p&gt;Pour développer en local sur le monolithe j’ai besoin de &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; (2!) et &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fabric&lt;/code&gt;. Pour éviter d’avoir des conflits entre &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python2&lt;/code&gt; et &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python3&lt;/code&gt;, j’ai décidé d’utiliser &lt;a href=&quot;https://github.com/pyenv/pyenv#the-automatic-installer&quot;&gt;pyenv&lt;/a&gt; (je vous conseille de bien lire tout le &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;README&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Une fois &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pyenv&lt;/code&gt; installer, je peux installer une version de &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; spécifique:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pyenv &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;2.7.18
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Pour installer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fabric&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;pyenv root&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;/versions/2.7.18/bin/pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;fabric&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.14.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;J’utilise l’&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aliasing&lt;/code&gt; pour rendre les futures manipulations plus rapide:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#.zshrc&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;fab&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;pyenv root&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/versions/2.7.18/bin/fab&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;8-productivité&quot;&gt;8/ Productivité&lt;/h2&gt;
+
+&lt;p&gt;Sur &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ubuntu Software&lt;/code&gt;, qui est l’équivalent de l’&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;App Store&lt;/code&gt; sur &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ubuntu&lt;/code&gt;, j’ai pu installer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Discord&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Slack&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Todoist&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Miro&lt;/code&gt; ou encore &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PHPStorm&lt;/code&gt;. Je n’ai pas rencontré de problème particulier. Les applications ont l’air de bien fonctionner. Je n’ai par contre pas trouvé &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Notion&lt;/code&gt; mais leur &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Webapp&lt;/code&gt; fonctionne très bien sur &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Firefox&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;9-airpods&quot;&gt;9/ AirPods&lt;/h2&gt;
+
+&lt;p&gt;J’ai pu connecter mes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AirPods&lt;/code&gt; avec ma machine en &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Bluetooth&lt;/code&gt;. Cependant le son est de moins bonne qualité. La captation du micro aussi me semble moins performante et surtout j’ai l’impression que la distance permise pour continuer à fonctionner est bien moindre que sur OSX.&lt;/p&gt;
+
+&lt;h2 id=&quot;10-webcam&quot;&gt;10/ Webcam&lt;/h2&gt;
+
+&lt;p&gt;Faire fonctionner la webcam a finalement été le plus gros soucis. A priori il n’y a pas de pilotes disponibles dans &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ubuntu&lt;/code&gt; pour la faire fonctionner. Cependant j’ai trouvé comment faire. Quelqu’un a développé &lt;a href=&quot;https://github.com/patjak/bcwc_pcie/wiki/Get-Started&quot;&gt;un pilote sur github&lt;/a&gt;. La procédure en résumé est disponible &lt;a href=&quot;https://askubuntu.com/a/1215628&quot;&gt;ici&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;11-les-raccourcis-clavier&quot;&gt;11/ Les raccourcis clavier&lt;/h2&gt;
+
+&lt;p&gt;C’est encore quelque chose qui me gêne après quelques heures d’utilisation mais j’ai commencé à prendre les bons réflexes. Cependant j’ai peur d’utiliser de nouveau OSX sur une autre machine et perdre ces habitudes. Je n’ai pas trouvé de solution encore pour adapter mon Ubuntu aux raccourcis utilisés sur OSX.&lt;/p&gt;
+</description>
+          <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
+          <link>http://qpautrat.github.io/pages/qpautrat/2020/11/26/installer-ubuntu-sur-un-macbookpro/</link>
+          <guid isPermaLink="true">http://qpautrat.github.io/pages/qpautrat/2020/11/26/installer-ubuntu-sur-un-macbookpro/</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>La validation métier dans le modèle, une assurance vie</title>
+          <description>&lt;p&gt;Aujourd’hui j’aimerais parler de validation.
+Si j’ai envie d’aborder le sujet c’est parce que bien souvent les développeurs ne connaissent qu’une seule façon de faire sans trop se demander si on peut procéder autrement.&lt;/p&gt;
+
+&lt;h3 id=&quot;la-documentation-un-effet-perfide&quot;&gt;La documentation, un effet perfide&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Symfony&lt;/em&gt;, par exemple,  mais ce n’est pas le seul, est un framework web très bien documenté.
+La plupart du temps il suffit de copier-coller un bout de code de ce qui nous intéresse et… &lt;em&gt;voilà&lt;/em&gt; !
+Cette documentation vous explique &lt;strong&gt;comment fonctionne&lt;/strong&gt; la librairie, pas de quelle façon elle &lt;strong&gt;s’intègre&lt;/strong&gt; le mieux à votre &lt;strong&gt;conception logicielle&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;ce-que-je-vois-trop-souvent&quot;&gt;Ce que je vois trop souvent&lt;/h3&gt;
+
+&lt;p&gt;Prenons l’exemple d’une machine à café. Il est possible de configurer le nombre de morceaux de sucre désiré.
+Une contrainte métier nous dit que ce nombre ne peut-être qu’un entier supérieur ou égal à 0.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Symfony&lt;/em&gt; est livré par défaut avec le &lt;a href=&quot;https://github.com/symfony/validator&quot;&gt;composant &lt;em&gt;validator&lt;/em&gt;&lt;/a&gt;.
+Il est facile à utiliser, met à disposition un bon nombre de règles par défaut et sa documentation est plutôt bien foutue.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// CoffeeMachine.php&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Symfony\Component\Validator\Constraints&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CoffeeMachine&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @Assert\Type(&quot;integer&quot;)
+     * @Assert\GreaterThanOrEqual(0)
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$numberOfSugarLump&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addSugar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$numberOfLump&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numberOfSugarLump&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$numberOfLump&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Controller.php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addSugarAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Request&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CoffeeMachine&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$coffeeMachine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$coffeeMachine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addSugar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'numberOfSugarLump'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+    &lt;span class=&quot;nv&quot;&gt;$validator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'validator'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$errors&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$validator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;validate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$coffeeMachine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$errors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'coffeeMachine/error.html.twig'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;'errors'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$errors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'doctrine.orm.entity_manager'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'coffeeMachine/success.html.twig'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;À première vue, on pourrait se dire que c’est simple, que cela fonctionne très bien et qu’il n’y a aucune raison de faire autrement.&lt;/p&gt;
+
+&lt;h3 id=&quot;oui-mais&quot;&gt;Oui mais…&lt;/h3&gt;
+
+&lt;p&gt;Le problème est l’&lt;strong&gt;état&lt;/strong&gt; dans lequel se trouve notre modèle &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CoffeeMachine&lt;/code&gt;. Si le nombre de morceaux, que l’on récupère depuis l’objet &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Request&lt;/code&gt;, est négatif notre machine est dans un état qu’on appelle &lt;strong&gt;invalide&lt;/strong&gt;, même pour un court laps de temps.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Oui c’est normal et c’est pour ça qu’on a notre couche de validation, pour s’assurer qu’on ne persiste pas de mauvaises données.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;me direz-vous.&lt;/p&gt;
+
+&lt;p&gt;Que se passe t’il si vous ajoutez des morceaux &lt;strong&gt;après&lt;/strong&gt; votre couche de validation ?&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Ça n’arrivera jamais, je sais ce que je fais.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Certes, mais si je vous dis que votre équipe technique va être multipliée par 5 durant les prochains mois, que votre &lt;em&gt;code base&lt;/em&gt; va grossir exponentiellement et donc sa complexité par extension. Si je vous dis que vous allez devoir faire de l’asynchrone, multiplier les sources de données, etc… Même un système de &lt;em&gt;code review&lt;/em&gt; efficace ne sera pas suffisant pour s’assurer de la cohérence de vos données. Et pour peu que vous vous absentiez un temps, c’est &lt;em&gt;la fin des haricots&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;le-métier-dans-le-métier-&quot;&gt;Le métier dans le métier !&lt;/h3&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/keep-calm-and-trust-your-model.jpg&quot; alt=&quot;Keep calm and trust your model&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Selon moi, (&lt;a href=&quot;http://codebetter.com/gregyoung/2009/05/22/always-valid/&quot;&gt;et bien d’autres&lt;/a&gt;) vos modèles devraient &lt;strong&gt;toujours&lt;/strong&gt; être dans un état valide.
+C’est une chose de moins à se soucier.&lt;/p&gt;
+
+&lt;p&gt;Quand on y pense, c’est une contrainte business. Elle a toute sa place dans notre &lt;strong&gt;domaine&lt;/strong&gt; non ?! Pourquoi l’exclure et la déléguer à notre &lt;a href=&quot;http://dddsample.sourceforge.net/architecture.html&quot;&gt;couche application&lt;/a&gt; ?&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// CoffeeMachine.php&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Librarie de validation par Benjamin Eberlei.&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Assert\Assertion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CoffeeMachine&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @Assert\Type(&quot;integer&quot;)
+     * @Assert\GreaterThanOrEqual(0)
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$numberOfSugarLump&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addSugar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$numberOfLump&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Assertion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;integer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$numberOfLump&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Assertion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;greaterOrEqualThan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$numberOfLump&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;nv&quot;&gt;$numberOfSugarLump&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$numberOfLump&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Ok mais il y a maintenant deux étapes de validations qui font exactement la même chose, c’est redondant !&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Oui et non. Si votre contexte vous force à informer le client des erreurs qu’il aurait pu faire alors vous pouvez considérer votre validation
+comme une couche de présentation, rien de plus. C’est juste une couche qui vous permet de formater simplement vos erreurs dans votre &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Response&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Dans certains contextes, cette couche de présentation sera inutile et vous pourrez même la supprimer purement et simplement (mais ça j’en parlerai dans un autre billet).&lt;/p&gt;
+
+&lt;h3 id=&quot;testabilité&quot;&gt;Testabilité&lt;/h3&gt;
+
+&lt;p&gt;Le plus beau dans tout ça c’est que pouvez maintenant tester unitairement votre validation d’un point de vue métier.
+Plus besoin de charger un système de test avec tout un tas de détails d’infrastructure (client HTTP, base de données, …).&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;cd&quot;&gt;/**
+ * @test
+ */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it_should_add_a_natural_integer_or_zero_number_of_sugar_lump&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$coffeeMachine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CoffeeMachine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$coffeeMachine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addSugar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;expectException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;InvalidArgumentException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;Mettre de la validation dans le modèle présente de vrais avantages. Cependant ce n’est peut-être pas nécessaire d’en faire aveuglément partout.
+Si vous travaillez sur un projet très fortement orienté CRUD, sans beaucoup de logique métier, déléguer la validation à un composant tierce fera l’affaire.
+Soyez simplement averti que la complexité d’un projet augmente rapidement et qu’il n’appartient qu’à vous de détecter le moment où les choses se corsent.&lt;/p&gt;
+</description>
+          <pubDate>Fri, 07 Jul 2017 00:00:00 +0000</pubDate>
+          <link>http://qpautrat.github.io/pages/qpautrat/2017/07/07/la-validation-metier-dans-le-modele-une-assurance-vie/</link>
+          <guid isPermaLink="true">http://qpautrat.github.io/pages/qpautrat/2017/07/07/la-validation-metier-dans-le-modele-une-assurance-vie/</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>DELETE INSERT sur une contrainte d'unicité avec Doctrine</title>
+          <description>&lt;p&gt;Si vous êtes arrivé ici, c’est peut-être parce que vous avez ce message :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint &lt;span class=&quot;s2&quot;&gt;&quot;unique_picture_position_idx&quot;&lt;/span&gt;
+DETAIL:  Key &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;article_id, &lt;span class=&quot;s2&quot;&gt;&quot;position&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)=(&lt;/span&gt;41ffd17c-4a15-4074-8db0-f7f8604d3458, 0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; already exists. &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Doctrine&lt;span class=&quot;se&quot;&gt;\D&lt;/span&gt;BAL&lt;span class=&quot;se&quot;&gt;\E&lt;/span&gt;xception&lt;span class=&quot;se&quot;&gt;\U&lt;/span&gt;niqueConstraintViolationException&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;1-contexte&quot;&gt;1. Contexte&lt;/h3&gt;
+
+&lt;p&gt;Imaginez un &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Article&lt;/code&gt; de blog avec une relation &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OneToMany&lt;/code&gt; vers &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Picture&lt;/code&gt; tout ce qu’il y a de plus classique.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Article.yml&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;Article&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;entity&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;oneToMany&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;pictures&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;targetEntity&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Picture&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;mappedBy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;article&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Picture.yml&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;Picture&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;entity&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;manyToOne&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;reversedBy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;pictures&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;joinColumn&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;referencedColumnName&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;id&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;nullable&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Afin de pouvoir établir un ordre entre ces images nous ajoutons une &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;position&lt;/code&gt; à &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Picture&lt;/code&gt;.
+Puisque nous sommes malins on ajoute une contrainte d’unicité entre cette &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;position&lt;/code&gt; et &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;article_id&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Picture.yml&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;fields&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;integer&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;unsigned&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;uniqueConstraints&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;unique_picture_position_idx&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;article_id&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;2-exemple&quot;&gt;2. Exemple&lt;/h3&gt;
+
+&lt;p&gt;Dans cette configuration, il est possible de reproduire l’erreur.
+La condition sinequanone est de procéder à un &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DELETE&lt;/code&gt; et un &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;INSERT&lt;/code&gt; dans la même transaction.
+Prenons l’exemple suivant :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$em&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// $picture-&amp;gt;position = 0&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getPictures&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;removeElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setArticle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getPictures&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$em&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$em&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bingo. Alors d’où vient le problème concrètement ?&lt;/p&gt;
+
+&lt;h3 id=&quot;3-origine&quot;&gt;3. Origine&lt;/h3&gt;
+
+&lt;p&gt;Tout se passe dans l’&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UnitOfWork&lt;/code&gt; (&lt;a href=&quot;https://github.com/doctrine/doctrine2/blob/2.5/lib/Doctrine/ORM/UnitOfWork.php#L375&quot;&gt;Doctrine\ORM\UnitOfWork&lt;/a&gt;) de l’&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ORM&lt;/code&gt;.
+Si on regarde d’un peu plus près la méthode &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;commit()&lt;/code&gt; on peut constater que les &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;INSERT&lt;/code&gt; sont fait &lt;strong&gt;avant&lt;/strong&gt; les &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DELETE&lt;/code&gt; :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Begin transaction&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;entityInsertions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$commitOrder&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;executeInserts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Entity deletions come last and need to be in reverse commit order&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;entityDeletions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$commitOrder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;entityDeletions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;executeDeletions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$commitOrder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Commit transaction&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Rollback transaction&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;4-solutions&quot;&gt;4. Solutions&lt;/h3&gt;
+
+&lt;p&gt;Une première possibilité serait bien sûr d’exécuter les deux actions dans deux transactions différentes.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$em&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// $picture-&amp;gt;position = 0&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getPictures&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;removeElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$em&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setArticle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getPictures&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$em&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$em&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;:bug: L’inconvénient avec cette méthode c’est si, pour une raison quelconque, l’ajout de l’image ne se passe pas bien, nous l’avons supprimé sans avoir pu la remplacer. On a donc un problème d’&lt;strong&gt;incohérence des données&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;:art: Il existe une autre possibilité, c’est de &lt;strong&gt;supprimer la contrainte d’unicité&lt;/strong&gt;.
+Pourquoi ? Il est préférable de &lt;strong&gt;faire confiance à son domaine&lt;/strong&gt; plutôt qu’à son schéma de base de données, n’en déplaise à votre esprit de DBA.&lt;/p&gt;
+
+&lt;p&gt;Grâce aux options de persistance en cascade et de suppression d’entité orpheline de &lt;strong&gt;Doctrine&lt;/strong&gt; nous pouvons complètement abstraire l’utilisation de l’&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EntityManager&lt;/code&gt;.
+De plus, une bonne habitude est d’encapsuler l’accès à vos collections dans des méthodes métier de votre agrégat :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Article.yml&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;Article&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;entity&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;oneToMany&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;pictures&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;targetEntity&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Picture&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;mappedBy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;article&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;cascade&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;persist&quot;&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Auto persist&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;orphanRemoval&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# Auto remove&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;removePicture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addPicture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$em&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Article.php&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;removePicture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Picture&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pictures&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;removeElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addPicture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Picture&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pictures&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$_picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_picture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PositionAlreadyUsed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pictures&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$picture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Qu’en pensez-vous ? Quelle solution avez-vous choisie ? Une autre idée ?
+N’hésitez pas à m’en faire part sur Twitter !&lt;/p&gt;
+</description>
+          <pubDate>Wed, 16 Nov 2016 00:00:00 +0000</pubDate>
+          <link>http://qpautrat.github.io/pages/qpautrat/2016/11/16/delete-insert-unicity-constraint-doctrine/</link>
+          <guid isPermaLink="true">http://qpautrat.github.io/pages/qpautrat/2016/11/16/delete-insert-unicity-constraint-doctrine/</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>Persistance en cascade avec Doctrine 2</title>
+          <description>&lt;p&gt;Persister ses données manuellement avec Doctrine peut paraître très simple au premier coup d’oeil.
+Mais dans une application complexe celà peut vite devenir lourd à gérer.
+Dans ce billet je vais introduire la notion de persistance en cascade, comment l’utiliser, et quels sont les petits pièges à eviter.&lt;/p&gt;
+
+&lt;h3 id=&quot;onetomany&quot;&gt;OneToMany&lt;/h3&gt;
+
+&lt;p&gt;Imaginons les deux entités suivantes:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cd&quot;&gt;/**
+ * Author
+ *
+ * @ORM\Table(name=&quot;author&quot;)
+ * @ORM\Entity
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Author&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @var integer
+     *
+     * @ORM\Column(name=&quot;id&quot;, type=&quot;integer&quot;)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy=&quot;AUTO&quot;)
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @ORM\OneToMany(targetEntity=&quot;Book&quot;, mappedBy=&quot;author&quot;)
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__construct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Doctrine\Common\Collections\ArrayCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Book&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setAuthor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;cd&quot;&gt;/**
+ * Book
+ *
+ * @ORM\Table(name=&quot;book&quot;)
+ * @ORM\Entity
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Book&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @var integer
+     *
+     * @ORM\Column(name=&quot;id&quot;, type=&quot;integer&quot;)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy=&quot;AUTO&quot;)
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @ORM\ManyToOne(targetEntity=&quot;Author&quot;, inversedBy=&quot;books&quot;)
+     * @ORM\JoinColumn(nullable=false)
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setAuthor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Author&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;author&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Pour le moment un auteur peut écrire un ou plusieurs livres. Un livre a un seul auteur.
+Nous avons donc une relation &lt;em&gt;OneToMany&lt;/em&gt; entre &lt;em&gt;Author&lt;/em&gt; et &lt;em&gt;Book&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Essayons de créer un auteur et de lui associer un livre.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Vous devriez avoir une erreur de ce type là:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[Doctrine\ORM\ORMInvalidArgumentException]
+  A new entity was found through the relationship 'Author#books' that was not configured to cascade persist operations for
+  entity: Book@0000000026085418000000011a266ab5. To solve this issue: Either explicitly call EntityManager#persist() on thi
+  s unknown entity or configure cascade persist  this association in the mapping for example @ManyToOne(..,cascade={&quot;persist&quot;}). If you cannot find out which entity causes the problem implement 'Book#__toString()' to get a clue.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;C’est tout à fait normal, nou avons demandé de persister &lt;em&gt;Author&lt;/em&gt; mais à aucun moment Doctrine peut savoir qu’il fallait également persister &lt;em&gt;Book&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Pour régler ce problème, Doctrine nous propose deux solutions.&lt;/p&gt;
+
+&lt;h4 id=&quot;1-persister-lobjet-manuellement&quot;&gt;1. Persister l’objet “manuellement”&lt;/h4&gt;
+
+&lt;p&gt;Ajoutons la ligne suivante avant de persister &lt;em&gt;Author&lt;/em&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Cette fois-ci tout se passe correctement. C’est très bien, mais se serait préférable de pouvoir éviter d’écrire cette ligne supplémentaire. On va donc configurer notre relation pour dire à Doctrine de persister automatiquement &lt;em&gt;Book&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;2-utiliser-la-persistance-en-cascade&quot;&gt;2. Utiliser la persistance en cascade&lt;/h4&gt;
+
+&lt;p&gt;Dans le message d’erreur, Doctrine nous propose de configurer la relation grâce à &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cascade={&quot;persist&quot;}&lt;/code&gt;.
+Même si la solution de la configuration peut paraître “sexy” elle n’en reste pas moins un peu “tricky” (faute de trouver mieux en français). En effet il faut bien faire attention à quel objet est persisté en premier.
+Dans notre cas il s’agit de Author.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Il faut donc rajouter la configuration dans la classe &lt;em&gt;Author&lt;/em&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cd&quot;&gt;/**
+ * @ORM\OneToMany(targetEntity=&quot;Book&quot;, mappedBy=&quot;author&quot;, cascade={&quot;persist&quot;})
+ */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;manytomany&quot;&gt;ManyToMany&lt;/h3&gt;
+
+&lt;p&gt;Allons un peu plus loin et faisons évoluer notre relation &lt;em&gt;One To Many&lt;/em&gt;.
+On va supposer qu’un livre peut avoir plusieurs auteurs.&lt;/p&gt;
+
+&lt;p&gt;Ce qui nous donne le schéma suivant:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cd&quot;&gt;/**
+ * Author
+ *
+ * @ORM\Table(name=&quot;author&quot;)
+ * @ORM\Entity
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Author&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @ORM\ManyToMany(targetEntity=&quot;Book&quot;, cascade={&quot;persist&quot;})
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__construct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Doctrine\Common\Collections\ArrayCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Book&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;cd&quot;&gt;/**
+ * Book
+ *
+ * @ORM\Table(name=&quot;book&quot;)
+ * @ORM\Entity
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Book&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Nous sommes dans une configuration &lt;strong&gt;unidirectionnelle&lt;/strong&gt; pour simplifier le schéma mais nous pourrions très bien la rendre &lt;strong&gt;bidirectionnelle&lt;/strong&gt; en ajoutant la relation dans &lt;em&gt;Book&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Ajoutons un deuxième auteur et testons:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$author2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$author2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$author2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Une nouvelle table &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;author_book&lt;/code&gt; a fait son apparition. Elle contient deux lignes et nous montre que nous avons bien deux auteurs pour le même livre.&lt;/p&gt;
+
+&lt;h3 id=&quot;onetomany---manytoone&quot;&gt;OneToMany - ManyToOne&lt;/h3&gt;
+
+&lt;p&gt;Faisons évoluer une nouvelle fois notre relation. En plus de savoir quels sont les auteurs d’un livre nous aimerions connaître la date à laquelle l’auteur a commencé à écrire sur l’ouvrage.
+Pour cela nous devons forcément modifier notre table de relation pour y ajouter un nouveau champ.
+A cause de celà notre table de relation va devenir une entité à part entière, c’est la seule façon de faire.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cd&quot;&gt;/**
+ * Author
+ *
+ * @ORM\Table(name=&quot;author&quot;)
+ * @ORM\Entity
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Author&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @ORM\OneToMany(targetEntity=&quot;AuthorBook&quot;, mappedBy=&quot;author&quot;, cascade={&quot;persist&quot;})
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$authorBooks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__construct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;authorBooks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Doctrine\Common\Collections\ArrayCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addAuthorBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;AuthorBook&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$authorBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$authorBook&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setAuthor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;authorBooks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$authorBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;cd&quot;&gt;/**
+ * AuthorBook
+ *
+ * @ORM\Table(name=&quot;author_book&quot;, uniqueConstraints={@ORM\UniqueConstraint(name=&quot;author_book_idx&quot;, columns={&quot;author_id&quot;, &quot;book_id&quot;})})
+ * @ORM\Entity
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AuthorBook&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @ORM\ManyToOne(targetEntity=&quot;Author&quot;, inversedBy=&quot;authorBooks&quot;)
+     * @ORM\Id
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @ORM\ManyToOne(targetEntity=&quot;Book&quot;, inversedBy=&quot;bookAuthors&quot;)
+     * @ORM\Id
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @ORM\Column(type=&quot;date&quot;)
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$startedAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__construct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;startedAt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;DateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setAuthor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Author&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;author&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Book&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;cd&quot;&gt;/**
+ * Book
+ *
+ * @ORM\Table(name=&quot;book&quot;)
+ * @ORM\Entity
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Book&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @ORM\OneToMany(targetEntity=&quot;AuthorBook&quot;, mappedBy=&quot;book&quot;)
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$bookAuthors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__construct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bookAuthors&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Doctrine\Common\Collections\ArrayCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addBookAuthor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;AuthorBook&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$bookAuthor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$bookAuthor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bookAuthors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$bookAuthor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Tentons de populer notre base de données.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$author2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$authorBook&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AuthorBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addAuthorBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$authorBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addBookAuthor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$authorBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$authorBook2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AuthorBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$author2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addAuthorBook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$authorBook2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addBookAuthor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$authorBook2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$author2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Malheureusement Doctrine n’a pas l’air content:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[Doctrine\ORM\ORMException]
+  Entity of type AuthorBook has identity through a foreign entity Author, however this entity has no identity itself. You have to call EntityManager#persist() on the related entity and make sure that an identifier was generated before trying to persist 'AuthorBook'. In case of Post Insert ID Generation (such as MySQL Auto-Increment or PostgreSQL SERIAL) this means you have to call EntityManager#flush() between both persist operations.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Nous y voilà, c’est exactement ce problème que j’ai rencontré et qui m’a donné &lt;del&gt;du fil à retordre&lt;/del&gt; envie d’écrire ce billet.
+Pourtant nous avons bien la bonne configuration grâce à &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cascade={&quot;persist&quot;}&lt;/code&gt;. Alors quel est le problème ?&lt;/p&gt;
+
+&lt;p&gt;C’est assez simple au final. La réponse vient du fait que la clé primaire de mon entité de liaison est composée de mes deux clés étrangères &lt;em&gt;Author&lt;/em&gt; et &lt;em&gt;Book&lt;/em&gt;. Doctrine, via la configuration en cascade, essaie donc de persister l’entité &lt;em&gt;AuthorBook&lt;/em&gt;.
+Pour celà il doit générer une nouvelle clé primaire. Malheureusement &lt;i&gt;author_id&lt;/i&gt; n’existe pas puisque &lt;em&gt;Author&lt;/em&gt; n’a pas encore été flushé, son &lt;em&gt;id&lt;/em&gt; est donc inconnu pour Doctrine.&lt;/p&gt;
+
+&lt;p&gt;Comme pour la relation &lt;em&gt;OneToMany&lt;/em&gt; nous pouvons &lt;em&gt;flusher&lt;/em&gt; manuellement &lt;em&gt;Author&lt;/em&gt; et &lt;em&gt;Book&lt;/em&gt; avant mais cette solution n’est pas adéquate dans beaucoup de situations.&lt;/p&gt;
+
+&lt;p&gt;Rappelez-vous, un peu plus haut, j’ai dis que notre table de relation allait devenir une entité à part entière. Il suffit simplement de lui affecter un &lt;em&gt;id&lt;/em&gt; !&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;AuthorBook&lt;/em&gt; devient donc:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cd&quot;&gt;/**
+ * AuthorBook
+ *
+ * @ORM\Table(name=&quot;author_book&quot;, uniqueConstraints={@ORM\UniqueConstraint(name=&quot;author_book_idx&quot;, columns={&quot;author_id&quot;, &quot;book_id&quot;})})
+ * @ORM\Entity
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AuthorBook&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @var integer
+     *
+     * @ORM\Column(name=&quot;id&quot;, type=&quot;integer&quot;)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy=&quot;AUTO&quot;)
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @ORM\ManyToOne(targetEntity=&quot;Author&quot;, inversedBy=&quot;authorBooks&quot;)
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @ORM\ManyToOne(targetEntity=&quot;Book&quot;, inversedBy=&quot;bookAuthors&quot;, cascade={&quot;persist&quot;})
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cd&quot;&gt;/**
+     * @ORM\Column(type=&quot;date&quot;)
+     */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$startedAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Remarquez aussi le &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cascade={&quot;persist&quot;}&lt;/code&gt; sur &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$book&lt;/code&gt;. Et oui, en persistant &lt;em&gt;Author&lt;/em&gt;, Doctrine va vouloir persister &lt;em&gt;AuthorBook&lt;/em&gt; qui lui doit persister à son tour &lt;em&gt;Book&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Attention&lt;/strong&gt; : Dans ce dernier cas de figure nous avons une persistance à deux niveaux. Imaginez si vous avez trois, ou même quatre niveaux. C’est quelque chose qui arrive régulièrement. Gérer une persistance à plusieurs niveaux peut être assez complexe.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;La persistance implicite est très puissante et surtout très pratique. Elle évite une redondance de code et libère le développeur d’une contrainte supplémentaire. Cependant cette persistance doit rester maitriser. On a vite fait de se perdre lorsque la cascade d’entités à persister augmente.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Vous pouvez aussi allez lire la &lt;a href=&quot;http://doctrine-orm.readthedocs.org/en/latest/reference/working-with-associations.html#transitive-persistence-cascade-operations&quot;&gt;documentation&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+</description>
+          <pubDate>Fri, 03 Apr 2015 00:00:00 +0000</pubDate>
+          <link>http://qpautrat.github.io/pages/qpautrat/2015/04/03/persistance-en-cascade-avec-doctrine-2/</link>
+          <guid isPermaLink="true">http://qpautrat.github.io/pages/qpautrat/2015/04/03/persistance-en-cascade-avec-doctrine-2/</guid>
+        </item>
+      
+    
+  </channel>
+</rss>

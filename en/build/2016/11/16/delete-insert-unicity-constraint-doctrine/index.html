@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DELETE INSERT sur une contrainte d'unicité avec Doctrine &#8211; Objectivement objectif.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Connaître l'origine du problème et quelles sont les solutions pour faire face à ce genre de cas.&#10; &#35;php &#35;doctrine &#35;orm &#35;domain driven design &#35;ddd">
+    <meta name="author" content="Quentin Pautrat">
+    <meta name="keywords" content="php, doctrine, orm, domain driven design, ddd">
+    <link rel="canonical" href="http://qpautrat.github.io/pages/qpautrat/2016/11/16/delete-insert-unicity-constraint-doctrine/">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/pages/qpautrat/css/pixyll.css" type="text/css">
+
+    <!-- Fonts -->
+    <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+    
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    
+
+    <!-- Open Graph -->
+    <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
+    
+        <meta property="og:locale" content="fr_FR">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="DELETE INSERT sur une contrainte d'unicité avec Doctrine">
+    <meta property="og:description" content="Connaître l'origine du problème et quelles sont les solutions pour faire face à ce genre de cas.&#10; &#35;php &#35;doctrine &#35;orm &#35;domain driven design &#35;ddd">
+    <meta property="og:url" content="http://qpautrat.github.io/pages/qpautrat/2016/11/16/delete-insert-unicity-constraint-doctrine/">
+    <meta property="og:site_name" content="Objectivement objectif.">
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@qpautrat" />
+    <meta name="twitter:title" content="DELETE INSERT sur une contrainte d'unicité avec Doctrine" />
+    <meta name="twitter:description" content="Connaître l'origine du problème et quelles sont les solutions pour faire face à ce genre de cas.&#10; &#35;php &#35;doctrine &#35;orm &#35;domain driven design &#35;ddd" />
+    
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+</head>
+
+<body class="">
+  <div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <a href="http://qpautrat.github.io/pages/qpautrat" class="site-title">Objectivement objectif.</a>
+      <nav class="site-nav right">
+        
+      </nav>
+      <div class="clearfix"></div>
+      
+        <div class="social-icons">
+  <div class="left">
+    
+      <a class="fa fa-github" href="https://github.com/qpautrat"></a>
+    
+    
+    <a class="fa fa-rss" href="/pages/qpautrat/feed.xml"></a>
+    
+      <a class="fa fa-twitter" href="https://twitter.com/qpautrat"></a>
+    
+    
+    
+    
+      <a class="fa fa-linkedin" href="https://www.linkedin.com/in/qpautrat"></a>
+    
+  </div>
+  <div class="right">
+    
+    
+    
+  </div>
+</div>
+<div class="clearfix"></div>
+
+      
+    </div>
+  </div>
+</header>
+
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
+        
+
+
+<div class="post-header mb2">
+  <h1>DELETE INSERT sur une contrainte d'unicité avec Doctrine</h1>
+  <span class="post-meta">Nov 16, 2016</span><br>
+  
+  <span class="post-meta small">5 minute read</span>
+  
+    <span class="post-meta small">#php #doctrine #orm #domain driven design #ddd</span><br>
+  
+</div>
+
+<article class="post-content">
+  <p>Si vous êtes arrivé ici, c’est peut-être parce que vous avez ce message :</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint <span class="s2">"unique_picture_position_idx"</span>
+DETAIL:  Key <span class="o">(</span>article_id, <span class="s2">"position"</span><span class="o">)=(</span>41ffd17c-4a15-4074-8db0-f7f8604d3458, 0<span class="o">)</span> already exists. <span class="o">(</span>Doctrine<span class="se">\D</span>BAL<span class="se">\E</span>xception<span class="se">\U</span>niqueConstraintViolationException<span class="o">)</span></code></pre></figure>
+
+<h3 id="1-contexte">1. Contexte</h3>
+
+<p>Imaginez un <code class="language-plaintext highlighter-rouge">Article</code> de blog avec une relation <code class="language-plaintext highlighter-rouge">OneToMany</code> vers <code class="language-plaintext highlighter-rouge">Picture</code> tout ce qu’il y a de plus classique.</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># Article.yml</span>
+
+<span class="na">Article</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">entity</span>
+    <span class="pi">[</span><span class="nv">...</span><span class="pi">]</span>
+    <span class="na">oneToMany</span><span class="pi">:</span>
+        <span class="na">pictures</span><span class="pi">:</span>
+            <span class="na">targetEntity</span><span class="pi">:</span> <span class="s">Picture</span>
+            <span class="na">mappedBy</span><span class="pi">:</span> <span class="s">article</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># Picture.yml</span>
+
+<span class="na">Picture</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">entity</span>
+    <span class="pi">[</span><span class="nv">...</span><span class="pi">]</span>
+    <span class="na">manyToOne</span><span class="pi">:</span>
+        <span class="na">article</span><span class="pi">:</span>
+            <span class="na">reversedBy</span><span class="pi">:</span> <span class="s">pictures</span>
+            <span class="na">joinColumn</span><span class="pi">:</span>
+                <span class="na">referencedColumnName</span><span class="pi">:</span> <span class="s">id</span>
+                <span class="na">nullable</span><span class="pi">:</span> <span class="no">false</span></code></pre></figure>
+
+<p>Afin de pouvoir établir un ordre entre ces images nous ajoutons une <code class="language-plaintext highlighter-rouge">position</code> à <code class="language-plaintext highlighter-rouge">Picture</code>.
+Puisque nous sommes malins on ajoute une contrainte d’unicité entre cette <code class="language-plaintext highlighter-rouge">position</code> et <code class="language-plaintext highlighter-rouge">article_id</code></p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># Picture.yml</span>
+
+<span class="na">fields</span><span class="pi">:</span>
+    <span class="na">position</span><span class="pi">:</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">integer</span>
+        <span class="na">options</span><span class="pi">:</span>
+            <span class="na">unsigned</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">uniqueConstraints</span><span class="pi">:</span>
+        <span class="na">unique_picture_position_idx</span><span class="pi">:</span>
+            <span class="na">columns</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">article_id</span><span class="pi">,</span> <span class="nv">position</span> <span class="pi">]</span></code></pre></figure>
+
+<h3 id="2-exemple">2. Exemple</h3>
+
+<p>Dans cette configuration, il est possible de reproduire l’erreur.
+La condition sinequanone est de procéder à un <code class="language-plaintext highlighter-rouge">DELETE</code> et un <code class="language-plaintext highlighter-rouge">INSERT</code> dans la même transaction.
+Prenons l’exemple suivant :</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$em</span><span class="o">-&gt;</span><span class="nf">remove</span><span class="p">(</span><span class="nv">$picture</span><span class="p">);</span> <span class="c1">// $picture-&gt;position = 0</span>
+<span class="nv">$article</span><span class="o">-&gt;</span><span class="nf">getPictures</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">removeElement</span><span class="p">(</span><span class="nv">$picture</span><span class="p">);</span>
+<span class="nv">$picture</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Picture</span><span class="p">();</span>
+<span class="nv">$picture</span><span class="o">-&gt;</span><span class="nf">setPosition</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="nv">$picture</span><span class="o">-&gt;</span><span class="nf">setArticle</span><span class="p">(</span><span class="nv">$article</span><span class="p">);</span>
+<span class="nv">$article</span><span class="o">-&gt;</span><span class="nf">getPictures</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="nv">$picture</span><span class="p">);</span>
+<span class="nv">$em</span><span class="o">-&gt;</span><span class="nf">persist</span><span class="p">(</span><span class="nv">$picture</span><span class="p">);</span>
+<span class="nv">$em</span><span class="o">-&gt;</span><span class="nb">flush</span><span class="p">();</span></code></pre></figure>
+
+<p>Bingo. Alors d’où vient le problème concrètement ?</p>
+
+<h3 id="3-origine">3. Origine</h3>
+
+<p>Tout se passe dans l’<code class="language-plaintext highlighter-rouge">UnitOfWork</code> (<a href="https://github.com/doctrine/doctrine2/blob/2.5/lib/Doctrine/ORM/UnitOfWork.php#L375">Doctrine\ORM\UnitOfWork</a>) de l’<code class="language-plaintext highlighter-rouge">ORM</code>.
+Si on regarde d’un peu plus près la méthode <code class="language-plaintext highlighter-rouge">commit()</code> on peut constater que les <code class="language-plaintext highlighter-rouge">INSERT</code> sont fait <strong>avant</strong> les <code class="language-plaintext highlighter-rouge">DELETE</code> :</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="c1">// Begin transaction</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">entityInsertions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$commitOrder</span> <span class="k">as</span> <span class="nv">$class</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">executeInserts</span><span class="p">(</span><span class="nv">$class</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+
+    <span class="c1">// Entity deletions come last and need to be in reverse commit order</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">entityDeletions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$count</span> <span class="o">=</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$commitOrder</span><span class="p">),</span> <span class="nv">$i</span> <span class="o">=</span> <span class="nv">$count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">entityDeletions</span><span class="p">;</span> <span class="o">--</span><span class="nv">$i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">executeDeletions</span><span class="p">(</span><span class="nv">$commitOrder</span><span class="p">[</span><span class="nv">$i</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Commit transaction</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nc">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Rollback transaction</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="4-solutions">4. Solutions</h3>
+
+<p>Une première possibilité serait bien sûr d’exécuter les deux actions dans deux transactions différentes.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$em</span><span class="o">-&gt;</span><span class="nf">remove</span><span class="p">(</span><span class="nv">$picture</span><span class="p">);</span> <span class="c1">// $picture-&gt;position = 0</span>
+<span class="nv">$article</span><span class="o">-&gt;</span><span class="nf">getPictures</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">removeElement</span><span class="p">(</span><span class="nv">$picture</span><span class="p">);</span>
+<span class="nv">$em</span><span class="o">-&gt;</span><span class="nb">flush</span><span class="p">();</span>
+<span class="c1">// ...</span>
+<span class="nv">$picture</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Picture</span><span class="p">();</span>
+<span class="nv">$picture</span><span class="o">-&gt;</span><span class="nf">setPosition</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="nv">$picture</span><span class="o">-&gt;</span><span class="nf">setArticle</span><span class="p">(</span><span class="nv">$article</span><span class="p">);</span>
+<span class="nv">$article</span><span class="o">-&gt;</span><span class="nf">getPictures</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="nv">$picture</span><span class="p">);</span>
+<span class="nv">$em</span><span class="o">-&gt;</span><span class="nf">persist</span><span class="p">(</span><span class="nv">$picture</span><span class="p">);</span>
+<span class="nv">$em</span><span class="o">-&gt;</span><span class="nb">flush</span><span class="p">();</span></code></pre></figure>
+
+<p><img class="emoji" title=":bug:" alt=":bug:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f41b.png" height="20" width="20"> L’inconvénient avec cette méthode c’est si, pour une raison quelconque, l’ajout de l’image ne se passe pas bien, nous l’avons supprimé sans avoir pu la remplacer. On a donc un problème d’<strong>incohérence des données</strong>.</p>
+
+<p><img class="emoji" title=":art:" alt=":art:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3a8.png" height="20" width="20"> Il existe une autre possibilité, c’est de <strong>supprimer la contrainte d’unicité</strong>.
+Pourquoi ? Il est préférable de <strong>faire confiance à son domaine</strong> plutôt qu’à son schéma de base de données, n’en déplaise à votre esprit de DBA.</p>
+
+<p>Grâce aux options de persistance en cascade et de suppression d’entité orpheline de <strong>Doctrine</strong> nous pouvons complètement abstraire l’utilisation de l’<code class="language-plaintext highlighter-rouge">EntityManager</code>.
+De plus, une bonne habitude est d’encapsuler l’accès à vos collections dans des méthodes métier de votre agrégat :</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># Article.yml</span>
+
+<span class="na">Article</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">entity</span>
+    <span class="pi">[</span><span class="nv">...</span><span class="pi">]</span>
+    <span class="na">oneToMany</span><span class="pi">:</span>
+        <span class="na">pictures</span><span class="pi">:</span>
+            <span class="na">targetEntity</span><span class="pi">:</span> <span class="s">Picture</span>
+            <span class="na">mappedBy</span><span class="pi">:</span> <span class="s">article</span>
+            <span class="na">cascade</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">persist"</span><span class="pi">]</span> <span class="c1"># Auto persist</span>
+            <span class="na">orphanRemoval</span><span class="pi">:</span> <span class="no">true</span>  <span class="c1"># Auto remove</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$article</span><span class="o">-&gt;</span><span class="nf">removePicture</span><span class="p">(</span><span class="nv">$picture</span><span class="p">);</span>
+<span class="nv">$article</span><span class="o">-&gt;</span><span class="nf">addPicture</span><span class="p">(</span><span class="k">new</span> <span class="nc">Picture</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nv">$em</span><span class="o">-&gt;</span><span class="nb">flush</span><span class="p">();</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="c1">// Article.php</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="n">removePicture</span><span class="p">(</span><span class="kt">Picture</span> <span class="nv">$picture</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">pictures</span><span class="o">-&gt;</span><span class="nf">removeElement</span><span class="p">(</span><span class="nv">$picture</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="n">addPicture</span><span class="p">(</span><span class="kt">Picture</span> <span class="nv">$picture</span><span class="p">,</span> <span class="nv">$position</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">foreach</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">pictures</span> <span class="k">as</span> <span class="nv">$_picture</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$_picture</span><span class="o">-&gt;</span><span class="nf">getPosition</span><span class="p">()</span> <span class="o">===</span> <span class="nv">$position</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nc">PositionAlreadyUsed</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nv">$picture</span><span class="o">-&gt;</span><span class="nf">setPosition</span><span class="p">(</span><span class="nv">$position</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">pictures</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="nv">$picture</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Qu’en pensez-vous ? Quelle solution avez-vous choisie ? Une autre idée ?
+N’hésitez pas à m’en faire part sur Twitter !</p>
+
+</article>
+
+
+  <div class="share-page">
+  Objectivement, tu <u>dois</u> partager
+
+  <div class="share-links">
+    
+      <a class="fa fa-facebook" href="https://facebook.com/sharer.php?u=http://qpautrat.github.io/pages/qpautrat/2016/11/16/delete-insert-unicity-constraint-doctrine/" rel="nofollow" target="_blank" title="Share on Facebook"></a>
+    
+
+    
+      
+
+      <a class="fa fa-twitter" href="https://twitter.com/intent/tweet?text=DELETE%20INSERT%20sur%20une%20contrainte%20d'unicit%C3%A9%20avec%20Doctrine.%20Faire%20confiance%20%C3%A0%20son%20domaine.%20%23ddd%20%23doctrine%20via%20@pautrat%0A&amp;url=http://qpautrat.github.io/pages/qpautrat/2016/11/16/delete-insert-unicity-constraint-doctrine/" rel="nofollow" target="_blank" title="Share on Twitter"></a>
+    
+
+    
+
+    
+      <a class="fa fa-linkedin" href="http://www.linkedin.com/shareArticle?url=http://qpautrat.github.io/pages/qpautrat/2016/11/16/delete-insert-unicity-constraint-doctrine/&amp;title=DELETE%20INSERT%20sur%20une%20contrainte%20d'unicit%C3%A9%20avec%20Doctrine" rel="nofollow" target="_blank" title="Share on LinkedIn"></a>
+    
+
+    
+
+    
+
+    
+
+    
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+  <div class="p2 wrap">
+    <div class="measure mt1 center">
+      <small>
+        Crafted with &lt;3 by <a href="http://johnotander.com">John Otander</a> (<a href="https://twitter.com/4lpine">@4lpine</a>).<br>
+        &lt;/&gt; available on <a href="https://github.com/johnotander/pixyll">Github</a>.
+      </small>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-49889834-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

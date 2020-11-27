@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Objectivement objectif.</title>
+    <description>Software craftsman</description>
+    <link>http://qpautrat.github.io/pages/qpautrat/en/</link>
+    <atom:link href="http://qpautrat.github.io/pages/qpautrat/en/feed.xml" rel="self" type="application/rss+xml" />
+    
+      
+        <item>
+          <title>Install Ubuntu on MacBookPro</title>
+          <description>&lt;p&gt;After more than 5 years I couldn’t stand the disastrous performance of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Docker4Mac&lt;/code&gt; anymore. Running a monolith that is about 10 years old is a real pain in the ass.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Docker&lt;/code&gt; is not the only one to blame here. Tight coupling between numerous systems does not help either. Nevertheless, I saw how slow my laptop was even on very small projects.&lt;/p&gt;
+
+&lt;p&gt;Moreover I used my machine very intensively and I felt it at the end of the race. It was time to give it a second wind.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thanks &lt;a href=&quot;https://twitter.com/rcasagraude&quot;&gt;@kipit&lt;/a&gt; for his precious help !&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;hardware&quot;&gt;Hardware&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;MacBookPro Mi 2015&lt;/li&gt;
+  &lt;li&gt;CPU Intel(R) Core(TM) i5-5287U CPU @ 2.90GHz&lt;/li&gt;
+  &lt;li&gt;RAM 2 X DDR3 Synchrone 1867 MHz&lt;/li&gt;
+  &lt;li&gt;Webcam Broadcom 720p FaceTime HD Camera&lt;/li&gt;
+  &lt;li&gt;WiFi Broadcom BCM43602 802.11ac Wireless LAN&lt;/li&gt;
+  &lt;li&gt;SATA APPLE SSD SM0256&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;1-data-backup&quot;&gt;1/ Data backup&lt;/h2&gt;
+
+&lt;p&gt;With a fresh new Operating System install,  I plan to overwrite everything already on my disk so I take care to keep everything that seems important to me.&lt;/p&gt;
+
+&lt;p&gt;Personal and professional documents, but also configuration files. For example my &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.zshrc&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gitconfig.&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-having-osx-just-in-case&quot;&gt;2/ Having OSX just in case&lt;/h2&gt;
+
+&lt;p&gt;The installation of Ubuntu may fail or I may be disappointed with the new OS.
+I should be able to go back and reinstall Apple’s Operating System.
+&lt;a href=&quot;https://support.apple.com/en-us/HT201372&quot;&gt;The procedure is well explained&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;3-download-ubuntu&quot;&gt;3/ Download Ubuntu&lt;/h2&gt;
+
+&lt;p&gt;Last LTS version is available on &lt;a href=&quot;https://ubuntu.com/download/desktop&quot;&gt;Ubuntu’s website&lt;/a&gt;.
+You could have download speed issue. If it’s the case you can try &lt;a href=&quot;https://launchpad.net/ubuntu/+cdmirrors&quot;&gt;mirrors&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;4-turning-a-usb-flash-drive-into-a-bootable-image&quot;&gt;4/ Turning a USB flash drive into a bootable image&lt;/h2&gt;
+
+&lt;p&gt;I used &lt;a href=&quot;https://www.balena.io/etcher/&quot;&gt;Balena Etcher&lt;/a&gt; which is a small tool very simple to use.
+You select the file (on your disk or from HTTP) then the USB flash drive.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;I encountered a small problem during this stage. The tool told me that the disc I wanted to write to was busy. I had to use the following command to solve the problem:&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;diskutil umount /path/to/your/disk
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;5-install-ubuntu&quot;&gt;5/ Install Ubuntu&lt;/h2&gt;
+
+&lt;p&gt;I reboot the Mac while holding down the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Option (or alt) key.&lt;/code&gt; The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boot&lt;/code&gt; menu appears and I can select my USB flash drive containing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ubuntu&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The installation is very simple. The wizard guides us through the essential steps.&lt;/p&gt;
+
+&lt;p&gt;The Mac keyboard is recognized without any problem and is available in the list of available keyboards.&lt;/p&gt;
+
+&lt;p&gt;WiFi works very well too. I had no problems connecting to a wireless network with an excellent download speed (~100Mbits/s).&lt;/p&gt;
+
+&lt;p&gt;It is also possible to encrypt your disk.&lt;/p&gt;
+
+&lt;h2 id=&quot;6-docker--docker-compose&quot;&gt;6/ Docker &amp;amp; docker-compose&lt;/h2&gt;
+
+&lt;p&gt;To install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker&lt;/code&gt; I didn’t have any particular worries. &lt;a href=&quot;https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository&quot;&gt;Everything is very well explained&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;⚠️ Take care to read the paragraph at the end of the installation on the management of rights and groups. A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;group&lt;/code&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker&lt;/code&gt; is added but there is nobody in it. This means that only the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;root&lt;/code&gt; user can execute &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker&lt;/code&gt; commands. If you want to use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker&lt;/code&gt; without &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo&lt;/code&gt;, &lt;a href=&quot;https://docs.docker.com/engine/install/linux-postinstall/&quot;&gt;follow this documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose&lt;/code&gt; I used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;docker-compose
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;7-python&quot;&gt;7/ Python&lt;/h2&gt;
+
+&lt;p&gt;To make the monolith working on my machine I need &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; (2!) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fabric&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To avoid conflicts between &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; versions I use &lt;a href=&quot;https://github.com/pyenv/pyenv#the-automatic-installer&quot;&gt;pyenv&lt;/a&gt;. I suggest you to read whole &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;README&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Once &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pyenv&lt;/code&gt; is installed, I can install whatever &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; version I want:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pyenv &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;2.7.18
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fabric&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;pyenv root&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;/versions/2.7.18/bin/pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;fabric&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.14.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I set an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alias&lt;/code&gt; to make &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fabric&lt;/code&gt; easier to use:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#.zshrc&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;fab&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;pyenv root&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/versions/2.7.18/bin/fab&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;8-productivity&quot;&gt;8/ Productivity&lt;/h2&gt;
+
+&lt;p&gt;On &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ubuntu Software&lt;/code&gt;, which is the equivalent of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;App Store&lt;/code&gt; on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ubuntu&lt;/code&gt;, I was able to install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Discord&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Slack&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Todoist&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Miro&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PHPStorm&lt;/code&gt;. I didn’t encounter any particular problem. The applications seem to work well. I didn’t find &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Notion&lt;/code&gt; but their webapp works very well on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Firefox&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;9-airpods&quot;&gt;9/ AirPods&lt;/h2&gt;
+
+&lt;p&gt;I was able to connect my &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AirPods&lt;/code&gt; with my machine with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Bluetooth&lt;/code&gt;. However the sound quality is not as good. Moreover I have the impression that the distance allowed between the laptop and the airpods to continue to function is much less than on OSX.&lt;/p&gt;
+
+&lt;h2 id=&quot;10-webcam&quot;&gt;10/ Webcam&lt;/h2&gt;
+
+&lt;p&gt;Making the webcam work was ultimately the biggest worry. There are no official drivers available in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ubuntu&lt;/code&gt;. However someone has developed &lt;a href=&quot;https://github.com/patjak/bcwc_pcie/wiki/Get-Started&quot;&gt;a driver on github&lt;/a&gt;. &lt;a href=&quot;https://askubuntu.com/a/1215628&quot;&gt;There is a summry of the procedure&lt;/a&gt;.&lt;/p&gt;
+</description>
+          <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
+          <link>http://qpautrat.github.io/pages/qpautrat/en/2020/11/26/install-ubuntu-macbookpro/</link>
+          <guid isPermaLink="true">http://qpautrat.github.io/pages/qpautrat/en/2020/11/26/install-ubuntu-macbookpro/</guid>
+        </item>
+      
+    
+  </channel>
+</rss>

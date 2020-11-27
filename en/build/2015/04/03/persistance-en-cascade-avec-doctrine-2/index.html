@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Persistance en cascade avec Doctrine 2 &#8211; Objectivement objectif.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Maitriser et profiter de la puissance de la persistance en cascade avec Doctrine 2.&#10; &#35;php &#35;doctrine &#35;orm &#35;persistance">
+    <meta name="author" content="Quentin Pautrat">
+    <meta name="keywords" content="php, doctrine, orm, persistance">
+    <link rel="canonical" href="http://qpautrat.github.io/pages/qpautrat/2015/04/03/persistance-en-cascade-avec-doctrine-2/">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/pages/qpautrat/css/pixyll.css" type="text/css">
+
+    <!-- Fonts -->
+    <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+    
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    
+
+    <!-- Open Graph -->
+    <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
+    
+        <meta property="og:locale" content="fr_FR">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Persistance en cascade avec Doctrine 2">
+    <meta property="og:description" content="Maitriser et profiter de la puissance de la persistance en cascade avec Doctrine 2.&#10; &#35;php &#35;doctrine &#35;orm &#35;persistance">
+    <meta property="og:url" content="http://qpautrat.github.io/pages/qpautrat/2015/04/03/persistance-en-cascade-avec-doctrine-2/">
+    <meta property="og:site_name" content="Objectivement objectif.">
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@qpautrat" />
+    <meta name="twitter:title" content="Persistance en cascade avec Doctrine 2" />
+    <meta name="twitter:description" content="Maitriser et profiter de la puissance de la persistance en cascade avec Doctrine 2.&#10; &#35;php &#35;doctrine &#35;orm &#35;persistance" />
+    
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+</head>
+
+<body class="">
+  <div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <a href="http://qpautrat.github.io/pages/qpautrat" class="site-title">Objectivement objectif.</a>
+      <nav class="site-nav right">
+        
+      </nav>
+      <div class="clearfix"></div>
+      
+        <div class="social-icons">
+  <div class="left">
+    
+      <a class="fa fa-github" href="https://github.com/qpautrat"></a>
+    
+    
+    <a class="fa fa-rss" href="/pages/qpautrat/feed.xml"></a>
+    
+      <a class="fa fa-twitter" href="https://twitter.com/qpautrat"></a>
+    
+    
+    
+    
+      <a class="fa fa-linkedin" href="https://www.linkedin.com/in/qpautrat"></a>
+    
+  </div>
+  <div class="right">
+    
+    
+    
+  </div>
+</div>
+<div class="clearfix"></div>
+
+      
+    </div>
+  </div>
+</header>
+
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
+        
+
+
+<div class="post-header mb2">
+  <h1>Persistance en cascade avec Doctrine 2</h1>
+  <span class="post-meta">Apr 3, 2015</span><br>
+  
+  <span class="post-meta small">9 minute read</span>
+  
+    <span class="post-meta small">#php #doctrine #orm #persistance</span><br>
+  
+</div>
+
+<article class="post-content">
+  <p>Persister ses données manuellement avec Doctrine peut paraître très simple au premier coup d’oeil.
+Mais dans une application complexe celà peut vite devenir lourd à gérer.
+Dans ce billet je vais introduire la notion de persistance en cascade, comment l’utiliser, et quels sont les petits pièges à eviter.</p>
+
+<h3 id="onetomany">OneToMany</h3>
+
+<p>Imaginons les deux entités suivantes:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cd">/**
+ * Author
+ *
+ * @ORM\Table(name="author")
+ * @ORM\Entity
+ */</span>
+<span class="kd">class</span> <span class="nc">Author</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */</span>
+    <span class="k">protected</span> <span class="nv">$id</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @ORM\OneToMany(targetEntity="Book", mappedBy="author")
+     */</span>
+    <span class="k">protected</span> <span class="nv">$books</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">books</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nc">Doctrine\Common\Collections\ArrayCollection</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addBook</span><span class="p">(</span><span class="kt">Book</span> <span class="nv">$book</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">books</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$book</span><span class="p">;</span>
+        <span class="nv">$book</span><span class="o">-&gt;</span><span class="nf">setAuthor</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cd">/**
+ * Book
+ *
+ * @ORM\Table(name="book")
+ * @ORM\Entity
+ */</span>
+<span class="kd">class</span> <span class="nc">Book</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */</span>
+    <span class="k">protected</span> <span class="nv">$id</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @ORM\ManyToOne(targetEntity="Author", inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */</span>
+    <span class="k">protected</span> <span class="nv">$author</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setAuthor</span><span class="p">(</span><span class="kt">Author</span> <span class="nv">$author</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">author</span> <span class="o">=</span> <span class="nv">$author</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Pour le moment un auteur peut écrire un ou plusieurs livres. Un livre a un seul auteur.
+Nous avons donc une relation <em>OneToMany</em> entre <em>Author</em> et <em>Book</em>.</p>
+
+<p>Essayons de créer un auteur et de lui associer un livre.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$author</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Author</span><span class="p">;</span>
+<span class="nv">$book</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Book</span><span class="p">;</span>
+<span class="nv">$author</span><span class="o">-&gt;</span><span class="nf">addBook</span><span class="p">(</span><span class="nv">$book</span><span class="p">);</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="nf">persist</span><span class="p">(</span><span class="nv">$author</span><span class="p">);</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="nb">flush</span><span class="p">();</span></code></pre></figure>
+
+<p>Vous devriez avoir une erreur de ce type là:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Doctrine\ORM\ORMInvalidArgumentException]
+  A new entity was found through the relationship 'Author#books' that was not configured to cascade persist operations for
+  entity: Book@0000000026085418000000011a266ab5. To solve this issue: Either explicitly call EntityManager#persist() on thi
+  s unknown entity or configure cascade persist  this association in the mapping for example @ManyToOne(..,cascade={"persist"}). If you cannot find out which entity causes the problem implement 'Book#__toString()' to get a clue.
+</code></pre></div></div>
+
+<p>C’est tout à fait normal, nou avons demandé de persister <em>Author</em> mais à aucun moment Doctrine peut savoir qu’il fallait également persister <em>Book</em>.</p>
+
+<p>Pour régler ce problème, Doctrine nous propose deux solutions.</p>
+
+<h4 id="1-persister-lobjet-manuellement">1. Persister l’objet “manuellement”</h4>
+
+<p>Ajoutons la ligne suivante avant de persister <em>Author</em>:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$manager</span><span class="o">-&gt;</span><span class="nf">persist</span><span class="p">(</span><span class="nv">$book</span><span class="p">);</span></code></pre></figure>
+
+<p>Cette fois-ci tout se passe correctement. C’est très bien, mais se serait préférable de pouvoir éviter d’écrire cette ligne supplémentaire. On va donc configurer notre relation pour dire à Doctrine de persister automatiquement <em>Book</em>.</p>
+
+<h4 id="2-utiliser-la-persistance-en-cascade">2. Utiliser la persistance en cascade</h4>
+
+<p>Dans le message d’erreur, Doctrine nous propose de configurer la relation grâce à <code class="language-plaintext highlighter-rouge">cascade={"persist"}</code>.
+Même si la solution de la configuration peut paraître “sexy” elle n’en reste pas moins un peu “tricky” (faute de trouver mieux en français). En effet il faut bien faire attention à quel objet est persisté en premier.
+Dans notre cas il s’agit de Author.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$manager</span><span class="o">-&gt;</span><span class="nf">persist</span><span class="p">(</span><span class="nv">$author</span><span class="p">);</span></code></pre></figure>
+
+<p>Il faut donc rajouter la configuration dans la classe <em>Author</em>:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cd">/**
+ * @ORM\OneToMany(targetEntity="Book", mappedBy="author", cascade={"persist"})
+ */</span>
+<span class="k">protected</span> <span class="nv">$books</span><span class="p">;</span></code></pre></figure>
+
+<h3 id="manytomany">ManyToMany</h3>
+
+<p>Allons un peu plus loin et faisons évoluer notre relation <em>One To Many</em>.
+On va supposer qu’un livre peut avoir plusieurs auteurs.</p>
+
+<p>Ce qui nous donne le schéma suivant:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cd">/**
+ * Author
+ *
+ * @ORM\Table(name="author")
+ * @ORM\Entity
+ */</span>
+<span class="kd">class</span> <span class="nc">Author</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="cd">/**
+     * @ORM\ManyToMany(targetEntity="Book", cascade={"persist"})
+     */</span>
+    <span class="k">protected</span> <span class="nv">$books</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">books</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nc">Doctrine\Common\Collections\ArrayCollection</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addBook</span><span class="p">(</span><span class="kt">Book</span> <span class="nv">$book</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">books</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$book</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cd">/**
+ * Book
+ *
+ * @ORM\Table(name="book")
+ * @ORM\Entity
+ */</span>
+<span class="kd">class</span> <span class="nc">Book</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Nous sommes dans une configuration <strong>unidirectionnelle</strong> pour simplifier le schéma mais nous pourrions très bien la rendre <strong>bidirectionnelle</strong> en ajoutant la relation dans <em>Book</em>.</p>
+
+<p>Ajoutons un deuxième auteur et testons:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$author</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Author</span><span class="p">;</span>
+<span class="nv">$author2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Author</span><span class="p">;</span>
+<span class="nv">$book</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Book</span><span class="p">;</span>
+<span class="nv">$author</span><span class="o">-&gt;</span><span class="nf">addBook</span><span class="p">(</span><span class="nv">$book</span><span class="p">);</span>
+<span class="nv">$author2</span><span class="o">-&gt;</span><span class="nf">addBook</span><span class="p">(</span><span class="nv">$book</span><span class="p">);</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="nf">persist</span><span class="p">(</span><span class="nv">$author</span><span class="p">);</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="nf">persist</span><span class="p">(</span><span class="nv">$author2</span><span class="p">);</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="nb">flush</span><span class="p">();</span></code></pre></figure>
+
+<p>Une nouvelle table <code class="language-plaintext highlighter-rouge">author_book</code> a fait son apparition. Elle contient deux lignes et nous montre que nous avons bien deux auteurs pour le même livre.</p>
+
+<h3 id="onetomany---manytoone">OneToMany - ManyToOne</h3>
+
+<p>Faisons évoluer une nouvelle fois notre relation. En plus de savoir quels sont les auteurs d’un livre nous aimerions connaître la date à laquelle l’auteur a commencé à écrire sur l’ouvrage.
+Pour cela nous devons forcément modifier notre table de relation pour y ajouter un nouveau champ.
+A cause de celà notre table de relation va devenir une entité à part entière, c’est la seule façon de faire.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cd">/**
+ * Author
+ *
+ * @ORM\Table(name="author")
+ * @ORM\Entity
+ */</span>
+<span class="kd">class</span> <span class="nc">Author</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="cd">/**
+     * @ORM\OneToMany(targetEntity="AuthorBook", mappedBy="author", cascade={"persist"})
+     */</span>
+    <span class="k">protected</span> <span class="nv">$authorBooks</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">authorBooks</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nc">Doctrine\Common\Collections\ArrayCollection</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addAuthorBook</span><span class="p">(</span><span class="kt">AuthorBook</span> <span class="nv">$authorBook</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$authorBook</span><span class="o">-&gt;</span><span class="nf">setAuthor</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">authorBooks</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$authorBook</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cd">/**
+ * AuthorBook
+ *
+ * @ORM\Table(name="author_book", uniqueConstraints={@ORM\UniqueConstraint(name="author_book_idx", columns={"author_id", "book_id"})})
+ * @ORM\Entity
+ */</span>
+<span class="kd">class</span> <span class="nc">AuthorBook</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @ORM\ManyToOne(targetEntity="Author", inversedBy="authorBooks")
+     * @ORM\Id
+     */</span>
+    <span class="k">protected</span> <span class="nv">$author</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @ORM\ManyToOne(targetEntity="Book", inversedBy="bookAuthors")
+     * @ORM\Id
+     */</span>
+    <span class="k">protected</span> <span class="nv">$book</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @ORM\Column(type="date")
+     */</span>
+    <span class="k">protected</span> <span class="nv">$startedAt</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">startedAt</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nc">DateTime</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setAuthor</span><span class="p">(</span><span class="kt">Author</span> <span class="nv">$author</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">author</span> <span class="o">=</span> <span class="nv">$author</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setBook</span><span class="p">(</span><span class="kt">Book</span> <span class="nv">$book</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">book</span> <span class="o">=</span> <span class="nv">$book</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cd">/**
+ * Book
+ *
+ * @ORM\Table(name="book")
+ * @ORM\Entity
+ */</span>
+<span class="kd">class</span> <span class="nc">Book</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="cd">/**
+     * @ORM\OneToMany(targetEntity="AuthorBook", mappedBy="book")
+     */</span>
+    <span class="k">protected</span> <span class="nv">$bookAuthors</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">bookAuthors</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nc">Doctrine\Common\Collections\ArrayCollection</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addBookAuthor</span><span class="p">(</span><span class="kt">AuthorBook</span> <span class="nv">$bookAuthor</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$bookAuthor</span><span class="o">-&gt;</span><span class="nf">setBook</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">bookAuthors</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$bookAuthor</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Tentons de populer notre base de données.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$author</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Author</span><span class="p">;</span>
+<span class="nv">$author2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Author</span><span class="p">;</span>
+
+<span class="nv">$book</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Book</span><span class="p">;</span>
+
+<span class="nv">$authorBook</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AuthorBook</span><span class="p">;</span>
+
+<span class="nv">$author</span><span class="o">-&gt;</span><span class="nf">addAuthorBook</span><span class="p">(</span><span class="nv">$authorBook</span><span class="p">);</span>
+<span class="nv">$book</span><span class="o">-&gt;</span><span class="nf">addBookAuthor</span><span class="p">(</span><span class="nv">$authorBook</span><span class="p">);</span>
+
+<span class="nv">$authorBook2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AuthorBook</span><span class="p">;</span>
+
+<span class="nv">$author2</span><span class="o">-&gt;</span><span class="nf">addAuthorBook</span><span class="p">(</span><span class="nv">$authorBook2</span><span class="p">);</span>
+<span class="nv">$book</span><span class="o">-&gt;</span><span class="nf">addBookAuthor</span><span class="p">(</span><span class="nv">$authorBook2</span><span class="p">);</span>
+
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="nf">persist</span><span class="p">(</span><span class="nv">$author</span><span class="p">);</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="nf">persist</span><span class="p">(</span><span class="nv">$author2</span><span class="p">);</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="nb">flush</span><span class="p">();</span></code></pre></figure>
+
+<p>Malheureusement Doctrine n’a pas l’air content:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Doctrine\ORM\ORMException]
+  Entity of type AuthorBook has identity through a foreign entity Author, however this entity has no identity itself. You have to call EntityManager#persist() on the related entity and make sure that an identifier was generated before trying to persist 'AuthorBook'. In case of Post Insert ID Generation (such as MySQL Auto-Increment or PostgreSQL SERIAL) this means you have to call EntityManager#flush() between both persist operations.
+</code></pre></div></div>
+
+<p>Nous y voilà, c’est exactement ce problème que j’ai rencontré et qui m’a donné <del>du fil à retordre</del> envie d’écrire ce billet.
+Pourtant nous avons bien la bonne configuration grâce à <code class="language-plaintext highlighter-rouge">cascade={"persist"}</code>. Alors quel est le problème ?</p>
+
+<p>C’est assez simple au final. La réponse vient du fait que la clé primaire de mon entité de liaison est composée de mes deux clés étrangères <em>Author</em> et <em>Book</em>. Doctrine, via la configuration en cascade, essaie donc de persister l’entité <em>AuthorBook</em>.
+Pour celà il doit générer une nouvelle clé primaire. Malheureusement <i>author_id</i> n’existe pas puisque <em>Author</em> n’a pas encore été flushé, son <em>id</em> est donc inconnu pour Doctrine.</p>
+
+<p>Comme pour la relation <em>OneToMany</em> nous pouvons <em>flusher</em> manuellement <em>Author</em> et <em>Book</em> avant mais cette solution n’est pas adéquate dans beaucoup de situations.</p>
+
+<p>Rappelez-vous, un peu plus haut, j’ai dis que notre table de relation allait devenir une entité à part entière. Il suffit simplement de lui affecter un <em>id</em> !</p>
+
+<p><em>AuthorBook</em> devient donc:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cd">/**
+ * AuthorBook
+ *
+ * @ORM\Table(name="author_book", uniqueConstraints={@ORM\UniqueConstraint(name="author_book_idx", columns={"author_id", "book_id"})})
+ * @ORM\Entity
+ */</span>
+<span class="kd">class</span> <span class="nc">AuthorBook</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */</span>
+    <span class="k">protected</span> <span class="nv">$id</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @ORM\ManyToOne(targetEntity="Author", inversedBy="authorBooks")
+     */</span>
+    <span class="k">protected</span> <span class="nv">$author</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @ORM\ManyToOne(targetEntity="Book", inversedBy="bookAuthors", cascade={"persist"})
+     */</span>
+    <span class="k">protected</span> <span class="nv">$book</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @ORM\Column(type="date")
+     */</span>
+    <span class="k">protected</span> <span class="nv">$startedAt</span><span class="p">;</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Remarquez aussi le <code class="language-plaintext highlighter-rouge">cascade={"persist"}</code> sur <code class="language-plaintext highlighter-rouge">$book</code>. Et oui, en persistant <em>Author</em>, Doctrine va vouloir persister <em>AuthorBook</em> qui lui doit persister à son tour <em>Book</em>.</p>
+
+<p><strong>Attention</strong> : Dans ce dernier cas de figure nous avons une persistance à deux niveaux. Imaginez si vous avez trois, ou même quatre niveaux. C’est quelque chose qui arrive régulièrement. Gérer une persistance à plusieurs niveaux peut être assez complexe.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>La persistance implicite est très puissante et surtout très pratique. Elle évite une redondance de code et libère le développeur d’une contrainte supplémentaire. Cependant cette persistance doit rester maitriser. On a vite fait de se perdre lorsque la cascade d’entités à persister augmente.</p>
+
+<p><em>Vous pouvez aussi allez lire la <a href="http://doctrine-orm.readthedocs.org/en/latest/reference/working-with-associations.html#transitive-persistence-cascade-operations">documentation</a>.</em></p>
+
+</article>
+
+
+  <div class="share-page">
+  Objectivement, tu <u>dois</u> partager
+
+  <div class="share-links">
+    
+      <a class = "fa fa-facebook" href="https://facebook.com/sharer.php?u=http://qpautrat.github.io/pages/qpautrat/2015/04/03/persistance-en-cascade-avec-doctrine-2/" rel="nofollow" target="_blank" title="Share on Facebook"></a>
+    
+
+    
+      
+
+      <a class="fa fa-twitter" href="https://twitter.com/intent/tweet?text=Persistance en cascade avec Doctrine 2 via @pautrat%0A %23php %23doctrine %23orm %23persistance%0A&url=http://qpautrat.github.io/pages/qpautrat/2015/04/03/persistance-en-cascade-avec-doctrine-2/" rel="nofollow" target="_blank" title="Share on Twitter"></a>
+    
+
+    
+
+    
+      <a class="fa fa-linkedin" href="http://www.linkedin.com/shareArticle?url=http://qpautrat.github.io/pages/qpautrat/2015/04/03/persistance-en-cascade-avec-doctrine-2/&title=Persistance en cascade avec Doctrine 2" rel="nofollow" target="_blank" title="Share on LinkedIn"></a>
+    
+
+    
+
+    
+
+    
+
+    
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+  <div class="p2 wrap">
+    <div class="measure mt1 center">
+      <small>
+        Crafted with &lt;3 by <a href="http://johnotander.com">John Otander</a> (<a href="https://twitter.com/4lpine">@4lpine</a>).<br>
+        &lt;/&gt; available on <a href="https://github.com/johnotander/pixyll">Github</a>.
+      </small>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-49889834-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

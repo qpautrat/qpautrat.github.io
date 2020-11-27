@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Install Ubuntu on MacBookPro &#8211; Objectivement objectif.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Install Ubuntu on MacBookPro, is it worth it ? How to do it ?&#10; &#35;Ubuntu &#35;OSX &#35;Operating System &#35;Docker">
+    <meta name="author" content="Quentin Pautrat">
+    <meta name="keywords" content="Ubuntu, OSX, Operating System, Docker">
+    <link rel="canonical" href="http://qpautrat.github.io/pages/qpautrat/en/2020/11/26/install-ubuntu-macbookpro/">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/pages/qpautrat/css/pixyll.css" type="text/css">
+
+    <!-- Fonts -->
+    <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+    
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    
+
+    <!-- Open Graph -->
+    <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
+    
+        <meta property="og:locale" content="en_US">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Install Ubuntu on MacBookPro">
+    <meta property="og:description" content="Install Ubuntu on MacBookPro, is it worth it ? How to do it ?&#10; &#35;Ubuntu &#35;OSX &#35;Operating System &#35;Docker">
+    <meta property="og:url" content="http://qpautrat.github.io/pages/qpautrat/en/2020/11/26/install-ubuntu-macbookpro/">
+    <meta property="og:site_name" content="Objectivement objectif.">
+    
+      <meta property="og:image" content="http://qpautrat.github.io/assets/logo-ubuntu.png">
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@qpautrat" />
+    <meta name="twitter:title" content="Install Ubuntu on MacBookPro" />
+    <meta name="twitter:description" content="Install Ubuntu on MacBookPro, is it worth it ? How to do it ?&#10; &#35;Ubuntu &#35;OSX &#35;Operating System &#35;Docker" />
+    
+      <meta name="twitter:image" content="http://qpautrat.github.io/assets/logo-ubuntu.png" />
+    
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+</head>
+
+<body class="">
+  <div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <a href="http://qpautrat.github.io/pages/qpautrat/en" class="site-title">Objectivement objectif.</a>
+      <nav class="site-nav right">
+        
+      </nav>
+      <div class="clearfix"></div>
+      
+        <div class="social-icons">
+  <div class="left">
+    
+      <a class="fa fa-github" href="https://github.com/qpautrat"></a>
+    
+    
+    <a class="fa fa-rss" href="/pages/qpautrat/en/feed.xml"></a>
+    
+      <a class="fa fa-twitter" href="https://twitter.com/qpautrat"></a>
+    
+    
+    
+    
+      <a class="fa fa-linkedin" href="https://www.linkedin.com/in/qpautrat"></a>
+    
+  </div>
+  <div class="right">
+    
+    
+    
+  </div>
+</div>
+<div class="clearfix"></div>
+
+      
+    </div>
+  </div>
+</header>
+
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
+        
+
+
+<div class="post-header mb2">
+  <h1>Install Ubuntu on MacBookPro</h1>
+  <span class="post-meta">Nov 26, 2020</span><br>
+  
+  <span class="post-meta small">4 minute read</span>
+  
+    <span class="post-meta small">#Ubuntu #OSX #Operating System #Docker</span><br>
+  
+</div>
+
+<article class="post-content">
+  <p>After more than 5 years I couldn’t stand the disastrous performance of <code class="language-plaintext highlighter-rouge">Docker4Mac</code> anymore. Running a monolith that is about 10 years old is a real pain in the ass.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Docker</code> is not the only one to blame here. Tight coupling between numerous systems does not help either. Nevertheless, I saw how slow my laptop was even on very small projects.</p>
+
+<p>Moreover I used my machine very intensively and I felt it at the end of the race. It was time to give it a second wind.</p>
+
+<p><em>Thanks <a href="https://twitter.com/rcasagraude">@kipit</a> for his precious help !</em></p>
+
+<h2 id="hardware">Hardware</h2>
+
+<ul>
+  <li>MacBookPro Mi 2015</li>
+  <li>CPU Intel(R) Core(TM) i5-5287U CPU @ 2.90GHz</li>
+  <li>RAM 2 X DDR3 Synchrone 1867 MHz</li>
+  <li>Webcam Broadcom 720p FaceTime HD Camera</li>
+  <li>WiFi Broadcom BCM43602 802.11ac Wireless LAN</li>
+  <li>SATA APPLE SSD SM0256</li>
+</ul>
+
+<h2 id="1-data-backup">1/ Data backup</h2>
+
+<p>With a fresh new Operating System install,  I plan to overwrite everything already on my disk so I take care to keep everything that seems important to me.</p>
+
+<p>Personal and professional documents, but also configuration files. For example my <code class="language-plaintext highlighter-rouge">.zshrc</code> or <code class="language-plaintext highlighter-rouge">gitconfig.</code> file.</p>
+
+<h2 id="2-having-osx-just-in-case">2/ Having OSX just in case</h2>
+
+<p>The installation of Ubuntu may fail or I may be disappointed with the new OS.
+I should be able to go back and reinstall Apple’s Operating System.
+<a href="https://support.apple.com/en-us/HT201372">The procedure is well explained</a>.</p>
+
+<h2 id="3-download-ubuntu">3/ Download Ubuntu</h2>
+
+<p>Last LTS version is available on <a href="https://ubuntu.com/download/desktop">Ubuntu’s website</a>.
+You could have download speed issue. If it’s the case you can try <a href="https://launchpad.net/ubuntu/+cdmirrors">mirrors</a>.</p>
+
+<h2 id="4-turning-a-usb-flash-drive-into-a-bootable-image">4/ Turning a USB flash drive into a bootable image</h2>
+
+<p>I used <a href="https://www.balena.io/etcher/">Balena Etcher</a> which is a small tool very simple to use.
+You select the file (on your disk or from HTTP) then the USB flash drive.</p>
+
+<p><em>I encountered a small problem during this stage. The tool told me that the disc I wanted to write to was busy. I had to use the following command to solve the problem:</em></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diskutil umount /path/to/your/disk
+</code></pre></div></div>
+
+<h2 id="5-install-ubuntu">5/ Install Ubuntu</h2>
+
+<p>I reboot the Mac while holding down the <code class="language-plaintext highlighter-rouge">Option (or alt) key.</code> The <code class="language-plaintext highlighter-rouge">boot</code> menu appears and I can select my USB flash drive containing <code class="language-plaintext highlighter-rouge">Ubuntu</code>.</p>
+
+<p>The installation is very simple. The wizard guides us through the essential steps.</p>
+
+<p>The Mac keyboard is recognized without any problem and is available in the list of available keyboards.</p>
+
+<p>WiFi works very well too. I had no problems connecting to a wireless network with an excellent download speed (~100Mbits/s).</p>
+
+<p>It is also possible to encrypt your disk.</p>
+
+<h2 id="6-docker--docker-compose">6/ Docker &amp; docker-compose</h2>
+
+<p>To install <code class="language-plaintext highlighter-rouge">docker</code> I didn’t have any particular worries. <a href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository">Everything is very well explained</a>.</p>
+
+<p>⚠️ Take care to read the paragraph at the end of the installation on the management of rights and groups. A <code class="language-plaintext highlighter-rouge">group</code> <code class="language-plaintext highlighter-rouge">docker</code> is added but there is nobody in it. This means that only the <code class="language-plaintext highlighter-rouge">root</code> user can execute <code class="language-plaintext highlighter-rouge">docker</code> commands. If you want to use <code class="language-plaintext highlighter-rouge">docker</code> without <code class="language-plaintext highlighter-rouge">sudo</code>, <a href="https://docs.docker.com/engine/install/linux-postinstall/">follow this documentation</a>.</p>
+
+<p>To install <code class="language-plaintext highlighter-rouge">docker-compose</code> I used <code class="language-plaintext highlighter-rouge">apt</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>docker-compose
+</code></pre></div></div>
+
+<h2 id="7-python">7/ Python</h2>
+
+<p>To make the monolith working on my machine I need <code class="language-plaintext highlighter-rouge">python</code> (2!) and <code class="language-plaintext highlighter-rouge">fabric</code>.</p>
+
+<p>To avoid conflicts between <code class="language-plaintext highlighter-rouge">python</code> versions I use <a href="https://github.com/pyenv/pyenv#the-automatic-installer">pyenv</a>. I suggest you to read whole <code class="language-plaintext highlighter-rouge">README</code>.</p>
+
+<p>Once <code class="language-plaintext highlighter-rouge">pyenv</code> is installed, I can install whatever <code class="language-plaintext highlighter-rouge">python</code> version I want:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv <span class="nb">install </span>2.7.18
+</code></pre></div></div>
+
+<p>Then <code class="language-plaintext highlighter-rouge">fabric</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="si">$(</span>pyenv root<span class="si">)</span>/versions/2.7.18/bin/pip <span class="nb">install </span><span class="nv">fabric</span><span class="o">==</span>1.14.0
+</code></pre></div></div>
+
+<p>I set an <code class="language-plaintext highlighter-rouge">alias</code> to make <code class="language-plaintext highlighter-rouge">fabric</code> easier to use:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#.zshrc</span>
+<span class="nb">alias </span><span class="nv">fab</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span>pyenv root<span class="si">)</span><span class="s2">/versions/2.7.18/bin/fab"</span>
+</code></pre></div></div>
+
+<h2 id="8-productivity">8/ Productivity</h2>
+
+<p>On <code class="language-plaintext highlighter-rouge">Ubuntu Software</code>, which is the equivalent of the <code class="language-plaintext highlighter-rouge">App Store</code> on <code class="language-plaintext highlighter-rouge">Ubuntu</code>, I was able to install <code class="language-plaintext highlighter-rouge">Discord</code>, <code class="language-plaintext highlighter-rouge">Slack</code>, <code class="language-plaintext highlighter-rouge">Todoist</code>, <code class="language-plaintext highlighter-rouge">Miro</code> and <code class="language-plaintext highlighter-rouge">PHPStorm</code>. I didn’t encounter any particular problem. The applications seem to work well. I didn’t find <code class="language-plaintext highlighter-rouge">Notion</code> but their webapp works very well on <code class="language-plaintext highlighter-rouge">Firefox</code>.</p>
+
+<h2 id="9-airpods">9/ AirPods</h2>
+
+<p>I was able to connect my <code class="language-plaintext highlighter-rouge">AirPods</code> with my machine with <code class="language-plaintext highlighter-rouge">Bluetooth</code>. However the sound quality is not as good. Moreover I have the impression that the distance allowed between the laptop and the airpods to continue to function is much less than on OSX.</p>
+
+<h2 id="10-webcam">10/ Webcam</h2>
+
+<p>Making the webcam work was ultimately the biggest worry. There are no official drivers available in <code class="language-plaintext highlighter-rouge">Ubuntu</code>. However someone has developed <a href="https://github.com/patjak/bcwc_pcie/wiki/Get-Started">a driver on github</a>. <a href="https://askubuntu.com/a/1215628">There is a summry of the procedure</a>.</p>
+
+</article>
+
+
+  <div class="share-page">
+  Objectivement, tu <u>dois</u> partager
+
+  <div class="share-links">
+    
+      <a class = "fa fa-facebook" href="https://facebook.com/sharer.php?u=http://qpautrat.github.io/pages/qpautrat/en/2020/11/26/install-ubuntu-macbookpro/" rel="nofollow" target="_blank" title="Share on Facebook"></a>
+    
+
+    
+      
+
+      <a class="fa fa-twitter" href="https://twitter.com/intent/tweet?text=Install Ubuntu on MacBookPro via @pautrat%0A %23Ubuntu %23OSX %23Operating System %23Docker%0A&url=http://qpautrat.github.io/pages/qpautrat/en/2020/11/26/install-ubuntu-macbookpro/" rel="nofollow" target="_blank" title="Share on Twitter"></a>
+    
+
+    
+
+    
+      <a class="fa fa-linkedin" href="http://www.linkedin.com/shareArticle?url=http://qpautrat.github.io/pages/qpautrat/en/2020/11/26/install-ubuntu-macbookpro/&title=Install Ubuntu on MacBookPro" rel="nofollow" target="_blank" title="Share on LinkedIn"></a>
+    
+
+    
+
+    
+
+    
+
+    
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+  <div class="p2 wrap">
+    <div class="measure mt1 center">
+      <small>
+        Crafted with &lt;3 by <a href="http://johnotander.com">John Otander</a> (<a href="https://twitter.com/4lpine">@4lpine</a>).<br>
+        &lt;/&gt; available on <a href="https://github.com/johnotander/pixyll">Github</a>.
+      </small>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-49889834-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
