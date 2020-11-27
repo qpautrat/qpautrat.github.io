@@ -11,6 +11,7 @@ plugins:
   - jekyll-multiple-languages-plugin
   - jekyll-sitemap
   - jemoji
+  - jekyll-github-metadata
 
 # Optional features
 animated:           false
@@ -52,7 +53,6 @@ permalink:    pretty
 paginate:     5
 sass:
   compressed: true
-repository: "qpautrat/qpautrat.github.io"
 
 encoding: utf-8
 
