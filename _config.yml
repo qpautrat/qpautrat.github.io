@@ -52,6 +52,7 @@ permalink:    pretty
 paginate:     5
 sass:
   compressed: true
+repository: "qpautrat/qpautrat.github.io"
 
 encoding: utf-8
 
