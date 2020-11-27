@@ -3,8 +3,8 @@
   <channel>
     <title>Objectivement objectif.</title>
     <description>Software craftsman</description>
-    <link>http://qpautrat.github.io/</link>
-    <atom:link href="http://qpautrat.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <link>https://qpautrat.github.io/</link>
+    <atom:link href="https://qpautrat.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       
         <item>
@@ -109,8 +109,8 @@
 &lt;p&gt;C’est encore quelque chose qui me gêne après quelques heures d’utilisation mais j’ai commencé à prendre les bons réflexes. Cependant j’ai peur d’utiliser de nouveau OSX sur une autre machine et perdre ces habitudes. Je n’ai pas trouvé de solution encore pour adapter mon Ubuntu aux raccourcis utilisés sur OSX.&lt;/p&gt;
 </description>
           <pubDate>Thu, 26 Nov 2020 00:00:00 +0100</pubDate>
-          <link>http://qpautrat.github.io/2020/11/26/installer-ubuntu-sur-un-macbookpro/</link>
-          <guid isPermaLink="true">http://qpautrat.github.io/2020/11/26/installer-ubuntu-sur-un-macbookpro/</guid>
+          <link>https://qpautrat.github.io/2020/11/26/installer-ubuntu-sur-un-macbookpro/</link>
+          <guid isPermaLink="true">https://qpautrat.github.io/2020/11/26/installer-ubuntu-sur-un-macbookpro/</guid>
         </item>
       
     
@@ -259,8 +259,8 @@ Si vous travaillez sur un projet très fortement orienté CRUD, sans beaucoup de
 Soyez simplement averti que la complexité d’un projet augmente rapidement et qu’il n’appartient qu’à vous de détecter le moment où les choses se corsent.&lt;/p&gt;
 </description>
           <pubDate>Fri, 07 Jul 2017 00:00:00 +0200</pubDate>
-          <link>http://qpautrat.github.io/2017/07/07/la-validation-metier-dans-le-modele-une-assurance-vie/</link>
-          <guid isPermaLink="true">http://qpautrat.github.io/2017/07/07/la-validation-metier-dans-le-modele-une-assurance-vie/</guid>
+          <link>https://qpautrat.github.io/2017/07/07/la-validation-metier-dans-le-modele-une-assurance-vie/</link>
+          <guid isPermaLink="true">https://qpautrat.github.io/2017/07/07/la-validation-metier-dans-le-modele-une-assurance-vie/</guid>
         </item>
       
     
@@ -429,8 +429,8 @@ De plus, une bonne habitude est d’encapsuler l’accès à vos collections dan
 N’hésitez pas à m’en faire part sur Twitter !&lt;/p&gt;
 </description>
           <pubDate>Wed, 16 Nov 2016 00:00:00 +0100</pubDate>
-          <link>http://qpautrat.github.io/2016/11/16/delete-insert-unicity-constraint-doctrine/</link>
-          <guid isPermaLink="true">http://qpautrat.github.io/2016/11/16/delete-insert-unicity-constraint-doctrine/</guid>
+          <link>https://qpautrat.github.io/2016/11/16/delete-insert-unicity-constraint-doctrine/</link>
+          <guid isPermaLink="true">https://qpautrat.github.io/2016/11/16/delete-insert-unicity-constraint-doctrine/</guid>
         </item>
       
     
@@ -803,8 +803,8 @@ Pour celà il doit générer une nouvelle clé primaire. Malheureusement &lt;i&g
 &lt;p&gt;&lt;em&gt;Vous pouvez aussi allez lire la &lt;a href=&quot;http://doctrine-orm.readthedocs.org/en/latest/reference/working-with-associations.html#transitive-persistence-cascade-operations&quot;&gt;documentation&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 </description>
           <pubDate>Fri, 03 Apr 2015 00:00:00 +0200</pubDate>
-          <link>http://qpautrat.github.io/2015/04/03/persistance-en-cascade-avec-doctrine-2/</link>
-          <guid isPermaLink="true">http://qpautrat.github.io/2015/04/03/persistance-en-cascade-avec-doctrine-2/</guid>
+          <link>https://qpautrat.github.io/2015/04/03/persistance-en-cascade-avec-doctrine-2/</link>
+          <guid isPermaLink="true">https://qpautrat.github.io/2015/04/03/persistance-en-cascade-avec-doctrine-2/</guid>
         </item>
       
     
