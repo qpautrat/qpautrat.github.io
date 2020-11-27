@@ -1,1 +1,1 @@
-Sitemap: http://qpautrat.github.io/pages/qpautrat/sitemap.xml
+Sitemap: http://qpautrat.github.io/sitemap.xml

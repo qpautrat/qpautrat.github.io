@@ -3,8 +3,8 @@
   <channel>
     <title>Objectivement objectif.</title>
     <description>Software craftsman</description>
-    <link>http://qpautrat.github.io/pages/qpautrat/en/</link>
-    <atom:link href="http://qpautrat.github.io/pages/qpautrat/en/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://qpautrat.github.io/en/</link>
+    <atom:link href="http://qpautrat.github.io/en/feed.xml" rel="self" type="application/rss+xml" />
     
       
         <item>
@@ -112,9 +112,9 @@ You select the file (on your disk or from HTTP) then the USB flash drive.&lt;/p&
 
 &lt;p&gt;Making the webcam work was ultimately the biggest worry. There are no official drivers available in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ubuntu&lt;/code&gt;. However someone has developed &lt;a href=&quot;https://github.com/patjak/bcwc_pcie/wiki/Get-Started&quot;&gt;a driver on github&lt;/a&gt;. &lt;a href=&quot;https://askubuntu.com/a/1215628&quot;&gt;There is a summry of the procedure&lt;/a&gt;.&lt;/p&gt;
 </description>
-          <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
-          <link>http://qpautrat.github.io/pages/qpautrat/en/2020/11/26/install-ubuntu-macbookpro/</link>
-          <guid isPermaLink="true">http://qpautrat.github.io/pages/qpautrat/en/2020/11/26/install-ubuntu-macbookpro/</guid>
+          <pubDate>Thu, 26 Nov 2020 00:00:00 +0100</pubDate>
+          <link>http://qpautrat.github.io/en/2020/11/26/install-ubuntu-macbookpro/</link>
+          <guid isPermaLink="true">http://qpautrat.github.io/en/2020/11/26/install-ubuntu-macbookpro/</guid>
         </item>
       
     
