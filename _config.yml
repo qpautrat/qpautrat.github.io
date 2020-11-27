@@ -55,5 +55,5 @@ sass:
 
 encoding: utf-8
 
-languages: ["fr"]
+languages: ["fr", "en"]
 exclude_from_localizations: ["images", "css", "assets"]

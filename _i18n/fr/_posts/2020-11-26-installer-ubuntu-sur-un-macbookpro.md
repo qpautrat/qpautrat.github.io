@@ -16,7 +16,7 @@ Alors oui, `Docker` n'est pas le seul à blamer. Un couplage fort avec une multi
 
 *Merci à [@kipit](https://twitter.com/rcasagraude) pour son aide précieuse !*
 
-### Matériel
+## Matériel
 
 - MacBookPro Mi 2015
 - CPU Intel(R) Core(TM) i5-5287U CPU @ 2.90GHz
@@ -98,7 +98,7 @@ alias fab="$(pyenv root)/versions/2.7.18/bin/fab"
 
 ## 8/ Productivité
 
-Sur `Ubuntu Software`, qui est l'équivalent de l'`App Store` sur `Ubuntu,` j'ai pu installer `Discord`, `Slack`, `Todoist`, `Miro` ou encore `PHPStorm`. Je n'ai pas rencontré de problème particulier. Les applications ont l'air de bien fonctionner. Je n'ai par contre pas trouvé `Notion` mais leur `Webapp` fonctionne très bien sur `Firefox`.
+Sur `Ubuntu Software`, qui est l'équivalent de l'`App Store` sur `Ubuntu`, j'ai pu installer `Discord`, `Slack`, `Todoist`, `Miro` ou encore `PHPStorm`. Je n'ai pas rencontré de problème particulier. Les applications ont l'air de bien fonctionner. Je n'ai par contre pas trouvé `Notion` mais leur `Webapp` fonctionne très bien sur `Firefox`.
 
 ## 9/ AirPods
 
