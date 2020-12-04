@@ -29,11 +29,7 @@
 
     <!-- Open Graph -->
     <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
-    {% if site.lang == "en" %}
-        <meta property="og:locale" content="en_US">
-    {% else %}
-        <meta property="og:locale" content="fr_FR">
-    {% endif %}
+    <meta property="og:locale" content="{% translate og.locale %}">
     <meta property="og:type" content="article">
     <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
     <meta property="og:description" content="{{ summary }}">
