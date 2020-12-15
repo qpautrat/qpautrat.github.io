@@ -13,7 +13,9 @@ image: /assets/electron.svg
 Développé et maintenu par Github, Electron est un framework qui permet de développer des **applications de bureau multi plateformes** (OSX, Windows, Linux) en **utilisant les technologies web**, HTML, CSS et JavaScript. Il embarque NodeJS pour le runtime et le moteur de rendu de Chromium pour le rendu graphique. Electron offre en plus une API qui sert d'abstraction pour interagir avec le système d'exploitation. 
 
 
-Comme fil rouge j'ai décidé de développer un [Digital Asset Management ou DAM](https://cloudinary.com/dam-guide/dam). Je vais développer deux fonctionnalités très simples. Importer un Asset dans l'application et visualiser les Assets déjà importés.
+Comme fil rouge j'ai décidé de faire un [Digital Asset Management ou DAM](https://cloudinary.com/dam-guide/dam). Je vais développer deux fonctionnalités très simples: 
+- Importer un Asset
+- Lister les Assets importés.
 
 ## Créer et lancer l'application
 
@@ -34,7 +36,7 @@ npm start
 
 ![Electron Hello World !](/assets/electron-hello-world.png)
 
-Je peux voir plusieurs choses assez cool. Mon application ressemble à n'importe quelle autre: un titre, un menu, le rendu visuel de ma première page web et même une DevToolBar !
+Je peux voir plusieurs choses assez cool. Mon application ressemble à n'importe quelle autre: un titre, un menu, le rendu visuel de ma fenêtre principale et même une DevToolBar !
 
 J'ai testé sur Ubuntu 20.04, Windows 10, OSX Catalina.
 
@@ -136,11 +138,11 @@ const mainWindow = new BrowserWindow({
 
 Je suis obligé de relancer mon application.
 
-⚠️ **Le fichier index.js est exécuté par NodeJS alors que les fichiers html et css sont eux interprétés par le navigateur. Le fichier index.js fait office de Backend tandis que le html fait office de Frontend.** 
+⚠️ **Le fichier index.js est exécuté par NodeJS alors que les fichiers HTML et CSS sont eux interprétés par le navigateur. Le fichier index.js fait office de Backend tandis que le html fait office de Frontend.** 
 
 ## Importer un Asset
 
-Afin de stocker les Assets et être en mesure de jouer avec je dois d'abord définir un répertoire de référence sur l'ordinateur de l'utilisateur.
+Afin de stocker les Assets et être en mesure de jouer avec, je dois d'abord définir un répertoire de référence sur l'ordinateur de l'utilisateur.
 
 ### Initialiser le répertoire de stockage
 
@@ -165,7 +167,7 @@ try {
 }
 ```
 
-La méthode *[app.getPath](https://www.electronjs.org/docs/all#appgetpathname)* offre plusieurs options possibles. D'un point de vue développeur elle permet de s'abstraire de l'OS sur lequel l'application est exécutée.
+La méthode *[app.getPath](https://www.electronjs.org/docs/all#appgetpathname)* offre plusieurs options possibles. D'un point de vue développeur elle permet de s'abstraire du système d'exploitation sur lequel l'application est exécutée.
 
 Après avoir relancer mon application, je vérifie qu'il existe maintenant un dossier _electron-dam-assets_ dans mes Documents:
 
