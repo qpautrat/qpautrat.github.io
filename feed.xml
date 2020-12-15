@@ -11,7 +11,11 @@
           <title>Débuter avec Electron</title>
           <description>&lt;p&gt;Développé et maintenu par Github, Electron est un framework qui permet de développer des &lt;strong&gt;applications de bureau multi plateformes&lt;/strong&gt; (OSX, Windows, Linux) en &lt;strong&gt;utilisant les technologies web&lt;/strong&gt;, HTML, CSS et JavaScript. Il embarque NodeJS pour le runtime et le moteur de rendu de Chromium pour le rendu graphique. Electron offre en plus une API qui sert d’abstraction pour interagir avec le système d’exploitation.&lt;/p&gt;
 
-&lt;p&gt;Comme fil rouge j’ai décidé de développer un &lt;a href=&quot;https://cloudinary.com/dam-guide/dam&quot;&gt;Digital Asset Management ou DAM&lt;/a&gt;. Je vais développer deux fonctionnalités très simples. Importer un Asset dans l’application et visualiser les Assets déjà importés.&lt;/p&gt;
+&lt;p&gt;Comme fil rouge j’ai décidé de faire un &lt;a href=&quot;https://cloudinary.com/dam-guide/dam&quot;&gt;Digital Asset Management ou DAM&lt;/a&gt;. Je vais développer deux fonctionnalités très simples:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Importer un Asset&lt;/li&gt;
+  &lt;li&gt;Lister les Assets importés.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&quot;créer-et-lancer-lapplication&quot;&gt;Créer et lancer l’application&lt;/h2&gt;
 
@@ -30,7 +34,7 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/electron-hello-world.png&quot; alt=&quot;Electron Hello World !&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Je peux voir plusieurs choses assez cool. Mon application ressemble à n’importe quelle autre: un titre, un menu, le rendu visuel de ma première page web et même une DevToolBar !&lt;/p&gt;
+&lt;p&gt;Je peux voir plusieurs choses assez cool. Mon application ressemble à n’importe quelle autre: un titre, un menu, le rendu visuel de ma fenêtre principale et même une DevToolBar !&lt;/p&gt;
 
 &lt;p&gt;J’ai testé sur Ubuntu 20.04, Windows 10, OSX Catalina.&lt;/p&gt;
 
@@ -126,11 +130,11 @@
 
 &lt;p&gt;Je suis obligé de relancer mon application.&lt;/p&gt;
 
-&lt;p&gt;⚠️ &lt;strong&gt;Le fichier index.js est exécuté par NodeJS alors que les fichiers html et css sont eux interprétés par le navigateur. Le fichier index.js fait office de Backend tandis que le html fait office de Frontend.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;⚠️ &lt;strong&gt;Le fichier index.js est exécuté par NodeJS alors que les fichiers HTML et CSS sont eux interprétés par le navigateur. Le fichier index.js fait office de Backend tandis que le html fait office de Frontend.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;importer-un-asset&quot;&gt;Importer un Asset&lt;/h2&gt;
 
-&lt;p&gt;Afin de stocker les Assets et être en mesure de jouer avec je dois d’abord définir un répertoire de référence sur l’ordinateur de l’utilisateur.&lt;/p&gt;
+&lt;p&gt;Afin de stocker les Assets et être en mesure de jouer avec, je dois d’abord définir un répertoire de référence sur l’ordinateur de l’utilisateur.&lt;/p&gt;
 
 &lt;h3 id=&quot;initialiser-le-répertoire-de-stockage&quot;&gt;Initialiser le répertoire de stockage&lt;/h3&gt;
 
@@ -154,7 +158,7 @@
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;La méthode &lt;em&gt;&lt;a href=&quot;https://www.electronjs.org/docs/all#appgetpathname&quot;&gt;app.getPath&lt;/a&gt;&lt;/em&gt; offre plusieurs options possibles. D’un point de vue développeur elle permet de s’abstraire de l’OS sur lequel l’application est exécutée.&lt;/p&gt;
+&lt;p&gt;La méthode &lt;em&gt;&lt;a href=&quot;https://www.electronjs.org/docs/all#appgetpathname&quot;&gt;app.getPath&lt;/a&gt;&lt;/em&gt; offre plusieurs options possibles. D’un point de vue développeur elle permet de s’abstraire du système d’exploitation sur lequel l’application est exécutée.&lt;/p&gt;
 
 &lt;p&gt;Après avoir relancer mon application, je vérifie qu’il existe maintenant un dossier &lt;em&gt;electron-dam-assets&lt;/em&gt; dans mes Documents:&lt;/p&gt;
 
