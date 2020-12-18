@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Débuter avec Electron
-summary: Développer des applications de bureau multi plateformes en utilisant les technologies Web, tour d'horizon !
+title: Getting started with Electron
+summary: "Developing cross platform desktop application using web technologies: Overview !"
 tags:
  - Electron
  - JavaScript
@@ -10,25 +10,25 @@ tags:
 image: /assets/electron-logo.png
 ---
 
-Développé et maintenu par Github, Electron est un framework qui permet de construire des **applications de bureau multi plateformes** (OSX, Windows, Linux) en **utilisant les technologies web**, HTML, CSS et JavaScript. Il embarque NodeJS pour le runtime et le moteur de rendu de Chromium pour le rendu graphique. Electron offre en plus une API qui sert d'abstraction pour interagir avec le système d'exploitation. 
+Developed and maintened by Github, Electron is a framework helping you to build **cross platform desktop applications** (OSX, Windows, Linux) using **web technologies** HTML, CSS and JavaScript. It ships NodeJS as runtime and Chromium rendering engine. In addition to NodeJS, Electron provides a nice API to interact with the operating system.
 
 
-Comme fil rouge j'ai décidé de faire un [Digital Asset Management ou DAM](https://cloudinary.com/dam-guide/dam). Je vais développer deux fonctionnalités très simples: 
-- Importer un Asset
-- Lister les Assets importés.
+As common thread I decided to build a [Digital Asset Management or DAM](https://cloudinary.com/dam-guide/dam). I will implement two basic feature:
+- Import an Asset
+- List imported Assets
 
-## Créer et lancer l'application
+## Create and start the application
 
-J'utilise le _builder_ [Electron Forge](https://www.electronforge.io) pour créer le projet. [Il en existe d'autres](https://www.electronjs.org/docs/tutorial/boilerplates-and-clis#boilerplates-and-clis).
+I use [Electron Forge](https://www.electronforge.io) as _builder_ to initialize the project. [There are more](https://www.electronjs.org/docs/tutorial/boilerplates-and-clis#boilerplates-and-clis).
 
 ```bash
 npx create-electron-app electron-dam
 cd electron-dam
 ```
 
-Forge met à disposition des *[Templates](https://www.electronforge.io/templates/typescript-+-webpack-template)* afin de commencer avec plus d'outils comme par exemple Webpack et TypeScript.
+Forge provides *[Templates](https://www.electronforge.io/templates/typescript-+-webpack-template)* in order to start easily with tools like Webpack or TypeScript.
 
-Je lance l'application:
+Then I run the app.
 
 ```bash
 npm start
@@ -36,15 +36,16 @@ npm start
 
 ![Electron Hello World !](/assets/electron-hello-world.png)
 
-Je peux voir plusieurs choses assez cool. Mon application ressemble à n'importe quelle autre: un titre, un menu, le rendu visuel de ma fenêtre principale et même une DevToolBar !
+I can see several things pretty cool here. My app looks like any other. There are a title, a menu, an visual interface with text and emoji. There is even a DevToolBar !
 
-J'ai testé sur Ubuntu 20.04, Windows 10, OSX Catalina.
+I tested this hello-world app on Ubuntu 20.04, Windows 10 and OSX Catalina, so far so good.
 
-Ma première impression est très bonne. C'est très simple d'avoir un premier déliverable.
+My first impression is really good. It's pretty simple to build and running a first small application.
 
 ## Bootstraping
 
-Je regarde ce que contient le projet.
+I look what is inside the project.
+
 
 ```json
 // package.json
@@ -53,7 +54,7 @@ Je regarde ce que contient le projet.
 }
 ```
 
-Comme toute application NodeJS, *main* spécifie le point d'entrée de l'application.
+As any NodeJS app, *main* is the entrypoint.
 
 
 ```json
@@ -70,7 +71,8 @@ Comme toute application NodeJS, *main* spécifie le point d'entrée de l'applica
 }
 ```
 
-Forge met à disposition [plusieurs commandes](https://www.electronforge.io/cli#commands) utiles pour développer et publier son application. 
+Forge provides [several useful commands](https://www.electronforge.io/cli#commands) to publish its application.
+
 
 ```json
 // package.json
@@ -104,17 +106,18 @@ Forge met à disposition [plusieurs commandes](https://www.electronforge.io/cli#
 }
 ```
 
-Forge propose par défaut plusieurs *[Makers](https://www.electronforge.io/config/makers)* qui permettent de créer des distribuables spécifiques à chaque platforme.
+*[Makers](https://www.electronforge.io/config/makers)* make specific platform package.
 
-Il y a aussi une section *[Plugins](https://www.electronforge.io/config/plugins)*, qui permet d'étendre les fonctionnalités de Forge. Par exemple il est possible de profiter de Webpack avec le Hot Module Reload.
+*[Plugins](https://www.electronforge.io/config/plugins)* are used to extend Forge. For example it's possible to take advantage of Hot Module Reload.
 
-Le fichier _index.js_ est très bien commenté et l'API d'Electron est simple à appréhender. J'ai très rapidement compris le contenu du fichier.
+_index.js_ is very well documented. Electron API is intuitive.
 
-Les fichiers _index.html_ et _index.css_ contiennent la partie visuelle de mon application comme une application web classique.
+_index.html_ and _index.css_ define graphical rendering like any web app.
 
-Si je modifie le HTML ou le CSS je ne suis pas obligé de relancer l'application. Je peux rafraichir la page avec Ctrl+R pour voir les modifications.
 
-Il est possible d'ajouter du Javascript:
+If I change HTML or CSS, there is no need to reboot the app. I can refresh as I could do in my web browser to see modifications.
+
+Of course it's possible to add JavaScript:
 
 ```jsx
 <!-- index.html -->
@@ -127,7 +130,8 @@ Il est possible d'ajouter du Javascript:
 
 ![Electron Welcome !](/assets/electron-welcome.png)
 
-Cependant si je veux changer par exemple la taille de ma fenêtre:
+However, if I want to change something in _index.js_ like increase window size:
+
 
 ```jsx
 const mainWindow = new BrowserWindow({
@@ -136,17 +140,20 @@ const mainWindow = new BrowserWindow({
 });
 ```
 
-Je suis obligé de relancer mon application.
+I have to run the app again.
 
-⚠️ **Le fichier index.js est exécuté par NodeJS alors que les fichiers HTML et CSS sont eux interprétés par le navigateur. Le fichier index.js fait office de Backend tandis que le html fait office de Frontend.** 
+⚠️ **index.js is executed by NodeJS when HTML and CSS files are interpreted by the browser. If I use web app comparison, I would say index.js act as the backend while HTML act as the frontend.**
 
-## Importer un Asset
 
-Afin de stocker les Assets et être en mesure de jouer avec, je dois d'abord définir un répertoire de référence sur l'ordinateur de l'utilisateur.
+## Import an Asset
 
-### Initialiser le répertoire de stockage
+In order to store Assets, I have to set a directory on user's computer.
 
-Au lancement de l'application je vais vérifier si le dossier existe. Si non je vais le créer. J'ai choisi arbitrairement le dossier de destination. Dans le futur je pourrais laisser le choix à l'utilisateur.
+
+### Initialize storage directory
+
+At launch, I check if folder exists. If not, I create it. I chose destination folder but in the future I could let user choose.
+
 
 ```jsx
 // index.js - Main process
@@ -167,17 +174,21 @@ try {
 }
 ```
 
-La méthode *[app.getPath](https://www.electronjs.org/docs/all#appgetpathname)* offre plusieurs options possibles. D'un point de vue développeur elle permet de s'abstraire du système d'exploitation sur lequel l'application est exécutée.
+*[app.getPath](https://www.electronjs.org/docs/all#appgetpathname)* offers multiple options. From a developer perspective it's handy because I don't need to worry about operating system details like how filesystem works.
 
-Après avoir relancer mon application, je vérifie qu'il existe maintenant un dossier _electron-dam-assets_ dans mes Documents:
+
+After restarting my app, I check if there is a folder _electron-dam-assets_ in my Documents:
 
 ```bash
 ls -al ~/Documents
+...
+drw-rw-r--  2 quentin quentin 4096 déc.   8 18:49 electron-dam-assets
 ```
 
-### Ajouter un menu
+### Add a menu
 
-Comme intéraction je propose à l'utilisateur un menu d'application supplémentaire _Asset_. Par défaut Electron initialise un menu. Lorsque l'application est *[ready](https://www.electronjs.org/docs/all#event-ready)* il est possible de le modifier via l'API *[Menu](https://www.electronjs.org/docs/api/menu)* et *[MenuItem](https://www.electronjs.org/docs/api/menu-item)*. Lorsque l'utilisateur va cliquer sur _Import_ l'application va lui ouvrir une fenêtre pour sélectionner un fichier sur son ordinateur. Tout comme *Menu* et *MenuItem*, l'objet *[dialog](https://www.electronjs.org/docs/api/dialog)* permet de faire cela sans se soucier de l'OS.
+I provide to the user a new menu _Asset_. By default Electron initialize a basic menu.
+I can override and extend the menu when the app is *[ready](https://www.electronjs.org/docs/all#event-ready)* with *[Menu](https://www.electronjs.org/docs/api/menu)* and *[MenuItem](https://www.electronjs.org/docs/api/menu-item)*. When user clicks on _Asset_, then _Import_, a _[dialog](https://www.electronjs.org/docs/api/dialog)_ will prompt to select on his/her computer which file he/she wants to import.
 
 ```javascript
 // index.js
@@ -206,9 +217,10 @@ app.on('ready', () => {
 
 ![Electron dialog](/assets/electron-dialog.png)
 
-### Sauvegarder le fichier
+### Save the file
 
-J'ajoute une fonction _importAsset_ pour copier le fichier sélectionné par l'utilisateur dans le dossier d'Assets.
+_importAsset_ copies selected file into Assets folder. 
+
 
 ```javascript
 'click': () => {
@@ -224,13 +236,14 @@ const importAsset = (filepath) => {
   })
 }
 ```
-En testant la fonctionnalité je m'assure que l'Asset a bien été importé:
+I can check file has been copied:
 
 ![Electron asset saved !](/assets/electron-asset-saved.png)
 
-## Afficher la liste des Assets
+## Display Assets
 
-La prochaine étape est maintenant d'afficher les Assets importés sur la fenêtre principale.
+Next step is to show to the user all imported Assets on the main window.
+
 
 ```html
 <!-- index.html -->
@@ -252,7 +265,7 @@ La prochaine étape est maintenant d'afficher les Assets importés sur la fenêt
 }
 ```
 
-Pour chaque instance de _[BrowserWindow](https://www.electronjs.org/docs/api/browser-window#new-browserwindowoptions)_ est associé un **processus de rendu (renderer proces)**. J'ajoute deux options à la création de ma fenêtre principale. Je vais d'abord autorisé l'integration de NodeJS dans ce processus de rendu et je lui passe le chemin vers le dossier d'assets. C'est une des façons de communiquer entre le **processus principal (main process)** et un processus de rendu. J'explique dans le chapitre suivant la notion de processus dans Electron qui est très importante.
+For each _[BrowserWindow](https://www.electronjs.org/docs/api/browser-window#new-browserwindowoptions)_ instance a **renderer process** is created. I add two options. First I authorize NodeJS integration into renderer process. Then I provide Assets folder path as process argument. I explain later how processes work in Electron.
 
 ```javascript
 // index.js
@@ -265,7 +278,8 @@ const mainWindow = new BrowserWindow({
 });
 ```
 
-Dans mon script coté client je vais récupérer le chemin du dossier de mes Assets depuis les [arguments de _process_](https://nodejs.org/api/process.html#process_process_argv). Ensuite pour chaque fichier dans ce dossier je vais ajouter un nouvel élément _img_ dans mon HTML avec pour attribut _src_ le chemin vers le fichier.
+From client side, I get Assets folder path from [_process'_ arguments](https://nodejs.org/api/process.html#process_process_argv). Then for each file I add a new element _img_ in DOM with _src_ attribute containing file path.
+
 
 ```javascript
 // index.html
@@ -288,39 +302,41 @@ fs.readdir(assetsFolder, function (err, files) {
 });
 ```
 
-Si je relance l'application je devrais être en mesure de voir les Assets que j'ai déjà importé !
+When I reload the app I should see all my imported Assets !
 
 ![Electron asset list](/assets/electron-asset-list.png)
 
-J'ai terminé l'implémentation des deux fonctionnalités. Je vais maintenant expliquer quelques concepts que j'estime extrêmement important à saisir.
+With these two small features I gave you an overview on how build an app on Electron.
+However there are, in my opinion, some concept that are very important to grasp.
 
-## Le système de Processus
+## Processes
 
-Electron a deux types de processus.
+Electron has two types of process.
 
 ### MainProcess
 
-Il n'y a qu'un seul processus principal. Le *MainProcess* va servir principalement à créer des pages web à l'aide de _BrowserWindow_ et à interagir avec le système grâce à NodeJS et à l'API d'Electron. C'est l'idée de **Backend** auquel je faisais référence un peu plus tôt.
+There is only one main process. Running from NodeJS, _MainProcess_ will interact with the system using NodeJS API and Electron API. Like I said above, it's like our **backend** in a web application.
 
 ### Renderer process
 
-Pour chaque instance de *BrowserWindow* (donc pour chaque page web) Electron associe un processus de rendu *RendererProcess*. Il peut donc y avoir autant de processus de rendu que de page web. Quand l'instance de *BrowserWindow* est détruite, le processus de rendu est lui aussi détruit. Le processus de rendu a pour but d'intéragir avec l'utilisateur. L'idée est de capter une action et de fournir un visuel adéquat. Le _RendererProcess_ a accès aux API web classiques.
+For each _BrowserWindow_ instance Electron provides a renderer process. It means there can be as many renderer processes as there are windows. If _BrowserWindow_ instance is destroyed the same is true for renderer process. Because Electron uses Chromium to render view as web page, renderer process has access to browser's API. It's the **frontend part** of your web application.
 
-[Plus d'informations sur la documentation.](https://www.electronjs.org/docs/tutorial/quick-start#main-and-renderer-processes)
 
-## Sécurité
+There are more about processes in the [documentation](https://www.electronjs.org/docs/tutorial/quick-start#main-and-renderer-processes).
 
-J'ai rendu possible l'accès à NodeJS depuis le processus de rendu pour faciliter l'implémentation.
+## Security
 
-⚠️ **Donner l'accès à NodeJS au processus de rendu est très pratique mais rend mon application totalement vulnérable**. Si par exemple je charge du contenu distant (ce qui arrive souvent) j'expose mon système à des attaques de type injection XSS.
+For convenience I made NodeJS available from renderer process possible.
 
-**Par défaut, [Electron désactive l'intégration de NodeJS](https://www.electronjs.org/docs/tutorial/security#2-do-not-enable-nodejs-integration-for-remote-content) dans le processus de rendu et respecte [le principe du moindre privilège](https://en.wikipedia.org/wiki/Principle_of_least_privilege).**
+⚠️ **Giving access to NodeJS from renderer process is handy but makes my application vulnerable**. For instance if I load remote content I expose my system to XSS injection attack.
 
-La documentation officielle fournit une [liste de recommandations](https://www.electronjs.org/docs/tutorial/security#checklist-security-recommendations) à propos de la sécurité des applications.
+**By default, [Electron disables NodeJS integration](https://www.electronjs.org/docs/tutorial/security#2-do-not-enable-nodejs-integration-for-remote-content) and follows [the least privilege principle](https://en.wikipedia.org/wiki/Principle_of_least_privilege).**
 
-Si il est très déconseillé de laisser la possibilité au processus de rendu d'accéder au système, comment notre **Frontend** va t'il pouvoir communiquer avec notre **Backend** comme on pourrait le faire en Web avec des appels HTTP ?
+Official documentation provides [recommendations](https://www.electronjs.org/docs/tutorial/security#checklist-security-recommendations) about application security.
 
-## IPC (Inter-Processes Communication)
+Having this in mind, my frontend **must be able to send messages**, queries and commands, to my backend. In a web application I typically do this by sending HTTP requests to backend API and waiting for response. Electron provides IPC system to do that.
+
+## Inter-Processes Communication
 
 Pour que les deux processus communiquent, l'API d'Electron met à disposition deux modules *IpcMain* et *IpcRenderer.*
 
@@ -390,6 +406,10 @@ Electron Forge fournit plusieurs utilitaires pour aider à partager son applicat
 
 - [https://www.electronforge.io/config/makers](https://www.electronforge.io/config/makers) 
 - [https://www.electronforge.io/config/publishers](https://www.electronforge.io/config/publishers)
+
+## Performance
+
+https://www.electronjs.org/docs/tutorial/performance
 
 ## Aller plus loin
 
