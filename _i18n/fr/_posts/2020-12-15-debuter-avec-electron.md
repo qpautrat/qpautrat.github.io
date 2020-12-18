@@ -10,7 +10,7 @@ tags:
 image: /assets/electron-logo.png
 ---
 
-Développé et maintenu par Github, Electron est un framework qui permet de développer des **applications de bureau multi plateformes** (OSX, Windows, Linux) en **utilisant les technologies web**, HTML, CSS et JavaScript. Il embarque NodeJS pour le runtime et le moteur de rendu de Chromium pour le rendu graphique. Electron offre en plus une API qui sert d'abstraction pour interagir avec le système d'exploitation. 
+Développé et maintenu par Github, Electron est un framework qui permet de construire des **applications de bureau multi plateformes** (OSX, Windows, Linux) en **utilisant les technologies web**, HTML, CSS et JavaScript. Il embarque NodeJS pour le runtime et le moteur de rendu de Chromium pour le rendu graphique. Electron offre en plus une API qui sert d'abstraction pour interagir avec le système d'exploitation. 
 
 
 Comme fil rouge j'ai décidé de faire un [Digital Asset Management ou DAM](https://cloudinary.com/dam-guide/dam). Je vais développer deux fonctionnalités très simples: 
@@ -146,7 +146,7 @@ Afin de stocker les Assets et être en mesure de jouer avec, je dois d'abord dé
 
 ### Initialiser le répertoire de stockage
 
-Au lancement de l'application je vais vérifier si le dossier existe. Si non je vais le créer. J'ai décidé de choisir arbitrairement le dossier de destination. Dans le futur je pourrais laisser le choix à l'utilisateur.
+Au lancement de l'application je vais vérifier si le dossier existe. Si non je vais le créer. J'ai choisi arbitrairement le dossier de destination. Dans le futur je pourrais laisser le choix à l'utilisateur.
 
 ```jsx
 // index.js - Main process
@@ -238,7 +238,7 @@ La prochaine étape est maintenant d'afficher les Assets importés sur la fenêt
 ```
 
 ```css
-// index.css
+/* index.css */
 #assets {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -246,7 +246,6 @@ La prochaine étape est maintenant d'afficher les Assets importés sur la fenêt
 }
 
 .asset {
-  background-color: tomato;
   width: 200px;
   height: 200px;
   border: black solid 2px;
@@ -266,16 +265,16 @@ const mainWindow = new BrowserWindow({
 });
 ```
 
-Dans mon script coté client je vais récupérer le chemin du dossier de mes Assets. Ensuite pour chaque fichier dans ce dossier je vais ajouter un nouvel élément *<img>* dans mon HTML avec pour attribut _src_ le chemin vers le fichier.
+Dans mon script coté client je vais récupérer le chemin du dossier de mes Assets depuis les [arguments de _process_](https://nodejs.org/api/process.html#process_process_argv). Ensuite pour chaque fichier dans ce dossier je vais ajouter un nouvel élément _img_ dans mon HTML avec pour attribut _src_ le chemin vers le fichier.
 
 ```javascript
 // index.html
 const path = require("path");
 const fs = require("fs");
 
+let assetsFolder = process.argv.slice(-1)[0];
 let assets = document.getElementById('assets')
 assets.innerHTML = '';
-let assetsFolder = process.argv.slice(-1)[0]
 fs.readdir(assetsFolder, function (err, files) {
     if (err) {
         return console.log('Unable to scan directory: ' + err);
@@ -374,7 +373,7 @@ window.api.receive("channel", (data) => {
 window.api.send("channel", "some data");
 ```
 
-Pour comprendre un peu mieux le sujet sur la sécurité, la communication inter-processus, le principe de moindre responsabilité ainsi que le preloading il y a un [excellent commentaire](https://github.com/electron/electron/issues/9920#issuecomment-575839738) sur le sujet et un [fichier Markdown](https://github.com/reZach/secure-electron-template/blob/master/docs/secureapps.md#building-a-secure-app).
+Pour comprendre un peu mieux le sujet sur la sécurité, la communication inter-processus, le principe de moindre responsabilité ainsi que le preloading il y a un [excellent commentaire](https://github.com/electron/electron/issues/9920#issuecomment-575839738) et un [fichier Markdown](https://github.com/reZach/secure-electron-template/blob/master/docs/secureapps.md#building-a-secure-app).
 
 ## Tests & Debug
 
