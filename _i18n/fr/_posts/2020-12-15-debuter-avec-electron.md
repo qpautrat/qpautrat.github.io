@@ -373,7 +373,7 @@ window.api.receive("channel", (data) => {
 window.api.send("channel", "some data");
 ```
 
-Pour comprendre un peu mieux le sujet sur la sécurité, la communication inter-processus, le principe de moindre responsabilité ainsi que le preloading il y a un [excellent commentaire](https://github.com/electron/electron/issues/9920#issuecomment-575839738) sur le sujet et un [fichier Markdown](https://github.com/reZach/secure-electron-template/blob/master/docs/secureapps.md#building-a-secure-app).
+Pour comprendre un peu mieux le sujet sur la sécurité, la communication inter-processus, le principe de moindre responsabilité ainsi que le preloading il y a un [excellent commentaire](https://github.com/electron/electron/issues/9920#issuecomment-575839738) et un [fichier Markdown](https://github.com/reZach/secure-electron-template/blob/master/docs/secureapps.md#building-a-secure-app).
 
 ## Tests & Debug
 

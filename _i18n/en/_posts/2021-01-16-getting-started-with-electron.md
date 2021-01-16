@@ -71,7 +71,7 @@ As any NodeJS app, *main* is the entrypoint.
 }
 ```
 
-Forge provides [several useful commands](https://www.electronforge.io/cli#commands) to publish its application.
+Forge provides [several useful commands](https://www.electronforge.io/cli#commands) to publish an app.
 
 
 ```json
@@ -334,23 +334,23 @@ For convenience I made NodeJS available from renderer process possible.
 
 Official documentation provides [recommendations](https://www.electronjs.org/docs/tutorial/security#checklist-security-recommendations) about application security.
 
-Having this in mind, my frontend **must be able to send messages**, queries and commands, to my backend. In a web application I typically do this by sending HTTP requests to backend API and waiting for response. Electron provides IPC system to do that.
+Having this in mind, my frontend **must be able to send messages**, queries and commands, to my backend. In a web application I typically do this by sending HTTP requests to backend API and waiting for response. How does that work with Electron ?
 
 ## Inter-Processes Communication
 
-Pour que les deux processus communiquent, l'API d'Electron met à disposition deux modules *IpcMain* et *IpcRenderer.*
+To make it happen, Electron's API provides two modules: _IpcMain_ and _IpcRenderer_.
 
 ```javascript
-ipcRenderer.send(channel, data); // Send data to main process
-ipcRenderer.on(channel, (event, ...args) => func(...args)); // Receive data from main process
+ipcRenderer.send(channel, data); // Send data to main process on a given channel
+ipcRenderer.on(channel, (event, ...args) => func(...args)); // Receive data from main process on a given channel
 
-ipcMain.on(channel, (event, ...args) => func(...args)); // Receive data from a renderer process
-BrowserWindow.webContents.send(channel, data); //Send data to a specific renderer process
+ipcMain.on(channel, (event, ...args) => func(...args)); // Receive data from a renderer process on a given channel
+BrowserWindow.webContents.send(channel, data); //Send data to a specific renderer process (BrowserWindow instance) on a given channel
 ```
 
-Puisque *ipcRenderer* fait partie de l'API Electron, il n'est pas possible de l'utiliser depuis le processus de rendu. Il manque une dernière étape que les développeurs d'Electron ont implémenté sous forme de *preloading*.
+Of course, as I said before, if I want to keep my app secure I can't use it directly from renderer process. There is a final step to implement called _preloading_.
 
-Lorsque l'on créé une nouvelle page web on peut exécuter un script de *preload*:
+When I create a new window I can specify to run a pre loading script before renderer process:
 
 ```javascript
 // index.js
@@ -362,7 +362,7 @@ const mainWindow = new BrowserWindow({
   });
 ```
 
-Ce script a accès à NodeJS et va nous servir de passerelle entre le processus principal et celui de rendu de la fenêtre courante. Le but de ce script est d'implémenter le principe de moindre privilège. On va pouvoir étendre les capacités du processus de rendu avec ce qui est seulement nécessaire.
+This script has access to NodeJS and Electron's API as main process do. I use it as a gateway between main process et renderer process. From now on I can follow the least privilege principle by providing a backend API to my frontend. I can extend rendering process capabilities without giving access to anything:
 
 ```javascript
 // preload.js
@@ -379,8 +379,6 @@ contextBridge.exposeInMainWorld(
 );
 ```
 
-Grâce à cela notre processus de rendu a maintenant accès à une nouvelle interface _api_.
-
 ```javascript
 //index.html
 window.api.receive("channel", (data) => {
@@ -389,34 +387,30 @@ window.api.receive("channel", (data) => {
 window.api.send("channel", "some data");
 ```
 
-Pour comprendre un peu mieux le sujet sur la sécurité, la communication inter-processus, le principe de moindre responsabilité ainsi que le preloading il y a un [excellent commentaire](https://github.com/electron/electron/issues/9920#issuecomment-575839738) sur le sujet et un [fichier Markdown](https://github.com/reZach/secure-electron-template/blob/master/docs/secureapps.md#building-a-secure-app).
+Everything I need to do now is to put in place some validation layer and I'm good to go.
+
+To better understand IPC, security and preloading matters I suggest you to read [this very good comment](https://github.com/electron/electron/issues/9920#issuecomment-575839738) that explains everything.
 
 ## Tests & Debug
 
-Il existe plusieurs moyens de tester et debugger son application Electron. Je survole le sujet.
+There are several ways to test and debug its application. I won't go in too much details.
 
-- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools) pour analyser son rendu, comme sur un site web classique
-- [Debugger avec VSCode](https://www.electronjs.org/docs/tutorial/debugging-vscode)
-- [Tests unitaires avec Jest](https://jestjs.io/)
-- [Tests d'intégration](https://www.electronjs.org/docs/tutorial/using-selenium-and-webdriver)
+- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools) is available. Use it as you used to in a web application.
+- [Debugging with VSCode](https://www.electronjs.org/docs/tutorial/debugging-vscode)
+- [Unit Test with Jest](https://jestjs.io/)
+- [Integration Test](https://www.electronjs.org/docs/tutorial/using-selenium-and-webdriver)
 
-## Packager et publier son application
+## Package and Publish
 
-Electron Forge fournit plusieurs utilitaires pour aider à partager son application.
+Electron Forge provides several utilities to help:
 
 - [https://www.electronforge.io/config/makers](https://www.electronforge.io/config/makers) 
 - [https://www.electronforge.io/config/publishers](https://www.electronforge.io/config/publishers)
 
 ## Performance
 
-https://www.electronjs.org/docs/tutorial/performance
-
-## Aller plus loin
-
-La [documentation officielle](https://www.electronjs.org/docs) d'Electron est **très complète**. Toute l'API du framework est disponible. La [section tutoriel](https://www.electronjs.org/docs/tutorial) couvrira la plupart des besoins en terme de développement.
-
-Voici une liste d'applications développées avec Electron que j'utilise au quotidien sur différents systèmes et qui fonctionnent bien:
-
+There are a lot of best practises from [documentation](https://www.electronjs.org/docs/tutorial/performance).
+Many of well known and widely used desktop applications are developed with Electron and work pretty well such as:
 - Slack
 - Discord
 - Notion
@@ -428,14 +422,12 @@ Voici une liste d'applications développées avec Electron que j'utilise au quot
 
 ## Conclusion
 
-L'initialisation d'une nouvelle application et la voir fonctionner en seulement deux commandes est très appréciable.
+Start a new app and seeing it running in just two commands is very cool.
 
-**La promesse du multi platformes à l'air vraiment d'être tenue**. Je pense qu'il y a forcément des exceptions mais l'impression que j'en ai jusque là est bonne.
+**Cross platform promise** looks like is being kept so far. It must have exceptions tho.
 
-L'expérience développeur est agréable aussi. La maturité grandissante de l'écosystème JavaScript aide en ce sens. L'utilisation de TypeScript ou Webpack par exemple est un gros plus. Il est possible d'utiliser des frameworks front tel que React ou Vue si besoin.
+Developer experience is great. JavaScript ecosystem maturity is growing every day. TypeScript helped me a lot for typing and Webpack is really helpful for building and configuring. On the frontend side you can use frameworks like React or Vue. An experienced JavaScript ecosystem developer will be used to it with ease.
 
-Un développeur JavaScript n'aura absolument **aucun mal à prendre en main** le framework.
+There are, however, some notions that are difficult to grasp. I thought it was a good idea to use backend and frontend terms to compare with Web development but don't make mistakes, environments are different.
 
-Il y a quand même quelques notions difficiles à appréhender. Malgré que l'on retrouve vite nos habitudes de développeur web, **l'environnement est différent et impose des contraintes différentes**.
-
-Globalement l'expérience est très positive et jusque là je ne vois aucune raison de ne pas utiliser Electron comme framework de développement d'application de bureau !
+That's being said, Electron, thanks to web technologies, offers a great experience to develop desktop app for a small price.
