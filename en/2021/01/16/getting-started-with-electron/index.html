@@ -5,12 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Débuter avec Electron &#8211; Objectivement objectif.</title>
+    <title>Getting started with Electron &#8211; Objectivement objectif.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Développer des applications de bureau multi plateformes en utilisant les technologies Web, tour d'horizon !&#10; &#35;Electron &#35;JavaScript &#35;NodeJS">
+    <meta name="description" content="Developing cross platform desktop application using web technologies: Overview !&#10; &#35;Electron &#35;JavaScript &#35;NodeJS">
     <meta name="author" content="Quentin Pautrat">
     <meta name="keywords" content="Electron, JavaScript, NodeJS">
-    <link rel="canonical" href="https://qpautrat.github.io/2020/12/15/debuter-avec-electron/">
+    <link rel="canonical" href="https://qpautrat.github.io/en/2021/01/16/getting-started-with-electron/">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/pixyll.css" type="text/css">
@@ -24,11 +24,11 @@
 
     <!-- Open Graph -->
     <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
-    <meta property="og:locale" content="fr_FR">
+    <meta property="og:locale" content="en_US">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Débuter avec Electron">
-    <meta property="og:description" content="Développer des applications de bureau multi plateformes en utilisant les technologies Web, tour d'horizon !&#10; &#35;Electron &#35;JavaScript &#35;NodeJS">
-    <meta property="og:url" content="https://qpautrat.github.io/2020/12/15/debuter-avec-electron/">
+    <meta property="og:title" content="Getting started with Electron">
+    <meta property="og:description" content="Developing cross platform desktop application using web technologies: Overview !&#10; &#35;Electron &#35;JavaScript &#35;NodeJS">
+    <meta property="og:url" content="https://qpautrat.github.io/en/2021/01/16/getting-started-with-electron/">
     <meta property="og:site_name" content="Objectivement objectif.">
     
       <meta property="og:image" content="https://qpautrat.github.io/assets/electron-logo.png">
@@ -36,8 +36,8 @@
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@qpautrat" />
-    <meta name="twitter:title" content="Débuter avec Electron" />
-    <meta name="twitter:description" content="Développer des applications de bureau multi plateformes en utilisant les technologies Web, tour d'horizon !&#10; &#35;Electron &#35;JavaScript &#35;NodeJS" />
+    <meta name="twitter:title" content="Getting started with Electron" />
+    <meta name="twitter:description" content="Developing cross platform desktop application using web technologies: Overview !&#10; &#35;Electron &#35;JavaScript &#35;NodeJS" />
     
       <meta name="twitter:image" content="https://qpautrat.github.io/assets/electron-logo.png" />
     
@@ -64,7 +64,7 @@
     <header class="site-header px2 px-responsive">
   <div class="mt2 wrap">
     <div class="measure">
-      <a href="https://qpautrat.github.io" class="site-title">Objectivement objectif.</a>
+      <a href="https://qpautrat.github.io/en" class="site-title">Objectivement objectif.</a>
       <nav class="site-nav right">
         
       </nav>
@@ -76,7 +76,7 @@
       <a class="fa fa-github" href="https://github.com/qpautrat"></a>
     
     
-    <a class="fa fa-rss" href="/feed.xml"></a>
+    <a class="fa fa-rss" href="/en/feed.xml"></a>
     
       <a class="fa fa-twitter" href="https://twitter.com/qpautrat"></a>
     
@@ -106,50 +106,50 @@
 
 
 <div class="post-header mb2">
-  <h1>Débuter avec Electron</h1>
-  <span class="post-meta">Dec 15, 2020</span><br>
+  <h1>Getting started with Electron</h1>
+  <span class="post-meta">Jan 16, 2021</span><br>
   
-  <span class="post-meta small">16 minute read</span>
+  <span class="post-meta small">14 minute read</span>
   
     <span class="post-meta small">#Electron #JavaScript #NodeJS</span><br>
   
 </div>
 
 <article class="post-content">
-  <p>Développé et maintenu par Github, Electron est un framework qui permet de construire des <strong>applications de bureau multi plateformes</strong> (OSX, Windows, Linux) en <strong>utilisant les technologies web</strong>, HTML, CSS et JavaScript. Il embarque NodeJS pour le runtime et le moteur de rendu de Chromium pour le rendu graphique. Electron offre en plus une API qui sert d’abstraction pour interagir avec le système d’exploitation.</p>
+  <p>Developed and maintened by Github, Electron is a framework helping you to build <strong>cross platform desktop applications</strong> (OSX, Windows, Linux) using <strong>web technologies</strong> HTML, CSS and JavaScript. It ships NodeJS as runtime and Chromium rendering engine. In addition to NodeJS, Electron provides a nice API to interact with the operating system.</p>
 
-<p>Comme fil rouge j’ai décidé de faire un <a href="https://cloudinary.com/dam-guide/dam">Digital Asset Management ou DAM</a>. Je vais développer deux fonctionnalités très simples:</p>
+<p>As common thread I decided to build a <a href="https://cloudinary.com/dam-guide/dam">Digital Asset Management or DAM</a>. I will implement two basic feature:</p>
 <ul>
-  <li>Importer un Asset</li>
-  <li>Lister les Assets importés.</li>
+  <li>Import an Asset</li>
+  <li>List imported Assets</li>
 </ul>
 
-<h2 id="créer-et-lancer-lapplication">Créer et lancer l’application</h2>
+<h2 id="create-and-start-the-application">Create and start the application</h2>
 
-<p>J’utilise le <em>builder</em> <a href="https://www.electronforge.io">Electron Forge</a> pour créer le projet. <a href="https://www.electronjs.org/docs/tutorial/boilerplates-and-clis#boilerplates-and-clis">Il en existe d’autres</a>.</p>
+<p>I use <a href="https://www.electronforge.io">Electron Forge</a> as <em>builder</em> to initialize the project. <a href="https://www.electronjs.org/docs/tutorial/boilerplates-and-clis#boilerplates-and-clis">There are more</a>.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx create-electron-app electron-dam
 <span class="nb">cd </span>electron-dam
 </code></pre></div></div>
 
-<p>Forge met à disposition des <em><a href="https://www.electronforge.io/templates/typescript-+-webpack-template">Templates</a></em> afin de commencer avec plus d’outils comme par exemple Webpack et TypeScript.</p>
+<p>Forge provides <em><a href="https://www.electronforge.io/templates/typescript-+-webpack-template">Templates</a></em> in order to start easily with tools like Webpack or TypeScript.</p>
 
-<p>Je lance l’application:</p>
+<p>Then I run the app.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm start
 </code></pre></div></div>
 
 <p><img src="/assets/electron-hello-world.png" alt="Electron Hello World !" /></p>
 
-<p>Je peux voir plusieurs choses assez cool. Mon application ressemble à n’importe quelle autre: un titre, un menu, le rendu visuel de ma fenêtre principale et même une DevToolBar !</p>
+<p>I can see several things pretty cool here. My app looks like any other. There are a title, a menu, an visual interface with text and emoji. There is even a DevToolBar !</p>
 
-<p>J’ai testé sur Ubuntu 20.04, Windows 10, OSX Catalina.</p>
+<p>I tested this hello-world app on Ubuntu 20.04, Windows 10 and OSX Catalina, so far so good.</p>
 
-<p>Ma première impression est très bonne. C’est très simple d’avoir un premier déliverable.</p>
+<p>My first impression is really good. It’s pretty simple to build and running a first small application.</p>
 
 <h2 id="bootstraping">Bootstraping</h2>
 
-<p>Je regarde ce que contient le projet.</p>
+<p>I look what is inside the project.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">package.json</span><span class="w">
 </span><span class="p">{</span><span class="w">
@@ -157,7 +157,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Comme toute application NodeJS, <em>main</em> spécifie le point d’entrée de l’application.</p>
+<p>As any NodeJS app, <em>main</em> is the entrypoint.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">package.json</span><span class="w">
 </span><span class="p">{</span><span class="w">
@@ -172,7 +172,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Forge met à disposition <a href="https://www.electronforge.io/cli#commands">plusieurs commandes</a> utiles pour développer et publier son application.</p>
+<p>Forge provides <a href="https://www.electronforge.io/cli#commands">several useful commands</a> to publish an app.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">package.json</span><span class="w">
 </span><span class="p">{</span><span class="w">
@@ -205,17 +205,17 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Forge propose par défaut plusieurs <em><a href="https://www.electronforge.io/config/makers">Makers</a></em> qui permettent de créer des distribuables spécifiques à chaque platforme.</p>
+<p><em><a href="https://www.electronforge.io/config/makers">Makers</a></em> make specific platform package.</p>
 
-<p>Il y a aussi une section <em><a href="https://www.electronforge.io/config/plugins">Plugins</a></em>, qui permet d’étendre les fonctionnalités de Forge. Par exemple il est possible de profiter de Webpack avec le Hot Module Reload.</p>
+<p><em><a href="https://www.electronforge.io/config/plugins">Plugins</a></em> are used to extend Forge. For example it’s possible to take advantage of Hot Module Reload.</p>
 
-<p>Le fichier <em>index.js</em> est très bien commenté et l’API d’Electron est simple à appréhender. J’ai très rapidement compris le contenu du fichier.</p>
+<p><em>index.js</em> is very well documented. Electron API is intuitive.</p>
 
-<p>Les fichiers <em>index.html</em> et <em>index.css</em> contiennent la partie visuelle de mon application comme une application web classique.</p>
+<p><em>index.html</em> and <em>index.css</em> define graphical rendering like any web app.</p>
 
-<p>Si je modifie le HTML ou le CSS je ne suis pas obligé de relancer l’application. Je peux rafraichir la page avec Ctrl+R pour voir les modifications.</p>
+<p>If I change HTML or CSS, there is no need to reboot the app. I can refresh as I could do in my web browser to see modifications.</p>
 
-<p>Il est possible d’ajouter du Javascript:</p>
+<p>Of course it’s possible to add JavaScript:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="err">!--</span> <span class="na">index</span><span class="err">.</span><span class="na">html</span> <span class="err">--</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
@@ -227,7 +227,7 @@
 
 <p><img src="/assets/electron-welcome.png" alt="Electron Welcome !" /></p>
 
-<p>Cependant si je veux changer par exemple la taille de ma fenêtre:</p>
+<p>However, if I want to change something in <em>index.js</em> like increase window size:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mainWindow</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
   <span class="na">width</span><span class="p">:</span> <span class="mi">1200</span><span class="p">,</span>
@@ -235,17 +235,17 @@
 <span class="p">});</span>
 </code></pre></div></div>
 
-<p>Je suis obligé de relancer mon application.</p>
+<p>I have to run the app again.</p>
 
-<p>⚠️ <strong>Le fichier index.js est exécuté par NodeJS alors que les fichiers HTML et CSS sont eux interprétés par le navigateur. Le fichier index.js fait office de Backend tandis que le html fait office de Frontend.</strong></p>
+<p>⚠️ <strong>index.js is executed by NodeJS when HTML and CSS files are interpreted by the browser. If I use web app comparison, I would say index.js act as the backend while HTML act as the frontend.</strong></p>
 
-<h2 id="importer-un-asset">Importer un Asset</h2>
+<h2 id="import-an-asset">Import an Asset</h2>
 
-<p>Afin de stocker les Assets et être en mesure de jouer avec, je dois d’abord définir un répertoire de référence sur l’ordinateur de l’utilisateur.</p>
+<p>In order to store Assets, I have to set a directory on user’s computer.</p>
 
-<h3 id="initialiser-le-répertoire-de-stockage">Initialiser le répertoire de stockage</h3>
+<h3 id="initialize-storage-directory">Initialize storage directory</h3>
 
-<p>Au lancement de l’application je vais vérifier si le dossier existe. Si non je vais le créer. J’ai choisi arbitrairement le dossier de destination. Dans le futur je pourrais laisser le choix à l’utilisateur.</p>
+<p>At launch, I check if folder exists. If not, I create it. I chose destination folder but in the future I could let user choose.</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index.js - Main process</span>
 <span class="kd">const</span> <span class="p">{</span> <span class="nx">app</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">electron</span><span class="dl">'</span><span class="p">);</span>
@@ -265,16 +265,19 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>La méthode <em><a href="https://www.electronjs.org/docs/all#appgetpathname">app.getPath</a></em> offre plusieurs options possibles. D’un point de vue développeur elle permet de s’abstraire du système d’exploitation sur lequel l’application est exécutée.</p>
+<p><em><a href="https://www.electronjs.org/docs/all#appgetpathname">app.getPath</a></em> offers multiple options. From a developer perspective it’s handy because I don’t need to worry about operating system details like how filesystem works.</p>
 
-<p>Après avoir relancer mon application, je vérifie qu’il existe maintenant un dossier <em>electron-dam-assets</em> dans mes Documents:</p>
+<p>After restarting my app, I check if there is a folder <em>electron-dam-assets</em> in my Documents:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-al</span> ~/Documents
+...
+drw-rw-r--  2 quentin quentin 4096 déc.   8 18:49 electron-dam-assets
 </code></pre></div></div>
 
-<h3 id="ajouter-un-menu">Ajouter un menu</h3>
+<h3 id="add-a-menu">Add a menu</h3>
 
-<p>Comme intéraction je propose à l’utilisateur un menu d’application supplémentaire <em>Asset</em>. Par défaut Electron initialise un menu. Lorsque l’application est <em><a href="https://www.electronjs.org/docs/all#event-ready">ready</a></em> il est possible de le modifier via l’API <em><a href="https://www.electronjs.org/docs/api/menu">Menu</a></em> et <em><a href="https://www.electronjs.org/docs/api/menu-item">MenuItem</a></em>. Lorsque l’utilisateur va cliquer sur <em>Import</em> l’application va lui ouvrir une fenêtre pour sélectionner un fichier sur son ordinateur. Tout comme <em>Menu</em> et <em>MenuItem</em>, l’objet <em><a href="https://www.electronjs.org/docs/api/dialog">dialog</a></em> permet de faire cela sans se soucier de l’OS.</p>
+<p>I provide to the user a new menu <em>Asset</em>. By default Electron initialize a basic menu.
+I can override and extend the menu when the app is <em><a href="https://www.electronjs.org/docs/all#event-ready">ready</a></em> with <em><a href="https://www.electronjs.org/docs/api/menu">Menu</a></em> and <em><a href="https://www.electronjs.org/docs/api/menu-item">MenuItem</a></em>. When user clicks on <em>Asset</em>, then <em>Import</em>, a <em><a href="https://www.electronjs.org/docs/api/dialog">dialog</a></em> will prompt to select on his/her computer which file he/she wants to import.</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Menu</span><span class="p">,</span> <span class="nx">MenuItem</span><span class="p">,</span> <span class="nx">dialog</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">electron</span><span class="dl">'</span><span class="p">;</span>
@@ -302,9 +305,9 @@
 
 <p><img src="/assets/electron-dialog.png" alt="Electron dialog" /></p>
 
-<h3 id="sauvegarder-le-fichier">Sauvegarder le fichier</h3>
+<h3 id="save-the-file">Save the file</h3>
 
-<p>J’ajoute une fonction <em>importAsset</em> pour copier le fichier sélectionné par l’utilisateur dans le dossier d’Assets.</p>
+<p><em>importAsset</em> copies selected file into Assets folder.</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="p">...</span>
@@ -319,13 +322,13 @@
   <span class="p">})</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>En testant la fonctionnalité je m’assure que l’Asset a bien été importé:</p>
+<p>I can check file has been copied:</p>
 
 <p><img src="/assets/electron-asset-saved.png" alt="Electron asset saved !" /></p>
 
-<h2 id="afficher-la-liste-des-assets">Afficher la liste des Assets</h2>
+<h2 id="display-assets">Display Assets</h2>
 
-<p>La prochaine étape est maintenant d’afficher les Assets importés sur la fenêtre principale.</p>
+<p>Next step is to show to the user all imported Assets on the main window.</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- index.html --&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"assets"</span><span class="nt">&gt;&lt;/div&gt;</span>
@@ -345,7 +348,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Pour chaque instance de <em><a href="https://www.electronjs.org/docs/api/browser-window#new-browserwindowoptions">BrowserWindow</a></em> est associé un <strong>processus de rendu (renderer proces)</strong>. J’ajoute deux options à la création de ma fenêtre principale. Je vais d’abord autorisé l’integration de NodeJS dans ce processus de rendu et je lui passe le chemin vers le dossier d’assets. C’est une des façons de communiquer entre le <strong>processus principal (main process)</strong> et un processus de rendu. J’explique dans le chapitre suivant la notion de processus dans Electron qui est très importante.</p>
+<p>For each <em><a href="https://www.electronjs.org/docs/api/browser-window#new-browserwindowoptions">BrowserWindow</a></em> instance a <strong>renderer process</strong> is created. I add two options. First I authorize NodeJS integration into renderer process. Then I provide Assets folder path as process argument. I explain later how processes work in Electron.</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index.js</span>
 <span class="kd">const</span> <span class="nx">mainWindow</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
@@ -357,7 +360,7 @@
 <span class="p">});</span>
 </code></pre></div></div>
 
-<p>Dans mon script coté client je vais récupérer le chemin du dossier de mes Assets depuis les <a href="https://nodejs.org/api/process.html#process_process_argv">arguments de <em>process</em></a>. Ensuite pour chaque fichier dans ce dossier je vais ajouter un nouvel élément <em>img</em> dans mon HTML avec pour attribut <em>src</em> le chemin vers le fichier.</p>
+<p>From client side, I get Assets folder path from <a href="https://nodejs.org/api/process.html#process_process_argv"><em>process’</em> arguments</a>. Then for each file I add a new element <em>img</em> in DOM with <em>src</em> attribute containing file path.</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index.html</span>
 <span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">);</span>
@@ -379,52 +382,53 @@
 <span class="p">});</span>
 </code></pre></div></div>
 
-<p>Si je relance l’application je devrais être en mesure de voir les Assets que j’ai déjà importé !</p>
+<p>When I reload the app I should see all my imported Assets !</p>
 
 <p><img src="/assets/electron-asset-list.png" alt="Electron asset list" /></p>
 
-<p>J’ai terminé l’implémentation des deux fonctionnalités. Je vais maintenant expliquer quelques concepts que j’estime extrêmement important à saisir.</p>
+<p>With these two small features I gave you an overview on how build an app on Electron.
+However there are, in my opinion, some concept that are very important to grasp.</p>
 
-<h2 id="le-système-de-processus">Le système de Processus</h2>
+<h2 id="processes">Processes</h2>
 
-<p>Electron a deux types de processus.</p>
+<p>Electron has two types of process.</p>
 
 <h3 id="mainprocess">MainProcess</h3>
 
-<p>Il n’y a qu’un seul processus principal. Le <em>MainProcess</em> va servir principalement à créer des pages web à l’aide de <em>BrowserWindow</em> et à interagir avec le système grâce à NodeJS et à l’API d’Electron. C’est l’idée de <strong>Backend</strong> auquel je faisais référence un peu plus tôt.</p>
+<p>There is only one main process. Running from NodeJS, <em>MainProcess</em> will interact with the system using NodeJS API and Electron API. Like I said above, it’s like our <strong>backend</strong> in a web application.</p>
 
 <h3 id="renderer-process">Renderer process</h3>
 
-<p>Pour chaque instance de <em>BrowserWindow</em> (donc pour chaque page web) Electron associe un processus de rendu <em>RendererProcess</em>. Il peut donc y avoir autant de processus de rendu que de page web. Quand l’instance de <em>BrowserWindow</em> est détruite, le processus de rendu est lui aussi détruit. Le processus de rendu a pour but d’intéragir avec l’utilisateur. L’idée est de capter une action et de fournir un visuel adéquat. Le <em>RendererProcess</em> a accès aux API web classiques.</p>
+<p>For each <em>BrowserWindow</em> instance Electron provides a renderer process. It means there can be as many renderer processes as there are windows. If <em>BrowserWindow</em> instance is destroyed the same is true for renderer process. Because Electron uses Chromium to render view as web page, renderer process has access to browser’s API. It’s the <strong>frontend part</strong> of your web application.</p>
 
-<p><a href="https://www.electronjs.org/docs/tutorial/quick-start#main-and-renderer-processes">Plus d’informations sur la documentation.</a></p>
+<p>There are more about processes in the <a href="https://www.electronjs.org/docs/tutorial/quick-start#main-and-renderer-processes">documentation</a>.</p>
 
-<h2 id="sécurité">Sécurité</h2>
+<h2 id="security">Security</h2>
 
-<p>J’ai rendu possible l’accès à NodeJS depuis le processus de rendu pour faciliter l’implémentation.</p>
+<p>For convenience I made NodeJS available from renderer process possible.</p>
 
-<p>⚠️ <strong>Donner l’accès à NodeJS au processus de rendu est très pratique mais rend mon application totalement vulnérable</strong>. Si par exemple je charge du contenu distant (ce qui arrive souvent) j’expose mon système à des attaques de type injection XSS.</p>
+<p>⚠️ <strong>Giving access to NodeJS from renderer process is handy but makes my application vulnerable</strong>. For instance if I load remote content I expose my system to XSS injection attack.</p>
 
-<p><strong>Par défaut, <a href="https://www.electronjs.org/docs/tutorial/security#2-do-not-enable-nodejs-integration-for-remote-content">Electron désactive l’intégration de NodeJS</a> dans le processus de rendu et respecte <a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege">le principe du moindre privilège</a>.</strong></p>
+<p><strong>By default, <a href="https://www.electronjs.org/docs/tutorial/security#2-do-not-enable-nodejs-integration-for-remote-content">Electron disables NodeJS integration</a> and follows <a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege">the least privilege principle</a>.</strong></p>
 
-<p>La documentation officielle fournit une <a href="https://www.electronjs.org/docs/tutorial/security#checklist-security-recommendations">liste de recommandations</a> à propos de la sécurité des applications.</p>
+<p>Official documentation provides <a href="https://www.electronjs.org/docs/tutorial/security#checklist-security-recommendations">recommendations</a> about application security.</p>
 
-<p>Si il est très déconseillé de laisser la possibilité au processus de rendu d’accéder au système, comment notre <strong>Frontend</strong> va t’il pouvoir communiquer avec notre <strong>Backend</strong> comme on pourrait le faire en Web avec des appels HTTP ?</p>
+<p>Having this in mind, my frontend <strong>must be able to send messages</strong>, queries and commands, to my backend. In a web application I typically do this by sending HTTP requests to backend API and waiting for response. How does that work with Electron ?</p>
 
-<h2 id="ipc-inter-processes-communication">IPC (Inter-Processes Communication)</h2>
+<h2 id="inter-processes-communication">Inter-Processes Communication</h2>
 
-<p>Pour que les deux processus communiquent, l’API d’Electron met à disposition deux modules <em>IpcMain</em> et <em>IpcRenderer.</em></p>
+<p>To make it happen, Electron’s API provides two modules: <em>IpcMain</em> and <em>IpcRenderer</em>.</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span> <span class="c1">// Send data to main process</span>
-<span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">func</span><span class="p">(...</span><span class="nx">args</span><span class="p">));</span> <span class="c1">// Receive data from main process</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span> <span class="c1">// Send data to main process on a given channel</span>
+<span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">func</span><span class="p">(...</span><span class="nx">args</span><span class="p">));</span> <span class="c1">// Receive data from main process on a given channel</span>
 
-<span class="nx">ipcMain</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">func</span><span class="p">(...</span><span class="nx">args</span><span class="p">));</span> <span class="c1">// Receive data from a renderer process</span>
-<span class="nx">BrowserWindow</span><span class="p">.</span><span class="nx">webContents</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span> <span class="c1">//Send data to a specific renderer process</span>
+<span class="nx">ipcMain</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">func</span><span class="p">(...</span><span class="nx">args</span><span class="p">));</span> <span class="c1">// Receive data from a renderer process on a given channel</span>
+<span class="nx">BrowserWindow</span><span class="p">.</span><span class="nx">webContents</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span> <span class="c1">//Send data to a specific renderer process (BrowserWindow instance) on a given channel</span>
 </code></pre></div></div>
 
-<p>Puisque <em>ipcRenderer</em> fait partie de l’API Electron, il n’est pas possible de l’utiliser depuis le processus de rendu. Il manque une dernière étape que les développeurs d’Electron ont implémenté sous forme de <em>preloading</em>.</p>
+<p>Of course, as I said before, if I want to keep my app secure I can’t use it directly from renderer process. There is a final step to implement called <em>preloading</em>.</p>
 
-<p>Lorsque l’on créé une nouvelle page web on peut exécuter un script de <em>preload</em>:</p>
+<p>When I create a new window I can specify to run a pre loading script before renderer process:</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index.js</span>
 <span class="kd">const</span> <span class="nx">mainWindow</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
@@ -435,7 +439,7 @@
   <span class="p">});</span>
 </code></pre></div></div>
 
-<p>Ce script a accès à NodeJS et va nous servir de passerelle entre le processus principal et celui de rendu de la fenêtre courante. Le but de ce script est d’implémenter le principe de moindre privilège. On va pouvoir étendre les capacités du processus de rendu avec ce qui est seulement nécessaire.</p>
+<p>This script has access to NodeJS and Electron’s API as main process do. I use it as a gateway between main process et renderer process. From now on I can follow the least privilege principle by providing a backend API to my frontend. I can extend rendering process capabilities without giving access to anything:</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// preload.js</span>
 <span class="kd">const</span> <span class="p">{</span> <span class="nx">contextBridge</span><span class="p">,</span><span class="nx">ipcRenderer</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">electron</span><span class="dl">'</span><span class="p">);</span>
@@ -451,8 +455,6 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Grâce à cela notre processus de rendu a maintenant accès à une nouvelle interface <em>api</em>.</p>
-
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//index.html</span>
 <span class="nb">window</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">receive</span><span class="p">(</span><span class="dl">"</span><span class="s2">channel</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Received </span><span class="p">${</span><span class="nx">data</span><span class="p">}</span><span class="s2"> from main process`</span><span class="p">);</span>
@@ -460,34 +462,34 @@
 <span class="nb">window</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">channel</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">some data</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>Pour comprendre un peu mieux le sujet sur la sécurité, la communication inter-processus, le principe de moindre responsabilité ainsi que le preloading il y a un <a href="https://github.com/electron/electron/issues/9920#issuecomment-575839738">excellent commentaire</a> et un <a href="https://github.com/reZach/secure-electron-template/blob/master/docs/secureapps.md#building-a-secure-app">fichier Markdown</a>.</p>
+<p>Everything I need to do now is to put in place some validation layer and I’m good to go.</p>
+
+<p>To better understand IPC, security and preloading matters I suggest you to read <a href="https://github.com/electron/electron/issues/9920#issuecomment-575839738">this very good comment</a> that explains everything.</p>
 
 <h2 id="tests--debug">Tests &amp; Debug</h2>
 
-<p>Il existe plusieurs moyens de tester et debugger son application Electron. Je survole le sujet.</p>
+<p>There are several ways to test and debug its application. I won’t go in too much details.</p>
 
 <ul>
-  <li><a href="https://developers.google.com/web/tools/chrome-devtools">Chrome DevTools</a> pour analyser son rendu, comme sur un site web classique</li>
-  <li><a href="https://www.electronjs.org/docs/tutorial/debugging-vscode">Debugger avec VSCode</a></li>
-  <li><a href="https://jestjs.io/">Tests unitaires avec Jest</a></li>
-  <li><a href="https://www.electronjs.org/docs/tutorial/using-selenium-and-webdriver">Tests d’intégration</a></li>
+  <li><a href="https://developers.google.com/web/tools/chrome-devtools">Chrome DevTools</a> is available. Use it as you used to in a web application.</li>
+  <li><a href="https://www.electronjs.org/docs/tutorial/debugging-vscode">Debugging with VSCode</a></li>
+  <li><a href="https://jestjs.io/">Unit Test with Jest</a></li>
+  <li><a href="https://www.electronjs.org/docs/tutorial/using-selenium-and-webdriver">Integration Test</a></li>
 </ul>
 
-<h2 id="packager-et-publier-son-application">Packager et publier son application</h2>
+<h2 id="package-and-publish">Package and Publish</h2>
 
-<p>Electron Forge fournit plusieurs utilitaires pour aider à partager son application.</p>
+<p>Electron Forge provides several utilities to help:</p>
 
 <ul>
   <li><a href="https://www.electronforge.io/config/makers">https://www.electronforge.io/config/makers</a></li>
   <li><a href="https://www.electronforge.io/config/publishers">https://www.electronforge.io/config/publishers</a></li>
 </ul>
 
-<h2 id="aller-plus-loin">Aller plus loin</h2>
+<h2 id="performance">Performance</h2>
 
-<p>La <a href="https://www.electronjs.org/docs">documentation officielle</a> d’Electron est <strong>très complète</strong>. Toute l’API du framework est disponible. La <a href="https://www.electronjs.org/docs/tutorial">section tutoriel</a> couvrira la plupart des besoins en terme de développement.</p>
-
-<p>Voici une liste d’applications développées avec Electron que j’utilise au quotidien sur différents systèmes et qui fonctionnent bien:</p>
-
+<p>There are a lot of best practises from <a href="https://www.electronjs.org/docs/tutorial/performance">documentation</a>.
+Many of well known and widely used desktop applications are developed with Electron and work pretty well such as:</p>
 <ul>
   <li>Slack</li>
   <li>Discord</li>
@@ -501,17 +503,15 @@
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>L’initialisation d’une nouvelle application et la voir fonctionner en seulement deux commandes est très appréciable.</p>
+<p>Start a new app and seeing it running in just two commands is very cool.</p>
 
-<p><strong>La promesse du multi platformes à l’air vraiment d’être tenue</strong>. Je pense qu’il y a forcément des exceptions mais l’impression que j’en ai jusque là est bonne.</p>
+<p><strong>Cross platform promise</strong> looks like is being kept so far. It must have exceptions tho.</p>
 
-<p>L’expérience développeur est agréable aussi. La maturité grandissante de l’écosystème JavaScript aide en ce sens. L’utilisation de TypeScript ou Webpack par exemple est un gros plus. Il est possible d’utiliser des frameworks front tel que React ou Vue si besoin.</p>
+<p>Developer experience is great. JavaScript ecosystem maturity is growing every day. TypeScript helped me a lot for typing and Webpack is really helpful for building and configuring. On the frontend side you can use frameworks like React or Vue. An experienced JavaScript ecosystem developer will be used to it with ease.</p>
 
-<p>Un développeur JavaScript n’aura absolument <strong>aucun mal à prendre en main</strong> le framework.</p>
+<p>There are, however, some notions that are difficult to grasp. I thought it was a good idea to use backend and frontend terms to compare with Web development but don’t make mistakes, environments are different.</p>
 
-<p>Il y a quand même quelques notions difficiles à appréhender. Malgré que l’on retrouve vite nos habitudes de développeur web, <strong>l’environnement est différent et impose des contraintes différentes</strong>.</p>
-
-<p>Globalement l’expérience est très positive et jusque là je ne vois aucune raison de ne pas utiliser Electron comme framework de développement d’application de bureau !</p>
+<p>That’s being said, Electron, thanks to web technologies, offers a great experience to develop desktop app for a small price.</p>
 
 </article>
 
@@ -521,19 +521,19 @@
 
   <div class="share-links">
     
-      <a class = "fa fa-facebook" href="https://facebook.com/sharer.php?u=https://qpautrat.github.io/2020/12/15/debuter-avec-electron/" rel="nofollow" target="_blank" title="Share on Facebook"></a>
+      <a class = "fa fa-facebook" href="https://facebook.com/sharer.php?u=https://qpautrat.github.io/en/2021/01/16/getting-started-with-electron/" rel="nofollow" target="_blank" title="Share on Facebook"></a>
     
 
     
       
 
-      <a class="fa fa-twitter" href="https://twitter.com/intent/tweet?text=Débuter avec Electron via @pautrat%0A %23Electron %23JavaScript %23NodeJS%0A&url=https://qpautrat.github.io/2020/12/15/debuter-avec-electron/" rel="nofollow" target="_blank" title="Share on Twitter"></a>
+      <a class="fa fa-twitter" href="https://twitter.com/intent/tweet?text=Getting started with Electron via @pautrat%0A %23Electron %23JavaScript %23NodeJS%0A&url=https://qpautrat.github.io/en/2021/01/16/getting-started-with-electron/" rel="nofollow" target="_blank" title="Share on Twitter"></a>
     
 
     
 
     
-      <a class="fa fa-linkedin" href="http://www.linkedin.com/shareArticle?url=https://qpautrat.github.io/2020/12/15/debuter-avec-electron/&title=Débuter avec Electron" rel="nofollow" target="_blank" title="Share on LinkedIn"></a>
+      <a class="fa fa-linkedin" href="http://www.linkedin.com/shareArticle?url=https://qpautrat.github.io/en/2021/01/16/getting-started-with-electron/&title=Getting started with Electron" rel="nofollow" target="_blank" title="Share on LinkedIn"></a>
     
 
     
