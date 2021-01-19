@@ -7,6 +7,7 @@ tags:
  - doctrine
  - orm
  - persistance
+redirect_to: /2015/04/03/persistance-en-cascade-avec-doctrine-2/
 ---
 
 Persister ses données manuellement avec Doctrine peut paraître très simple au premier coup d'oeil.

@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html>
-{% include head.html %}
-<body class="{% if site.animated %}animated fade-in-down{% endif %}">
-  <div class="site-wrap">
-    {% include header.html %}
-
-    <div class="post p2 p-responsive wrap" role="main">
-      <div class="measure">
-        {{ content }}
-      </div>
-    </div>
-  </div>
-
-  {% include footer.html %}
-</body>
+<html lang="{% translate html_lang %}">
+	<head>
+		<meta charset="utf-8">
+		<title>Redirecting&hellip;</title>
+		<link rel="canonical" href="{{ site.url | append: site.baseurl }}">
+		<script>location="{{ site.url | append: site.baseurl }}"</script>
+		<meta http-equiv="refresh" content="0; url={{ site.url | append: site.baseurl }}">
+		<meta name="robots" content="noindex">
+	</head>
+	<body>
+		<h1>Redirecting&hellip;</h1>
+		<a href="{{ site.url | append: site.baseurl }}">Click here if you are not redirected.</a>
+	</body>
 </html>

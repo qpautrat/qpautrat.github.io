@@ -9,6 +9,7 @@ tags:
  - validation
  - ddd
 image: /assets/keep-calm-and-trust-your-model.jpg
+redirect_to: /2017/07/07/la-validation-metier-dans-le-modele-une-assurance-vie/
 ---
 
 Aujourd'hui j'aimerais parler de validation.

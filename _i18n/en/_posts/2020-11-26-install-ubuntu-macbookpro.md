@@ -8,6 +8,7 @@ tags:
  - Operating System
  - Docker
 image: /assets/logo-ubuntu.png
+redirect_to: /2020/11/26/install-ubuntu-macbookpro/
 ---
 
 After more than 5 years I couldn't stand the disastrous performance of `Docker4Mac` anymore. Running a monolith that is about 10 years old is a real pain in the ass.

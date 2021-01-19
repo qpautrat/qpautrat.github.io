@@ -2,7 +2,7 @@
 title:       Objectivement objectif.
 author:      Quentin Pautrat
 description: "Software craftsman"
-url:         "https://qpautrat.github.io"
+url:         "https://qpautrat.fr"
 
 # Google analytics
 google_analytics: UA-49889834-2
@@ -12,6 +12,7 @@ plugins:
   - jekyll-sitemap
   - jemoji
   - jekyll-github-metadata
+
 
 # Optional features
 animated:           false
@@ -58,3 +59,6 @@ encoding: utf-8
 
 languages: ["fr", "en"]
 exclude_from_localizations: ["images", "css", "assets", "deploy.sh"]
+
+redirect_from:
+  json: false

@@ -8,6 +8,7 @@ tags:
  - NodeJS
 
 image: /assets/electron-logo.png
+redirect_to: /2021/01/16/getting-started-with-electron/
 ---
 
 Developed and maintened by Github, Electron is a framework helping you to build **cross platform desktop applications** (OSX, Windows, Linux) using **web technologies** HTML, CSS and JavaScript. It ships NodeJS as runtime and Chromium rendering engine. In addition to NodeJS, Electron provides a nice API to interact with the operating system.
